@@ -7,15 +7,15 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  * Created by garrett on 12/8/16.
  */
 
-public class Drive {
+public class DriveTrain {
     HardwareMap hwMap;
     public DcMotor[][] motors=new DcMotor[2][2];
-    public void init(HardwareMap hwMap){
+    public void DriveTrain(HardwareMap hwMap){
         this.hwMap = hwMap;
-        motors[0][0]  = hwMap.dcMotor.get("left_a");
-        motors[0][1]  = hwMap.dcMotor.get("left_b");
-        motors[1][0]  = hwMap.dcMotor.get("right_a");
-        motors[1][1]  = hwMap.dcMotor.get("right_b");
+        motors[0][0]  = hwMap.dcMotor.get("left_driveA");
+        motors[0][1]  = hwMap.dcMotor.get("left_driveB");
+        motors[1][0]  = hwMap.dcMotor.get("right_driveA");
+        motors[1][1]  = hwMap.dcMotor.get("right_driveB");
         for(int i = 0; i < motors.length; i++){
             for(int j = 0; j <motors[0].length; j++) {
                 motors[i][j].setPower(0);
@@ -30,4 +30,5 @@ public class Drive {
             motors[1][i].setPower(right);
         }
     }
+
 }
