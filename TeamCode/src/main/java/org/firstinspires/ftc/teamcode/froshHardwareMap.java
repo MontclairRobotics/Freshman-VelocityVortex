@@ -15,7 +15,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Motor channel:  Back  Left  drive motor:        "left_driveB"
  * Motor channel:  Front Right drive motor:        "right_driveA"
  * Motor channel:  Back  Right drive motor:        "right_driveB"
- * Motor channel:  Manipulator drive motor:        "intake"
+ * Motor channel:  Intake drive motor:             "intake"
+ * Motor channel:  Beacon pusher drive motor:      "beacon_pusher"
 
  */
 
@@ -26,8 +27,9 @@ public class froshHardwareMap
     public DcMotor  leftMotorB   = null;
     public DcMotor  rightMotorA  = null;
     public DcMotor  rightMotorB  = null;
-    public DcMotor  armMotor     = null;
+    public DcMotor  intakeMotor  = null;
     public DcMotor  shooterMotor = null;
+    public DcMotor  beaconMotor  = null;
 
 
     /* local OpMode members. */
@@ -49,24 +51,27 @@ public class froshHardwareMap
         leftMotorB   = hwMap.dcMotor.get("left_driveB");
         rightMotorA  = hwMap.dcMotor.get("right_driveA");
         rightMotorB  = hwMap.dcMotor.get("right_driveB");
-        armMotor     = hwMap.dcMotor.get("intake");
+        intakeMotor  = hwMap.dcMotor.get("intake");
         shooterMotor = hwMap.dcMotor.get("shooter");
+        beaconMotor  = hwMap.dcMotor.get("beacon_pusher");
 
         // Set all motors to zero power
         leftMotorA.setPower(0);
         leftMotorB.setPower(0);
         rightMotorA.setPower(0);
         rightMotorB.setPower(0);
-        armMotor.setPower(0);
+        intakeMotor.setPower(0);
         shooterMotor.setPower(0);
+        beaconMotor.setPower(0);
 
         // Set all motors to run with encoders.
         leftMotorA.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftMotorB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightMotorA.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightMotorB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        beaconMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     }
 
