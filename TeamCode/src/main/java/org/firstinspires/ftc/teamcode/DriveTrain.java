@@ -8,14 +8,14 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  */
 
 public class DriveTrain {
-    HardwareMap hwMap;
+    froshHardwareMap hwMap;
     public DcMotor[][] motors=new DcMotor[2][2];
-    public void DriveTrain(HardwareMap hwMap){
+    public DriveTrain(froshHardwareMap hwMap){
         this.hwMap = hwMap;
-        motors[0][0]  = hwMap.dcMotor.get("left_driveA");
-        motors[0][1]  = hwMap.dcMotor.get("left_driveB");
-        motors[1][0]  = hwMap.dcMotor.get("right_driveA");
-        motors[1][1]  = hwMap.dcMotor.get("right_driveB");
+        motors[0][0]  = hwMap.leftMotorA;
+        motors[1][0]  = hwMap.leftMotorB;
+        motors[0][1]  = hwMap.rightMotorA;
+        motors[1][1]  = hwMap.rightMotorB;
         for(int i = 0; i < motors.length; i++){
             for(int j = 0; j <motors[0].length; j++) {
                 motors[i][j].setPower(0);
