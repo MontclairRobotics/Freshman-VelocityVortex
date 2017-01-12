@@ -41,5 +41,4 @@ public class Intake {
     public void incrDown(int incr){
         intake.setTargetPosition(intake.getCurrentPosition() + incr);
     }
-    updateTelemetry(telemetry);
 }
