@@ -45,5 +45,6 @@ public class teleop extends OpMode{
             intake.incrDown(10);
             telemetry.addData("INFO", "Intake Position " + intake.getVals());
         }
+        updateTelemetry(telemetry);
     }
 }
