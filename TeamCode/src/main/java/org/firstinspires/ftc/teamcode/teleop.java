@@ -18,11 +18,13 @@ public class teleop extends OpMode{
     public void init() {
         hardware = new froshHardwareMap();
         hardware.init(hardwareMap);
-        telemetry.addData("INFO","Initialized");
-        driveTrain = new DriveTrain(hardware);
+        driveTrain = new DriveTrain();
+        driveTrain.init(hardware);
         controller = new Controller();
+        controller.init(gamepad1, gamepad2);
         intake = new Intake();
-        Controller.init(gamepad1, gamepad2);
+        intake.init(hardware);
+        telemetry.addData("INFO","Initialized");
     }
 
     @Override

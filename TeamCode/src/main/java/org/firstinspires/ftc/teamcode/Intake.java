@@ -15,13 +15,13 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Intake {
     DcMotor intake;
-    HardwareMap hwMap;
+    froshHardwareMap hardware;
     int intakeUpPos;
     int intakeDownPos;
     int intakeRegPos;
-    public void init(HardwareMap hwMap){
-        this.hwMap = hwMap;
-        intake = this.hwMap.dcMotor.get("intake");
+    public void init(froshHardwareMap hwMap){
+        hardware = hwMap;
+        intake = hardware.intakeMotor;
     }
     public void intakeUp(){
         intake.setTargetPosition(intakeUpPos);

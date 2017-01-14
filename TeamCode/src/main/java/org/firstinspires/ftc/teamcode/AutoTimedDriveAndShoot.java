@@ -23,10 +23,10 @@ public class AutoTimedDriveAndShoot extends LinearOpMode {
 
 
     static final double     FORWARD_SPEED = 0.75;
-    int                     shooterStartPosition = 0  //start value for shooter
-    int                     shootPosition = 1 //shoot value for shooter
-    int                     intakeStartPosition =  0 //start value for intake
-    int                     intakeIntakePosition= -500 //end value for intake
+    int                     shooterStartPosition = 0; //start value for shooter
+    int                     shootPosition = 1; //shoot value for shooter
+    int                     intakeStartPosition =  0; //start value for intake
+    int                     intakeIntakePosition= -500; //end value for intake
 
     @Override
     public void runOpMode() {
@@ -46,12 +46,12 @@ public class AutoTimedDriveAndShoot extends LinearOpMode {
 
         // intake ball and shoot
         robot.shooterMotor.setTargetPosition(shootPosition);
-        wait(1);
+        //wait(1);
         robot.shooterMotor.setTargetPosition(shooterStartPosition);
         robot.intakeMotor.setTargetPosition(intakeIntakePosition);
-        wait(1);
+        //wait(1);
         robot.shooterMotor.setTargetPosition(shootPosition);
-        wait(1);
+        //wait(1);
         robot.shooterMotor.setTargetPosition(shooterStartPosition);
         robot.intakeMotor.setTargetPosition(intakeStartPosition);
 

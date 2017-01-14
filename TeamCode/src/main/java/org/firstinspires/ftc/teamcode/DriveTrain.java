@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class DriveTrain {
     froshHardwareMap hwMap;
     public DcMotor[][] motors=new DcMotor[2][2];
-    public DriveTrain(froshHardwareMap hwMap){
+    public void init(froshHardwareMap hwMap){
         this.hwMap = hwMap;
         motors[0][0]  = hwMap.leftMotorA;
         motors[1][0]  = hwMap.leftMotorB;
