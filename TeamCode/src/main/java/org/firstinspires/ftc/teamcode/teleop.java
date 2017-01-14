@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 
 /**
  * Created by garrett on 1/9/17.
@@ -30,6 +32,13 @@ public class teleop extends OpMode{
     @Override
     public void loop() {
         driveTrain.setDriveTank(controller.getRightPower(), controller.getLeftPower());
+        telemetry.addData("INFO", controller.getRightPower());
+        telemetry.addData("INFO", controller.getLeftPower());
+        telemetry.addData("RightX", controller.getRightX());
+        telemetry.addData("RighttY", controller.getRightY());
+        telemetry.addData("LeftX", controller.getLeftX());
+        telemetry.addData("LeftY", controller.getLeftY());
+
         boolean intaking = false;
         if (controller.getButtonPressed("Y")){
             intake.intakeDown();
@@ -43,7 +52,7 @@ public class teleop extends OpMode{
             intake.incrUp(10);
             telemetry.addData("INFO", "Intake Position " + intake.getVals());
         }
-        if (controller.dpad("Down")) {
+        if (controller.dpad("DOWN")) {
             intake.incrDown(10);
             telemetry.addData("INFO", "Intake Position " + intake.getVals());
         }

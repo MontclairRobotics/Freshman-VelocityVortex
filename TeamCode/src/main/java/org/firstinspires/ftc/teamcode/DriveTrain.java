@@ -13,8 +13,8 @@ public class DriveTrain {
     public void init(froshHardwareMap hwMap){
         this.hwMap = hwMap;
         motors[0][0]  = hwMap.leftMotorA;
-        motors[1][0]  = hwMap.leftMotorB;
-        motors[0][1]  = hwMap.rightMotorA;
+        motors[0][1]  = hwMap.leftMotorB;
+        motors[1][0]  = hwMap.rightMotorA;
         motors[1][1]  = hwMap.rightMotorB;
         for(int i = 0; i < motors.length; i++){
             for(int j = 0; j <motors[0].length; j++) {
