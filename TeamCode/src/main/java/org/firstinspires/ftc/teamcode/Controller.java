@@ -16,7 +16,7 @@ public class Controller {
         shoot = b;
     }
     public float getRightPower(){
-        return drive.right_stick_y - drive.right_stick_x;
+        return drive.right_stick_x + drive.right_stick_y;
     }
     public float getLeftPower() {
         return drive.right_stick_x - drive.right_stick_y;

@@ -32,13 +32,6 @@ public class teleop extends OpMode{
     @Override
     public void loop() {
         driveTrain.setDriveTank(controller.getRightPower(), controller.getLeftPower());
-        telemetry.addData("INFO", controller.getRightPower());
-        telemetry.addData("INFO", controller.getLeftPower());
-        telemetry.addData("RightX", controller.getRightX());
-        telemetry.addData("RighttY", controller.getRightY());
-        telemetry.addData("LeftX", controller.getLeftX());
-        telemetry.addData("LeftY", controller.getLeftY());
-
         boolean intaking = false;
         if (controller.getButtonPressed("Y")){
             intake.intakeDown();
@@ -49,11 +42,11 @@ public class teleop extends OpMode{
             intake.intakeReg();
         }
         if (controller.dpad("UP")) {
-            intake.incrUp(10);
+            intake.incrUp(100);
             telemetry.addData("INFO", "Intake Position " + intake.getVals());
         }
         if (controller.dpad("DOWN")) {
-            intake.incrDown(10);
+            intake.incrDown(100);
             telemetry.addData("INFO", "Intake Position " + intake.getVals());
         }
         updateTelemetry(telemetry);
