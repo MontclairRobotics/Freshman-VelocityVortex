@@ -69,8 +69,8 @@ public class froshHardwareMap
         leftMotorB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightMotorA.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightMotorB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        shooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        intakeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        shooterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         beaconMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     }

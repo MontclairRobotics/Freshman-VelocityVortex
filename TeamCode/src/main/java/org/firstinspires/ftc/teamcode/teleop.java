@@ -38,7 +38,6 @@ public class teleop extends OpMode{
         if (controller.getButtonPressed("B")){
             pusher.pusherOut();
         }
-
         boolean intaking = false;
         if (controller.getButtonPressed("Y")){
             intake.intakeDown();
@@ -49,11 +48,11 @@ public class teleop extends OpMode{
             intake.intakeReg();
         }
         if (controller.dpad("UP")) {
-            intake.incrUp(10);
+            intake.incrUp(100);
             telemetry.addData("INFO", "Intake Position " + intake.getVals());
         }
         if (controller.dpad("DOWN")) {
-            intake.incrDown(10);
+            intake.incrDown(100);
             telemetry.addData("INFO", "Intake Position " + intake.getVals());
         }
         updateTelemetry(telemetry);
