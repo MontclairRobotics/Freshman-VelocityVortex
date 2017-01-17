@@ -8,5 +8,29 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 public class Shooter {
     DcMotor shooter;
-    froshHardwareMap hardware;
+    froshHardwareMap hwMap;
+
+    int shooterUpPos;
+    int shooterDownPos;
+
+    public void init(froshHardwareMap hwMap){
+        this.hwMap = hwMap;
+        shooter = hwMap.shooterMotor;
+    }
+
+    public void shooterUp(){
+        shooter.setTargetPosition(shooterUpPos);
+    }
+
+    public void shooterDown(){
+        shooter.setTargetPosition(shooterDownPos);
+    }
+
+    public void incrUp(int incr){
+        shooter.setTargetPosition(shooter.getCurrentPosition() + incr);
+    }
+
+    public void incrDown(int incr){
+        shooter.setTargetPosition(shooter.getCurrentPosition() - incr);
+    }
 }

@@ -39,6 +39,6 @@ public class Intake {
         intake.setTargetPosition(intake.getCurrentPosition() + incr);
     }
     public void incrDown(int incr){
-        intake.setTargetPosition(intake.getCurrentPosition() + incr);
+        intake.setTargetPosition(intake.getCurrentPosition() - incr);
     }
 }
