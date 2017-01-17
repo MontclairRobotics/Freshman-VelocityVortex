@@ -16,6 +16,7 @@ public class teleop extends OpMode{
     froshHardwareMap hardware;
     Intake intake;
     Controller controller;
+    beacon_pusher pusher;
     @Override
     public void init() {
         hardware = new froshHardwareMap();
@@ -26,18 +27,17 @@ public class teleop extends OpMode{
         controller.init(gamepad1, gamepad2);
         intake = new Intake();
         intake.init(hardware);
+        pusher = new beacon_pusher();
+        pusher.init(hardware);
         telemetry.addData("INFO","Initialized");
     }
 
     @Override
     public void loop() {
         driveTrain.setDriveTank(controller.getRightPower(), controller.getLeftPower());
-        telemetry.addData("INFO", controller.getRightPower());
-        telemetry.addData("INFO", controller.getLeftPower());
-        telemetry.addData("RightX", controller.getRightX());
-        telemetry.addData("RighttY", controller.getRightY());
-        telemetry.addData("LeftX", controller.getLeftX());
-        telemetry.addData("LeftY", controller.getLeftY());
+        if (controller.getButtonPressed("B")){
+            pusher.pusherOut();
+        }
 
         boolean intaking = false;
         if (controller.getButtonPressed("Y")){
