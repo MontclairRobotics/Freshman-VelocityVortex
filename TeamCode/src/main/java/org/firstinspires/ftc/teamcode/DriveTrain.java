@@ -30,5 +30,25 @@ public class DriveTrain {
             motors[1][i].setPower(right);
         }
     }
+    public void autoInit(froshHardwareMap hwMap){
+        this.hwMap = hwMap;
+        motors[0][0]  = hwMap.leftMotorA;
+        motors[0][1]  = hwMap.leftMotorB;
+        motors[1][0]  = hwMap.rightMotorA;
+        motors[1][1]  = hwMap.rightMotorB;
+        for(int i = 0; i < motors.length; i++){
+            for(int j = 0; j <motors[0].length; j++) {
+                motors[i][j].setPower(0);
+                motors[i][j].setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                motors[i][j].setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            }
+        }
+    }
+    public void setDrivePosition(int position){
 
+        motors[0][0].setTargetPosition(position);
+        motors[0][1].setTargetPosition(position);
+        motors[1][0].setTargetPosition(position);
+        motors[1][1].setTargetPosition(position);
+    }
 }
