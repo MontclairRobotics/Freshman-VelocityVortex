@@ -51,4 +51,16 @@ public class DriveTrain {
         motors[1][0].setTargetPosition(position);
         motors[1][1].setTargetPosition(position);
     }
+    public void setLeftTurnPosition(int position){
+        motors[0][0].setTargetPosition(-1*position);
+        motors[0][1].setTargetPosition(-1*position);
+        motors[1][0].setTargetPosition(position);
+        motors[1][1].setTargetPosition(position);
+    }
+    public void setRightTurnPosition(int position){
+        motors[0][0].setTargetPosition(position);
+        motors[0][1].setTargetPosition(position);
+        motors[1][0].setTargetPosition(-1*position);
+        motors[1][1].setTargetPosition(-1*position);
+    }
 }
