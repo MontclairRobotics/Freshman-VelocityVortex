@@ -73,7 +73,6 @@ public class froshHardwareMap
         shooterMotor.setPower(0);
         beaconMotor.setPower(0);
 
-
     }
 
     /***

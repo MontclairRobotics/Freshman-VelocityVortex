@@ -26,7 +26,7 @@ public class AutoDriveAndShootWithTurnRed extends AutoMode {
                 break;
 
             case 1: driveTrain.setLeftTurnPosition(90);
-                nextState(driveTrain.isCloseToLeft(-90 * DEGREES_PER_INCH_CIRCLE) && driveTrain.isCloseToRight(90 * DEGREES_PER_INCH_CIRCLE));
+                nextState(driveTrain.isCloseToLeft(-TURN_DEGREE_90) && driveTrain.isCloseToRight(TURN_DEGREE_90));
                 break;
 
             case 2: driveTrain.setDrivePosition(2 * SINGLE_BLOCK_DISTANCE);
@@ -34,7 +34,7 @@ public class AutoDriveAndShootWithTurnRed extends AutoMode {
                 break;
 
             case 3: driveTrain.setRightTurnPosition(90);
-                nextState(driveTrain.isCloseToLeft(90 * DEGREES_PER_INCH_CIRCLE) && driveTrain.isCloseToRight(-90 * DEGREES_PER_INCH_CIRCLE));
+                nextState(driveTrain.isCloseToLeft(TURN_DEGREE_90) && driveTrain.isCloseToRight(-TURN_DEGREE_90));
                 break;
 
             case 4: driveTrain.setDrivePosition(-PART_BLOCK_DISTANCE);

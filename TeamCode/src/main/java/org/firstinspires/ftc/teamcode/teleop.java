@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 /**
  * Created by garrett on 1/9/17.
  */
-@TeleOp(name="Teleop", group="Freshman147")
+@TeleOp(name="Teleop Competion", group="147")
 public class teleop extends OpMode{
     DriveTrain driveTrain;
     froshHardwareMap hardware;

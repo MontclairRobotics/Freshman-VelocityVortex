@@ -25,7 +25,7 @@ public class AutoDriveWithTurnBlue extends AutoMode {
                 break;
 
             case 1: driveTrain.setRightTurnPosition(45);
-                    nextState(driveTrain.isCloseToLeft(45 * DEGREES_PER_INCH_CIRCLE) && driveTrain.isCloseToRight(-45 * DEGREES_PER_INCH_CIRCLE));
+                    nextState(driveTrain.isCloseToLeft(TURN_DEGREE_90/2) && driveTrain.isCloseToRight(-TURN_DEGREE_90/2));
                 break;
 
             case 2: driveTrain.setDrivePosition( AFTER_TURN_DISTANCE * DEGREES_PER_INCH);

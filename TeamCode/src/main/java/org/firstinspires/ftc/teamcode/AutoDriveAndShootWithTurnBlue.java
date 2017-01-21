@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.graphics.YuvImage;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 /**
  * Created by Will Chu on 1/20/2017.
@@ -16,20 +18,20 @@ public class AutoDriveAndShootWithTurnBlue extends AutoMode {
     @Override
     public void loop() {
         switch (state){
-            case 0: driveTrain.setDrivePosition(PART_BLOCK_DISTANCE);
-                nextState(driveTrain.isCloseTo(PART_BLOCK_DISTANCE));
+            case 0:
+                nextState(drive(PART_BLOCK_DISTANCE));
                 break;
 
-            case 1: driveTrain.setRightTurnPosition(90);
-                nextState(driveTrain.isCloseToLeft(90 * DEGREES_PER_INCH_CIRCLE) && driveTrain.isCloseToRight(-90 * DEGREES_PER_INCH_CIRCLE));
+            case 1: driveTrain.setRightTurnPosition(TURN_DEGREE_90);
+                nextState(driveTrain.isCloseToLeft(TURN_DEGREE_90) && driveTrain.isCloseToRight(-TURN_DEGREE_90));
                 break;
 
             case 2: driveTrain.setDrivePosition(2 * SINGLE_BLOCK_DISTANCE);
                 nextState(driveTrain.isCloseTo(2 * SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 3: driveTrain.setLeftTurnPosition(90);
-                nextState(driveTrain.isCloseToLeft(-90 * DEGREES_PER_INCH_CIRCLE) && driveTrain.isCloseToRight(90 * DEGREES_PER_INCH_CIRCLE));
+            case 3: driveTrain.setLeftTurnPosition(TURN_DEGREE_90);
+                nextState(driveTrain.isCloseToLeft(-TURN_DEGREE_90) && driveTrain.isCloseToRight(TURN_DEGREE_90));
                 break;
 
             case 4: driveTrain.setDrivePosition(-PART_BLOCK_DISTANCE);
