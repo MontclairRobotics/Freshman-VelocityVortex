@@ -47,7 +47,7 @@ public class AutoDriveAndShoot2 extends AutoMode {
                 break;
 
             case 4:
-                drivetrain.setDrivePosition(Corner_Vortex_Distance_From_Start * DEGREES_PER_INCH);
+                drivetrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
                 break;
         }
     }
