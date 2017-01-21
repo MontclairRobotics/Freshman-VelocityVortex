@@ -16,10 +16,10 @@ public class Controller {
         shoot = b;
     }
     public float getRightPower(){
-        return drive.right_stick_x + drive.right_stick_y;
+        return drive.right_stick_x + drive.left_stick_y;
     }
     public float getLeftPower() {
-        return drive.right_stick_x - drive.right_stick_y;
+        return drive.right_stick_x - drive.left_stick_y;
     }
     public float getRightX(){
         return drive.right_stick_x;
@@ -30,6 +30,7 @@ public class Controller {
     public float getLeftX(){
         return drive.left_stick_x;
     }
+
     public float getLeftY(){
         return drive.left_stick_y;
     }
@@ -39,9 +40,9 @@ public class Controller {
             return shoot.a;
         }else if (button.equals("B")){
             return shoot.b;
-        }else if (button.equals("C")){
+        }else if (button.equals("X")){
             return shoot.x;
-        }else if (button.equals("D")){
+        }else if (button.equals("Y")){
             return shoot.y;
         }else{
             return false;

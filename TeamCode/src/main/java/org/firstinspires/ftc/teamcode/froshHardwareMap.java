@@ -55,6 +55,15 @@ public class froshHardwareMap
         shooterMotor = hwMap.dcMotor.get("shooter");
         beaconMotor  = hwMap.dcMotor.get("beacon_pusher");
 
+        // Set all motors to run with encoders.
+        leftMotorA.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftMotorB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightMotorA.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightMotorB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        intakeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        shooterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        beaconMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         // Set all motors to zero power
         leftMotorA.setPower(0);
         leftMotorB.setPower(0);
@@ -64,14 +73,6 @@ public class froshHardwareMap
         shooterMotor.setPower(0);
         beaconMotor.setPower(0);
 
-        // Set all motors to run with encoders.
-        leftMotorA.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftMotorB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightMotorA.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightMotorB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        intakeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        shooterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        beaconMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     }
 

@@ -44,7 +44,10 @@ public class DriveTrain {
             }
         }
     }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 1ea27b4a014f2748421da3e4f6c9060fed999292
     public void setDrivePosition(int position){
         motors[0][0].setTargetPosition(position);
         motors[0][1].setTargetPosition(position);
