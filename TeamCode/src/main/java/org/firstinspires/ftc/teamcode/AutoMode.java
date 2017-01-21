@@ -43,7 +43,7 @@ public class AutoMode extends OpMode {
     public static final int PART_BLOCK_DISTANCE = 15;
     public int[][] motorPos = driveTrain.getMotorPos();
     public static final int DEGREES_PER_INCH_CIRCLE = 255/360;
-
+    public boolean driving = false;
 
     //State Machine
     public int state = 0;
@@ -64,7 +64,24 @@ public class AutoMode extends OpMode {
 
 
     //Drive Controls
-
+    int distanceTraveled = 0;
+    int startingPos = 0;
+    public int drive(int distance){
+        if(!(driving)) {
+            for (int i = 0; i < driveTrain.motors.length; i++) {
+                for (int j = 0; i < driveTrain.motors[i].length; j++) {
+                    startingPos = driveTrain.motors[i][j].getCurrentPosition();
+                    driveTrain.motors[i][j].setTargetPosition(startingPos + distance);
+                }
+            }
+            driving = true;
+        }
+        distanceTraveled = driveTrain.motors[0][0].getCurrentPosition() - startingPos;
+        if(Math.abs(distanceTraveled - distance) > 20){
+            driving = false;
+        }
+        return distanceTraveled;
+    }
 
 
 
