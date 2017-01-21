@@ -41,4 +41,9 @@ public class Intake {
     public void incrDown(int incr){
         intake.setTargetPosition(intake.getCurrentPosition() - incr);
     }
+    
+    public boolean isCloseTo(double val) {
+        return Math.abs(val - intake.getCurrentPosition()) < 5;
+    }
+    
 }
