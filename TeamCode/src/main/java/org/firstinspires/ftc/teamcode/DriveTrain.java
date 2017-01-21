@@ -44,25 +44,28 @@ public class DriveTrain {
             }
         }
     }
-    public void setDrivePosition(int position){
 
+    public void setDrivePosition(int position){
         motors[0][0].setTargetPosition(position);
         motors[0][1].setTargetPosition(position);
         motors[1][0].setTargetPosition(position);
         motors[1][1].setTargetPosition(position);
     }
+
     public void setLeftTurnPosition(int position){
         motors[0][0].setTargetPosition(-1*position);
         motors[0][1].setTargetPosition(-1*position);
         motors[1][0].setTargetPosition(position);
         motors[1][1].setTargetPosition(position);
     }
+
     public void setRightTurnPosition(int position){
         motors[0][0].setTargetPosition(position);
         motors[0][1].setTargetPosition(position);
         motors[1][0].setTargetPosition(-1*position);
         motors[1][1].setTargetPosition(-1*position);
     }
+
     public int[][] getMotorPos(){
         int[][] motorPos = new int[2][2];
         for(int i = 0; i < motors.length; i++){
@@ -71,5 +74,16 @@ public class DriveTrain {
             }
         }
         return motorPos;
+    }
+    
+    public boolean isCloseTo(int pos) {
+        double avgPos = 0.0;
+        for(DcMotor[] row : motors) {
+            for(DcMotor motor : row) {
+                avgPos += motor.getCurrentPosition();
+            }
+        }
+        
+        return Math.abs(pos - avgPos) < 20;
     }
 }

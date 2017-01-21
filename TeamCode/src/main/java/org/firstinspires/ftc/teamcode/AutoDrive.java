@@ -1,18 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
+
 /**
  * Created by Will on 1/20/2017.
  */
 
+@Autonomous(name="Auto Drive NO TURN RED/Blue", group="147")
 public class AutoDrive extends AutoMode {
         DriveTrain driveTrain;
-        froshHardwareMap hardware;
 
     @Override
     public void init() {
         setState(0);
-        driveTrain = new DriveTrain();
-        driveTrain.init(hardware);
     }
 
     @Override
