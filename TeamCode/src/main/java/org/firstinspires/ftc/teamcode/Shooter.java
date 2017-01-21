@@ -10,8 +10,8 @@ public class Shooter {
     DcMotor shooter;
     froshHardwareMap hwMap;
 
-    int shooterUpPos;
-    int shooterDownPos;
+    int shooterUpPos = 200;
+    int shooterDownPos = -950;
 
     public void init(froshHardwareMap hwMap){
         this.hwMap = hwMap;
@@ -33,4 +33,9 @@ public class Shooter {
     public void incrDown(int incr){
         shooter.setTargetPosition(shooter.getCurrentPosition() - incr);
     }
+    
+    public boolean isCloseTo(double val) {
+        return Math.abs(val - shooter.getCurrentPosition()) < 5;
+    }
+    
 }

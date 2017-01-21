@@ -55,7 +55,7 @@ public class teleop extends OpMode{
                 intaking = false;
             }
         }else{
-            intake.intakeReg();
+            intake.intakeHalf();
         }
         
         if (controller.dpad("UP")) {

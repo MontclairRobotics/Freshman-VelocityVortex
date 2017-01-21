@@ -16,26 +16,32 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class Intake {
     public DcMotor intake;
     froshHardwareMap hwMap;
+
     public int intakeTolerance = 50;
     int intakeUpPos = 200;
     int intakeDownPos = 1300;
     int intakeRegPos = 400;
+
     public void init(froshHardwareMap hwMap){
         this.hwMap = hwMap;
         intake = this.hwMap.intakeMotor;
     }
+
     public void intakeUp(){
         intake.setPower(.5);
         intake.setTargetPosition(intakeUpPos);
     }
+
     public void intakeDown(){
         intake.setPower(.5);
         intake.setTargetPosition(intakeDownPos);
     }
-    public void intakeReg(){
+
+    public void intakeReg() {
         intake.setPower(.5);
         intake.setTargetPosition(intakeRegPos);
     }
+
     public void setPos(int pos){ intake.setTargetPosition(pos);}
     public double getVals(){
         return intake.getCurrentPosition();
@@ -46,4 +52,8 @@ public class Intake {
     public void incrDown(int incr){
         intake.setTargetPosition(intake.getCurrentPosition() - incr);
     }
+    public boolean isCloseTo(double val) {
+        return Math.abs(val - intake.getCurrentPosition()) < 5;
+    }
+    
 }
