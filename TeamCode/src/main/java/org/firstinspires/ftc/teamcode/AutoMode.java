@@ -42,7 +42,7 @@ public class AutoMode extends OpMode {
     public static final int PART_BLOCK_DISTANCE = 15;
     public int[][] motorPos = driveTrain.getMotorPos();
     public static final double INCH_PER_DEGREE_CIRCUMFERENCE = 0.16;
-    public static final int INCH_FOR_90_DEGREE_TURN = 14;
+    public static final double INCH_FOR_90_DEGREE_TURN = 14.13;
     public static final int TURN_DEGREE_90 = (int)(INCH_PER_DEGREE_CIRCUMFERENCE * INCH_FOR_90_DEGREE_TURN);
     public boolean driving = false;
 
@@ -91,8 +91,7 @@ public class AutoMode extends OpMode {
         }
         return !(driving);
     }
-
-
+    
 
 
     @Override

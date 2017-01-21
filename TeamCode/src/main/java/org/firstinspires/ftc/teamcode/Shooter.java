@@ -37,5 +37,5 @@ public class Shooter {
     public boolean isCloseTo(double val) {
         return Math.abs(val - shooter.getCurrentPosition()) < 5;
     }
-    
+
 }

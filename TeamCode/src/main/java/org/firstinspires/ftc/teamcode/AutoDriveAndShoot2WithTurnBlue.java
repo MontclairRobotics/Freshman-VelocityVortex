@@ -15,47 +15,56 @@ public class AutoDriveAndShoot2WithTurnBlue extends AutoMode {
     @Override
     public void loop() {
         switch (state){
-            case 0: driveTrain.setDrivePosition(PART_BLOCK_DISTANCE);
+            case 0: // Driving So the Center of the robot is lined up with 24 inch from wall
+                driveTrain.setDrivePosition(PART_BLOCK_DISTANCE);
                 nextState(driveTrain.isCloseTo(PART_BLOCK_DISTANCE));
                 break;
 
-            case 1: // TODO: 90 vx. 90*conversion?
+            case 1: // Turning 90 Deg right in place
                 driveTrain.setRightTurnPosition(TURN_DEGREE_90);
                 nextState(driveTrain.isCloseToLeft(TURN_DEGREE_90) && driveTrain.isCloseToRight(-TURN_DEGREE_90));
                 break;
 
-            case 2: driveTrain.setDrivePosition(2 * SINGLE_BLOCK_DISTANCE);
+            case 2: // Driving Foward 2 Blocks(48 in)
+                driveTrain.setDrivePosition(2 * SINGLE_BLOCK_DISTANCE);
                 nextState(driveTrain.isCloseTo(2 * SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 3: driveTrain.setLeftTurnPosition(TURN_DEGREE_90);
+            case 3: // Turning 90 Deg Left in Place
+                driveTrain.setLeftTurnPosition(TURN_DEGREE_90);
                 nextState(driveTrain.isCloseToLeft(-TURN_DEGREE_90) && driveTrain.isCloseToRight(TURN_DEGREE_90));
                 break;
 
-            case 4: driveTrain.setDrivePosition(-PART_BLOCK_DISTANCE);
+            case 4: // Driving Backwards so robot is backed against wall
+                driveTrain.setDrivePosition(-PART_BLOCK_DISTANCE);
                 nextState(driveTrain.isCloseTo(-PART_BLOCK_DISTANCE));
                 break;
 
-            case 5: shooter.shooterUp();
+            case 5: // Shooting Ball and Intake 2nd Ball
+                shooter.shooterUp();
                 intake.intakeDown();
                 nextState(shooter.isCloseTo(shooter.shooterUpPos) && intake.isCloseTo(intake.intakeDownPos));
                 break;
 
-            case 6: shooter.shooterDown();
+            case 6: // Shooter Reset and Intake Up Position
+                shooter.shooterDown();
                 intake.intakeUp();
                 nextState(shooter.isCloseTo(shooter.shooterDownPos) && intake.isCloseTo(intake.intakeUpPos));
                 break;
 
-            case 7: shooter.shooterUp();
+            case 7: // Intake Lowered To Half
                 intake.intakeHalf();
-                nextState(shooter.isCloseTo(shooter.shooterUpPos) && intake.isCloseTo(intake.intakeHalfPos));
+                nextState(intake.isCloseTo(intake.intakeHalfPos));
                 break;
 
-            case 8: shooter.shooterDown();
-                nextState(shooter.isCloseTo(shooter.shooterDownPos) && intake.isCloseTo(intake.intakeHalfPos));
+            case 8: // Shooting 2nd Ball
+                shooter.shooterUp();
+                nextState(shooter.isCloseTo(shooter.shooterUpPos));
                 break;
 
-            case 9: driveTrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
+            case 9: // Shooter Reset and Move to Center Vortex
+                shooter.shooterDown();
+                driveTrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
                 break;
         }
     }

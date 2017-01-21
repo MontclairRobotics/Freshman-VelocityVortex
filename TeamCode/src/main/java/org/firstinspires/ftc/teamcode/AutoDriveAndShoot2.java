@@ -23,32 +23,29 @@ public class AutoDriveAndShoot2 extends AutoMode {
     public void loop() {
         switch (state){
 
-            case 0:
+            case 0: // Shooting Ball and Intake 2nd Ball
                 shooter.shooterUp();
                 intake.intakeDown();
                 nextState(shooter.isCloseTo(shooter.shooterUpPos) && intake.isCloseTo(intake.intakeDownPos));
                 break;
 
-            case 1:
+            case 1: // Reset Shooter and Intake Up Position
                 shooter.shooterDown();
                 intake.intakeUp();
                 nextState(shooter.isCloseTo(shooter.shooterDownPos) && intake.isCloseTo(intake.intakeUpPos));
                 break;
 
-            case 2:
+            case 2: // Shooting Ball and Intake half Position
                 shooter.shooterUp();
                 intake.intakeHalf();
                 nextState(shooter.isCloseTo(shooter.shooterUpPos) && intake.isCloseTo(intake.intakeHalfPos));
                 break;
 
-            case 3:
+            case 3: // Shooter Reset and Move to Center Vortex
                 shooter.shooterDown();
-                nextState(shooter.isCloseTo(shooter.shooterDownPos) && intake.isCloseTo(intake.intakeHalfPos));
-                break;
-
-            case 4:
                 drivetrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
                 break;
+
         }
     }
 }
