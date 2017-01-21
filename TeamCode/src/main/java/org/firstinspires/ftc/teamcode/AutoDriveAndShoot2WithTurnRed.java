@@ -19,19 +19,24 @@ public class AutoDriveAndShoot2WithTurnRed extends AutoMode {
     public void loop() {
         switch (state){
 
-            case 0: driveTrain.setDrivePosition(PART_BLOCK_DISTANCE);
+            case 0: drivetrain.setDrivePosition(PART_BLOCK_DISTANCE);
+                nextState(drivetrain.isCloseTo(PART_BLOCK_DISTANCE));
                 break;
 
-            case 1: driveTrain.setLeftTurnPosition(90);
+            case 1: drivetrain.setLeftTurnPosition(90);
+                nextState(drivetrain.isCloseToLeft(-90 * DEGREES_PER_INCH_CIRCLE) && drivetrain.isCloseToRight(90 * DEGREES_PER_INCH_CIRCLE));
                 break;
 
-            case 2: driveTrain.setDrivePosition(2 * SINGLE_BLOCK_DISTANCE);
+            case 2: drivetrain.setDrivePosition(2 * SINGLE_BLOCK_DISTANCE);
+                nextState(drivetrain.isCloseTo(2 * SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 3: driveTrain.setRightTurnPosition(90);
+            case 3: drivetrain.setRightTurnPosition(90);
+                nextState(drivetrain.isCloseToLeft(90 * DEGREES_PER_INCH_CIRCLE) && drivetrain.isCloseToRight(-90 * DEGREES_PER_INCH_CIRCLE));
                 break;
 
-            case 4: driveTrain.setDrivePosition(-PART_BLOCK_DISTANCE);
+            case 4: drivetrain.setDrivePosition(-PART_BLOCK_DISTANCE);
+                nextState(drivetrain.isCloseTo(-PART_BLOCK_DISTANCE));
                 break;
 
             case 5: shooter.shooterUp();
