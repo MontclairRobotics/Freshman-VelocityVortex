@@ -16,7 +16,8 @@ public class teleop extends OpMode{
     froshHardwareMap hardware;
     Intake intake;
     Controller controller;
-    beacon_pusher pusher;
+    BeaconPusher pusher;
+    Shooter shooter;
     @Override
     public void init() {
         hardware = new froshHardwareMap();
@@ -27,9 +28,13 @@ public class teleop extends OpMode{
         controller.init(gamepad1, gamepad2);
         intake = new Intake();
         intake.init(hardware);
-        pusher = new beacon_pusher();
+        pusher = new BeaconPusher();
         pusher.init(hardware);
+        intake.intakeReg();
+        shooter = new Shooter();
+        shooter.init(hardware);
         telemetry.addData("INFO","Initialized");
+
     }
 
     @Override
@@ -38,15 +43,21 @@ public class teleop extends OpMode{
         if (controller.getButtonPressed("B")){
             pusher.pusherOut();
         }
+
         boolean intaking = false;
+
         if (controller.getButtonPressed("Y")){
             intake.intakeDown();
-        }else if(intaking){
             intaking = true;
+        }else if(intaking){
             intake.intakeUp();
+            if (intake.getVals() == intake.intakeUpPos){
+                intaking = false;
+            }
         }else{
             intake.intakeReg();
         }
+        
         if (controller.dpad("UP")) {
             intake.incrUp(100);
             telemetry.addData("INFO", "Intake Position " + intake.getVals());
