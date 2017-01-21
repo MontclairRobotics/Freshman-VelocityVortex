@@ -15,25 +15,24 @@ public class Controller {
         drive = a;
         shoot = b;
     }
+
+
     public float getRightPower(){
         return drive.right_stick_x + drive.left_stick_y;
     }
     public float getLeftPower() {
         return drive.right_stick_x - drive.left_stick_y;
     }
-    public float getRightX(){
-        return drive.right_stick_x;
-    }
-    public float getRightY(){
-        return drive.right_stick_y;
-    }
-    public float getLeftX(){
-        return drive.left_stick_x;
-    }
-
     public float getLeftY(){
         return drive.left_stick_y;
     }
+    public boolean getRightBumper(){
+        return drive.right_bumper;
+    }
+    public boolean getLeftBumper(){
+        return drive.left_bumper;
+    }
+
 
     public boolean getButtonPressed(String button){
         if (button.equals("A")){
@@ -47,8 +46,8 @@ public class Controller {
         }else{
             return false;
         }
-
     }
+
     public boolean dpad(String direction){
         if (direction.equals("UP")){
             return shoot.dpad_up;
@@ -62,4 +61,5 @@ public class Controller {
             return false;
         }
     }
+
 }

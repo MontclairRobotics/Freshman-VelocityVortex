@@ -39,13 +39,29 @@ public class teleop extends OpMode{
 
     @Override
     public void loop() {
+
+        //Drive Controls
+        float multiplier = 0.5f;
+        if(controller.getRightBumper()){
+            multiplier = 1;
+        }else if(controller.getLeftBumper()){
+            multiplier = 0.25f;
+        }else {
+            multiplier = 0.5f;
+        }
         driveTrain.setDriveTank(controller.getRightPower(), controller.getLeftPower());
+
+
+
+        //Beacon Pusher Controls
         if (controller.getButtonPressed("B")){
             pusher.pusherOut();
         }
 
-        boolean intaking = false;
 
+
+        //intake Controls
+        boolean intaking = false;
         if (controller.getButtonPressed("Y")){
             intake.intakeDown();
             intaking = true;
@@ -57,15 +73,17 @@ public class teleop extends OpMode{
         }else{
             intake.intakeHalf();
         }
+
+
         
-        if (controller.dpad("UP")) {
-            intake.incrUp(100);
-            telemetry.addData("INFO", "Intake Position " + intake.getVals());
+        //Shooter Controls
+        if (controller.getButtonPressed("A")){
+            shooter.shooterUp();
+        }else if(shooter.isCloseTo(shooter.shooterUpPos)){
+            shooter.shooterDown();
         }
-        if (controller.dpad("DOWN")) {
-            intake.incrDown(100);
-            telemetry.addData("INFO", "Intake Position " + intake.getVals());
-        }
+
+
         updateTelemetry(telemetry);
     }
 }
