@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  */
 
 public class BeaconPusher {
-    DcMotor beacon_pusher;
+    DcMotor pusher;
     froshHardwareMap hardware;
 
     int pusherInPos;
@@ -15,15 +15,15 @@ public class BeaconPusher {
 
     public void init(froshHardwareMap hwMap){
         hardware = hwMap;
-        beacon_pusher = hardware.beaconMotor;
+        pusher = hardware.beaconMotor;
     }
     public void pusherIn(){
-        beacon_pusher.setPower(0.3);
-        beacon_pusher.setTargetPosition(pusherInPos);
+        pusher.setPower(0.1);
+        pusher.setTargetPosition(pusherInPos);
     }
     public void pusherOut(){
-        beacon_pusher.setPower(0.3);
-        beacon_pusher.setTargetPosition(pusherOutPos);
+        pusher.setPower(0.1);
+        pusher.setTargetPosition(pusherOutPos);
     }
     
 }

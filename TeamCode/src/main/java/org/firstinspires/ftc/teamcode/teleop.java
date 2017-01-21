@@ -56,6 +56,8 @@ public class teleop extends OpMode{
         //Beacon Pusher Controls
         if (controller.getButtonPressed("B")){
             pusher.pusherOut();
+        }else{
+            pusher.pusherIn();
         }
 
 
@@ -75,7 +77,7 @@ public class teleop extends OpMode{
         }
 
 
-        
+
         //Shooter Controls
         if (controller.getButtonPressed("A")){
             shooter.shooterUp();
