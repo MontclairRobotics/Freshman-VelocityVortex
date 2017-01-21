@@ -32,6 +32,7 @@ public class AutoMode extends OpMode {
 
 
     //AutoMode Variables
+    //TODO: Review whether distances / conversions are okay as ints instead of doubles
     public static final int INCHES_TO_CORNER_VORTEX = 144;
     public static int totalPos = 0;
     public static int currentPos = 0;
