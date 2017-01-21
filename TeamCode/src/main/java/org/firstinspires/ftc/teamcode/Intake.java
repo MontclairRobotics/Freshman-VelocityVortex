@@ -37,7 +37,7 @@ public class Intake {
         intake.setTargetPosition(intakeDownPos);
     }
 
-    public void intakeReg() {
+    public void intakeHalf() {
         intake.setPower(.5);
         intake.setTargetPosition(intakeHalfPos);
     }
