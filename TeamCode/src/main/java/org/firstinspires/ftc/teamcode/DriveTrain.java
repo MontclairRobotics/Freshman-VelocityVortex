@@ -63,4 +63,13 @@ public class DriveTrain {
         motors[1][0].setTargetPosition(-1*position);
         motors[1][1].setTargetPosition(-1*position);
     }
+    public int[][] getMotorPos(){
+        int[][] motorPos = new int[2][2];
+        for(int i = 0; i < motors.length; i++){
+            for(int j = 0; i < motors[i].length; j++){
+                motorPos[i][j] = motors[i][j].getCurrentPosition();
+            }
+        }
+        return motorPos;
+    }
 }

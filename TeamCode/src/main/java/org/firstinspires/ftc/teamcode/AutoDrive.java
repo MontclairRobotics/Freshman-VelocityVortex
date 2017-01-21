@@ -18,8 +18,8 @@ public class AutoDrive extends AutoMode {
     @Override
     public void loop() {
         switch (state){
-            case 0: driveTrain.setDrivePosition(Corner_Vortex_Distance_From_Start * DEGREES_PER_INCH);
-
+            case 0:
+                driveTrain.setDrivePosition(Corner_Vortex_Distance_From_Start * DEGREES_PER_INCH);
                 break;
 
         }

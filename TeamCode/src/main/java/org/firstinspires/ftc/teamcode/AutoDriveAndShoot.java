@@ -21,15 +21,18 @@ public class AutoDriveAndShoot extends AutoMode {
     public void loop() {
         switch (state){
 
-            case 0: shooter.shooterUp();
-                    intake.intakeDown();
+            case 0:
+                shooter.shooterUp();
+                intake.intakeDown();
                 break;
 
-            case 1:shooter.shooterDown();
-                   intake.intakeHalf();
+            case 1:
+                shooter.shooterDown();
+                intake.intakeHalf();
                 break;
 
-            case 2: drivetrain.setDrivePosition(Corner_Vortex_Distance_From_Start * DEGREES_PER_INCH);
+            case 2:
+                drivetrain.setDrivePosition(Corner_Vortex_Distance_From_Start * DEGREES_PER_INCH);
                 break;
         }
     }

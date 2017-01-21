@@ -16,6 +16,7 @@ public class AutoMode extends OpMode{
     public static final int Corner_Vortex_Distance_From_Start = DEGREES_PER_INCH*144;
     public static final int INTAKE_DOWN_POS = 1100;  /* Borrowed from Original Code */
     public static final int INTAKE_HALF_POS = 400; /* Borrowed from Original Code */
+    public int[][] motorPositions = new int[2][2];
 
 
 
@@ -36,8 +37,7 @@ public class AutoMode extends OpMode{
         }
     }
     //Drive Controls
-
-
+    
 
 
 
