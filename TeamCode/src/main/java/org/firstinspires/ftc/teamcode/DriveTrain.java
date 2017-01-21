@@ -63,4 +63,16 @@ public class DriveTrain {
         motors[1][0].setTargetPosition(-1*position);
         motors[1][1].setTargetPosition(-1*position);
     }
+    
+    public boolean isCloseTo(int pos) {
+        double avgPos = 0.0;
+        for(DcMotor[] row : motors) {
+            for(DcMotor motor : row) {
+                avgPos += motor.getCurrentPosition();
+            }
+        }
+        
+        return Math.abs(pos - avgPos) < 20;
+    }
+    
 }
