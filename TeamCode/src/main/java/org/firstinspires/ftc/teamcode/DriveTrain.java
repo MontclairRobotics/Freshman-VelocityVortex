@@ -75,15 +75,36 @@ public class DriveTrain {
         }
         return motorPos;
     }
-    
+
     public boolean isCloseTo(int pos) {
         double avgPos = 0.0;
-        for(DcMotor[] row : motors) {
-            for(DcMotor motor : row) {
+        for (DcMotor[] row : motors){
+            for (DcMotor motor : row) {
                 avgPos += motor.getCurrentPosition();
             }
         }
-        
+
         return Math.abs(pos - avgPos) < 20;
     }
+
+    public boolean isCloseToRight(int pos) {
+        double avgPos = 0.0;
+        DcMotor[] rightRow = motors[1];
+        for (DcMotor motor : rightRow) {
+            avgPos += motor.getCurrentPosition();
+        }
+
+        return Math.abs(pos - avgPos) < 20;
+    }
+
+    public boolean isCloseToLeft(int pos) {
+        double avgPos = 0.0;
+        DcMotor[] leftRow = motors[0];
+        for (DcMotor motor : leftRow) {
+           avgPos += motor.getCurrentPosition();
+        }
+
+        return Math.abs(pos - avgPos) < 20;
+    }
+
 }
