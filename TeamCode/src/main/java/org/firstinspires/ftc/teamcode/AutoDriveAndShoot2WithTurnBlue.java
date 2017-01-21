@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 /**
  * Created by Will Chu on 1/20/2017.
  */
-@Autonomous(name="Auto Drive With TURN And Shoot Blue", group="147")
-public class AutoDriveAndShootWithTurnBlue extends AutoMode {
+@Autonomous(name="Auto Drive With TURN And Shoot 2 Blue", group="147")
+public class AutoDriveAndShoot2WithTurnBlue extends AutoMode {
 
     DriveTrain drivetrain;
     Intake intake;
@@ -21,7 +21,8 @@ public class AutoDriveAndShootWithTurnBlue extends AutoMode {
     public void loop() {
         switch (state){
 
-            case 0: drivetrain.setDrivePosition(SINGLE_BLOCK_DISTANCE);
+            case 0: drivetrain.setDrivePosition(PART_BLOCK_DISTANCE);
+                break;
 
             case 1: drivetrain.setRightTurnPosition(90);
                 break;
@@ -32,7 +33,7 @@ public class AutoDriveAndShootWithTurnBlue extends AutoMode {
             case 3: drivetrain.setLeftTurnPosition(90);
                 break;
 
-            case 4: drivetrain.setDrivePosition(-SINGLE_BLOCK_DISTANCE);
+            case 4: drivetrain.setDrivePosition(-PART_BLOCK_DISTANCE);
                 break;
 
             case 5: shooter.shooterUp();
@@ -41,11 +42,20 @@ public class AutoDriveAndShootWithTurnBlue extends AutoMode {
                 break;
 
             case 6: shooter.shooterDown();
+                intake.intakeUp();
+                nextState(shooter.isCloseTo(shooter.shooterDownPos) && intake.isCloseTo(intake.intakeUpPos));
+                break;
+
+            case 7: shooter.shooterUp();
                 intake.intakeHalf();
+                nextState(shooter.isCloseTo(shooter.shooterUpPos) && intake.isCloseTo(intake.intakeHalfPos));
+                break;
+
+            case 8: shooter.shooterDown();
                 nextState(shooter.isCloseTo(shooter.shooterDownPos) && intake.isCloseTo(intake.intakeHalfPos));
                 break;
 
-            case 7: drivetrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
+            case 9: drivetrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
                 break;
         }
     }
