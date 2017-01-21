@@ -20,7 +20,7 @@ public class AutoDrive extends AutoMode {
     public void loop() {
         switch (state){
             case 0:
-                driveTrain.setDrivePosition(Corner_Vortex_Distance_From_Start * DEGREES_PER_INCH);
+                driveTrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
                 break;
 
         }
