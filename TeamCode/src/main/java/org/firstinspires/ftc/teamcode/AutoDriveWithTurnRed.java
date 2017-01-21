@@ -21,11 +21,11 @@ public class AutoDriveWithTurnRed extends AutoMode {
     public void loop() {
         switch (state){
             case 0: driveTrain.setDrivePosition(SINGLE_BLOCK_DISTANCE);
-
+                nextState(driveTrain.isCloseToLeft(SINGLE_BLOCK_DISTANCE) && driveTrain.isCloseToRight(SINGLE_BLOCK_DISTANCE));
                 break;
 
             case 1: driveTrain.setLeftTurnPosition(45);
-
+                nextState(driveTrain.isCloseToLeft(-45 * DEGREES_PER_INCH_CIRCLE) && driveTrain.isCloseToRight(45 * DEGREES_PER_INCH_CIRCLE));
                 break;
 
             case 2: driveTrain.setDrivePosition( AFTER_TURN_DISTANCE * DEGREES_PER_INCH);

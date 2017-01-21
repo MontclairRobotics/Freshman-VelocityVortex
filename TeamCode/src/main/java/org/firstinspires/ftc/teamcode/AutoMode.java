@@ -16,6 +16,7 @@ public class AutoMode extends OpMode{
     public static final int Corner_Vortex_Distance_From_Far_Start = DEGREES_PER_INCH*144;
     public static final int SINGLE_BLOCK_DISTANCE = 24;
     public static final int PART_BLOCK_DISTANCE = 15;
+    public static final int DEGREES_PER_INCH_CIRCLE = 255/360;
 
 
     //State Machine
