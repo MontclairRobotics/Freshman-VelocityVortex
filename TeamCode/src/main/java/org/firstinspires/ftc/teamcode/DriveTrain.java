@@ -46,6 +46,7 @@ public class DriveTrain {
     }
 
     public void setDrivePosition(int position){
+        //TODO: Should these positions be set to absolute position or relative to current position. Or possibly have a reset?
         motors[0][0].setTargetPosition(position);
         motors[0][1].setTargetPosition(position);
         motors[1][0].setTargetPosition(position);
@@ -53,6 +54,7 @@ public class DriveTrain {
     }
 
     public void setLeftTurnPosition(int position){
+        //TODO: Should these positions be set to absolute position or relative to current position. Or possibly have a reset?
         motors[0][0].setTargetPosition(-1*position);
         motors[0][1].setTargetPosition(-1*position);
         motors[1][0].setTargetPosition(position);
@@ -60,6 +62,7 @@ public class DriveTrain {
     }
 
     public void setRightTurnPosition(int position){
+        //TODO: Should these positions be set to absolute position or relative to current position. Or possibly have a reset?
         motors[0][0].setTargetPosition(position);
         motors[0][1].setTargetPosition(position);
         motors[1][0].setTargetPosition(-1*position);
@@ -83,6 +86,7 @@ public class DriveTrain {
                 avgPos += motor.getCurrentPosition();
             }
         }
+        // TODO: Does avgPos need to be divided by DcMotor[] count?
 
         return Math.abs(pos - avgPos) < 20;
     }
@@ -93,6 +97,7 @@ public class DriveTrain {
         for (DcMotor motor : rightRow) {
             avgPos += motor.getCurrentPosition();
         }
+        // TODO: Does avgPos need to be divided by DcMotor[] count?
 
         return Math.abs(pos - avgPos) < 20;
     }
@@ -103,6 +108,7 @@ public class DriveTrain {
         for (DcMotor motor : leftRow) {
            avgPos += motor.getCurrentPosition();
         }
+        // TODO: Does avgPos need to be divided by DcMotor[] count?
 
         return Math.abs(pos - avgPos) < 20;
     }

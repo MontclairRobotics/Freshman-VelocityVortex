@@ -19,7 +19,8 @@ public class AutoDriveAndShoot2WithTurnBlue extends AutoMode {
                 nextState(driveTrain.isCloseTo(PART_BLOCK_DISTANCE));
                 break;
 
-            case 1: driveTrain.setRightTurnPosition(90);
+            case 1: // TODO: 90 vx. 90*conversion?
+                driveTrain.setRightTurnPosition(90);
                 nextState(driveTrain.isCloseToLeft(90 * DEGREES_PER_INCH_CIRCLE) && driveTrain.isCloseToRight(-90 * DEGREES_PER_INCH_CIRCLE));
                 break;
 
