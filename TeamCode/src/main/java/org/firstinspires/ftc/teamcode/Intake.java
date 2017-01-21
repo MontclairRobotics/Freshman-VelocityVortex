@@ -20,7 +20,7 @@ public class Intake {
     public int intakeTolerance = 50;
     int intakeUpPos = 200;
     int intakeDownPos = 1300;
-    int intakeRegPos = 400;
+    int intakeHalfPos = 400;
 
     public void init(froshHardwareMap hwMap){
         this.hwMap = hwMap;
@@ -39,7 +39,7 @@ public class Intake {
 
     public void intakeReg() {
         intake.setPower(.5);
-        intake.setTargetPosition(intakeRegPos);
+        intake.setTargetPosition(intakeHalfPos);
     }
 
     public void setPos(int pos){ intake.setTargetPosition(pos);}
