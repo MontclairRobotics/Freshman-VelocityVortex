@@ -33,4 +33,9 @@ public class Shooter {
     public void incrDown(int incr){
         shooter.setTargetPosition(shooter.getCurrentPosition() - incr);
     }
+    
+    public boolean isCloseTo(double val) {
+        return Math.abs(val - shooter.getCurrentPosition()) < 5;
+    }
+    
 }
