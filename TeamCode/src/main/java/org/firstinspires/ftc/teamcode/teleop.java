@@ -30,7 +30,7 @@ public class teleop extends OpMode{
         intake.init(hardware);
         pusher = new BeaconPusher();
         pusher.init(hardware);
-        intake.intakeReg();
+        intake.intakeHalf();
         shooter = new Shooter();
         shooter.init(hardware);
         telemetry.addData("INFO","Initialized");

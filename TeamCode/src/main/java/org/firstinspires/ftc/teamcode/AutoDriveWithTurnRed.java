@@ -9,7 +9,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 @Autonomous(name="Auto Drive WITH TURN Red", group="147")
 public class AutoDriveWithTurnRed extends AutoMode {
-    DriveTrain driveTrain;
     int AFTER_TURN_DISTANCE = 68;
 
     @Override

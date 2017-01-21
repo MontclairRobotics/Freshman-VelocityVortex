@@ -29,12 +29,12 @@ public class AutoDriveAndShoot extends AutoMode {
                     nextState(shooter.isCloseTo(shooter.shooterUpPos) && intake.isCloseTo(intake.intakeDownPos));
                 break;
             case 1: shooter.shooterDown();
-                    intake.intakeReg();
-                    nextState(shooter.isCloseTo(shooter.shooterDownPos) && intake.isCloseTo(intake.intakeRegPos));
+                    intake.intakeHalf();
+                    nextState(shooter.isCloseTo(shooter.shooterDownPos) && intake.isCloseTo(intake.intakeHalfPos));
                 break;
 
             case 2:
-                drivetrain.setDrivePosition(Corner_Vortex_Distance_From_Start * DEGREES_PER_INCH);
+                drivetrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
                 break;
         }
     }

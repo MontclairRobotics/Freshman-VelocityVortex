@@ -7,33 +7,28 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 @Autonomous(name="Auto Drive With TURN And Shoot 2 Blue", group="147")
 public class AutoDriveAndShoot2WithTurnBlue extends AutoMode {
 
-    DriveTrain drivetrain;
-    Intake intake;
-    Shooter shooter;
-
     @Override
     public void init() {
         setState(0);
-
     }
 
     @Override
     public void loop() {
         switch (state){
 
-            case 0: drivetrain.setDrivePosition(PART_BLOCK_DISTANCE);
+            case 0: driveTrain.setDrivePosition(PART_BLOCK_DISTANCE);
                 break;
 
-            case 1: drivetrain.setRightTurnPosition(90);
+            case 1: driveTrain.setRightTurnPosition(90);
                 break;
 
-            case 2: drivetrain.setDrivePosition(2 * SINGLE_BLOCK_DISTANCE);
+            case 2: driveTrain.setDrivePosition(2 * SINGLE_BLOCK_DISTANCE);
                 break;
 
-            case 3: drivetrain.setLeftTurnPosition(90);
+            case 3: driveTrain.setLeftTurnPosition(90);
                 break;
 
-            case 4: drivetrain.setDrivePosition(-PART_BLOCK_DISTANCE);
+            case 4: driveTrain.setDrivePosition(-PART_BLOCK_DISTANCE);
                 break;
 
             case 5: shooter.shooterUp();
@@ -55,7 +50,7 @@ public class AutoDriveAndShoot2WithTurnBlue extends AutoMode {
                 nextState(shooter.isCloseTo(shooter.shooterDownPos) && intake.isCloseTo(intake.intakeHalfPos));
                 break;
 
-            case 9: drivetrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
+            case 9: driveTrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
                 break;
         }
     }
