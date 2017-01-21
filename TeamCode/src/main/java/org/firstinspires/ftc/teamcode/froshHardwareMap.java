@@ -62,7 +62,7 @@ public class froshHardwareMap
         rightMotorB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         intakeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         shooterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        beaconMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        beaconMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         // Set all motors to zero power
         leftMotorA.setPower(0);
