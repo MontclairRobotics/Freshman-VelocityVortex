@@ -92,7 +92,16 @@ public class AutoMode extends OpMode {
         }
         return !(driving);
     }
-    
+
+    public boolean shoot(){
+        if (!(shooting)){
+            shooter.shooterUp();
+        }
+        if(Math.abs(shooter.shooterUpPos - shooter.getPos()) < 20){
+            shooter.shooterDown();
+        }
+        return !(shooting);
+    }
 
 
     @Override
