@@ -86,6 +86,7 @@ public class DriveTrain {
                 avgPos += motor.getCurrentPosition();
             }
         }
+        avgPos = avgPos/4;
         // TODO: Does avgPos need to be divided by DcMotor[] count?
 
         return Math.abs(pos - avgPos) < 20;

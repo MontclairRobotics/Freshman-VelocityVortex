@@ -30,6 +30,10 @@ public class Shooter {
         shooter.setTargetPosition(shooter.getCurrentPosition() + incr);
     }
 
+    public int getPos(){
+        return shooter.getCurrentPosition();
+    }
+
     public void incrDown(int incr){
         shooter.setTargetPosition(shooter.getCurrentPosition() - incr);
     }
