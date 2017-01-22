@@ -19,15 +19,18 @@ public class AutoDriveWithTurnRed extends AutoMode {
     @Override
     public void loop() {
         switch (state){
-            case 0: driveTrain.setDrivePosition(SINGLE_BLOCK_DISTANCE);
+            case 0: // Drive Foward a single Block Distance
+                driveTrain.setDrivePosition(SINGLE_BLOCK_DISTANCE);
                 nextState(driveTrain.isCloseToLeft(SINGLE_BLOCK_DISTANCE) && driveTrain.isCloseToRight(SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 1: driveTrain.setLeftTurnPosition(45);
+            case 1: // Turn Left 45 Deg in same place
+                driveTrain.setLeftTurnPosition(45);
                 nextState(driveTrain.isCloseToLeft(-TURN_DEGREE_90/2) && driveTrain.isCloseToRight(TURN_DEGREE_90/2));
                 break;
 
-            case 2: driveTrain.setDrivePosition( AFTER_TURN_DISTANCE * DEGREES_PER_INCH);
+            case 2: // Drive and Park in Center Vortex
+                driveTrain.setDrivePosition( AFTER_TURN_DISTANCE * DEGREES_PER_INCH);
 
                 break;
 

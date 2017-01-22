@@ -19,17 +19,19 @@ public class AutoDriveWithTurnBlue extends AutoMode {
     @Override
     public void loop() {
         switch (state){
-            case 0: driveTrain.setDrivePosition(SINGLE_BLOCK_DISTANCE);
-                    nextState(driveTrain.isCloseTo(SINGLE_BLOCK_DISTANCE));
 
+            case 0: // Drive Single Block Distance
+                driveTrain.setDrivePosition(SINGLE_BLOCK_DISTANCE);
+                nextState(driveTrain.isCloseTo(SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 1: driveTrain.setRightTurnPosition(45);
-                    nextState(driveTrain.isCloseToLeft(TURN_DEGREE_90/2) && driveTrain.isCloseToRight(-TURN_DEGREE_90/2));
+            case 1: // Turn Right 45 Degree in place
+                driveTrain.setRightTurnPosition(45);
+                nextState(driveTrain.isCloseToLeft(TURN_DEGREE_90/2) && driveTrain.isCloseToRight(-TURN_DEGREE_90/2));
                 break;
 
-            case 2: driveTrain.setDrivePosition( AFTER_TURN_DISTANCE * DEGREES_PER_INCH);
-
+            case 2: // Drive and Park on Corner Vortex
+                driveTrain.setDrivePosition( AFTER_TURN_DISTANCE * DEGREES_PER_INCH);
                 break;
 
         }

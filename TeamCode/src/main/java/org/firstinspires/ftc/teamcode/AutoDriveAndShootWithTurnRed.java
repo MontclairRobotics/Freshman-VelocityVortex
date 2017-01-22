@@ -21,39 +21,44 @@ public class AutoDriveAndShootWithTurnRed extends AutoMode {
         switch (state){
 
 
-            case 0: driveTrain.setDrivePosition(PART_BLOCK_DISTANCE);
+            case 0: // Drive foward so Center of the Robot is 24 in from Wall
+                driveTrain.setDrivePosition(PART_BLOCK_DISTANCE);
                 nextState(driveTrain.isCloseTo(PART_BLOCK_DISTANCE));
                 break;
 
-            case 1: driveTrain.setLeftTurnPosition(90);
+            case 1: // Turn Left 90 Deg in Place
+                driveTrain.setLeftTurnPosition(90);
                 nextState(driveTrain.isCloseToLeft(-TURN_DEGREE_90) && driveTrain.isCloseToRight(TURN_DEGREE_90));
                 break;
 
-            case 2: driveTrain.setDrivePosition(2 * SINGLE_BLOCK_DISTANCE);
+            case 2: // Drive Foward 2 Blocks Distance (24 in)
+                driveTrain.setDrivePosition(2 * SINGLE_BLOCK_DISTANCE);
                 nextState(driveTrain.isCloseTo(2 * SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 3: driveTrain.setRightTurnPosition(90);
+            case 3: // Turn Right 90 Deg in Same Place
+                driveTrain.setRightTurnPosition(90);
                 nextState(driveTrain.isCloseToLeft(TURN_DEGREE_90) && driveTrain.isCloseToRight(-TURN_DEGREE_90));
                 break;
 
-            case 4: driveTrain.setDrivePosition(-PART_BLOCK_DISTANCE);
+            case 4: // Drive Back Against the Wall
+                driveTrain.setDrivePosition(-PART_BLOCK_DISTANCE);
                 nextState(driveTrain.isCloseTo(-PART_BLOCK_DISTANCE));
 
                 break;
 
-            case 5: shooter.shooterUp();
+            case 5: // Shoot Ball and Lower Intake
+                shooter.shooterUp();
                 intake.intakeDown();
                 nextState(shooter.isCloseTo(shooter.shooterUpPos) && intake.isCloseTo(intake.intakeDownPos));
                 break;
 
-            case 6: shooter.shooterDown();
+            case 6: // Shooter Reset and intake Half Position
+                shooter.shooterDown();
                 intake.intakeHalf();
-                nextState(shooter.isCloseTo(shooter.shooterDownPos) && intake.isCloseTo(intake.intakeHalfPos));
+                driveTrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
                 break;
 
-            case 7: driveTrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
-                break;
         }
     }
 }
