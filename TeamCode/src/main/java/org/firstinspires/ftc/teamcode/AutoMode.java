@@ -45,6 +45,7 @@ public class AutoMode extends OpMode {
     public static final double INCH_FOR_90_DEGREE_TURN = 14.13;
     public static final int TURN_DEGREE_90 = (int)(INCH_PER_DEGREE_CIRCUMFERENCE * INCH_FOR_90_DEGREE_TURN);
     public boolean driving = false;
+    public boolean shooting;
 
     //State Machine
     public int state = 0;
@@ -86,12 +87,12 @@ public class AutoMode extends OpMode {
         avgPos = avgPos/4;
 
         distanceTraveled = avgPos - startingPos;
-        if(Math.abs(distanceTraveled - distance) > 20){
+        if(Math.abs(distanceTraveled - distance) < 20){
             driving = false;
         }
         return !(driving);
     }
-
+    
 
 
     @Override
