@@ -9,20 +9,21 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 @Autonomous(name="Auto Drive NO TURN RED/Blue", group="147")
 public class AutoDrive extends AutoMode {
-    DriveTrain driveTrain;
 
     @Override
     public void init() {
         autoInit();
-        driveTrain.autoInit(hardware);
         setState(0);
     }
 
     @Override
     public void loop() {
-        switch (state){
+        switch(state){
             case 0:
-                driveTrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
+                nextState(drive(24 * DEGREES_PER_INCH));
+                break;
+            case 1:
+                telemetry.addData("INFO", "Second state Acheived");
                 break;
 
         }

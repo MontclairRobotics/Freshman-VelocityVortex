@@ -12,7 +12,6 @@ public class AutoDriveAndShootWithTurnBlue extends AutoMode {
     @Override
     public void init() {
         setState(0);
-
     }
 
     @Override

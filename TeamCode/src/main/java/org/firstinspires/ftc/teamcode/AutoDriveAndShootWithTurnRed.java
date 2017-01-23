@@ -7,8 +7,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 @Autonomous(name="Auto Drive With TURN And Shoot RED", group="147")
 public class AutoDriveAndShootWithTurnRed extends AutoMode {
 
-    Intake intake;
-    Shooter shooter;
 
     @Override
     public void init() {

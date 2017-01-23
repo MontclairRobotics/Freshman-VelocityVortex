@@ -9,9 +9,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 @Autonomous(name="Auto Drive NO TURN And Shoot 2 RED/Blue", group="147")
 public class AutoDriveAndShoot2 extends AutoMode {
 
-    DriveTrain drivetrain;
-    Intake intake;
-    Shooter shooter;
 
     @Override
     public void init() {
@@ -43,7 +40,7 @@ public class AutoDriveAndShoot2 extends AutoMode {
 
             case 3: // Shooter Reset and Move to Center Vortex
                 shooter.shooterDown();
-                drivetrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
+                driveTrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
                 break;
 
         }

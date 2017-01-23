@@ -16,18 +16,25 @@ public class AutoMode extends OpMode {
     Intake intake;
     Shooter shooter;
     BeaconPusher beaconPusher;
+    public int[][] motorPos;
 
     public void autoInit() {
         hardware = new froshHardwareMap();
         hardware.init(hardwareMap);
-        driveTrain = new DriveTrain();
-        driveTrain.autoInit(hardware);
+        telemetry.addData("INFO", "Hardware Map Init");
         intake = new Intake();
         intake.init(hardware);
+        telemetry.addData("INFO", "Intake Init");
+        driveTrain = new DriveTrain();
+        driveTrain.autoInit(hardware);
+        telemetry.addData("INFO", "Drive Train Init");
         beaconPusher = new BeaconPusher();
         beaconPusher.init(hardware);
+        telemetry.addData("INFO", "Pusher Init");
         shooter = new Shooter();
         shooter.init(hardware);
+        telemetry.addData("INFO", "Shooter Init");
+        motorPos = driveTrain.getMotorPos();
     }
 
 
@@ -40,7 +47,6 @@ public class AutoMode extends OpMode {
     public static final int Corner_Vortex_Distance_From_Far_Start = DEGREES_PER_INCH * 144;
     public static final int SINGLE_BLOCK_DISTANCE = 24;
     public static final int PART_BLOCK_DISTANCE = 15;
-    public int[][] motorPos = driveTrain.getMotorPos();
     public static final double INCH_PER_DEGREE_CIRCUMFERENCE = 0.16;
     public static final double INCH_FOR_90_DEGREE_TURN = 14.13;
     public static final int TURN_DEGREE_90 = (int)(INCH_PER_DEGREE_CIRCUMFERENCE * INCH_FOR_90_DEGREE_TURN);
@@ -70,17 +76,20 @@ public class AutoMode extends OpMode {
     int startingPos = 0;
     public boolean drive(int distance){
         if(!(driving)) {
-            for (int i = 0; i < driveTrain.motors.length; i++) {
-                for (int j = 0; i < driveTrain.motors[i].length; j++) {
-                    startingPos = driveTrain.motors[i][j].getCurrentPosition();
-                    driveTrain.motors[i][j].setTargetPosition(startingPos + distance);
-                }
+            for (int i = 0; i < driveTrain.motors[0].length; i++) {
+                startingPos = driveTrain.motors[1][i].getCurrentPosition();
+                driveTrain.motors[1][i].setTargetPosition(startingPos + distance);
             }
+            for (int i = 0; i < driveTrain.motors[0].length; i++) {
+                startingPos = driveTrain.motors[1][i].getCurrentPosition();
+                driveTrain.motors[1][i].setTargetPosition(startingPos + distance);
+            }
+
             driving = true;
         }
         int avgPos = 0;
         for (int i = 0; i < driveTrain.motors.length; i++) {
-            for (int j = 0; i < driveTrain.motors[i].length; j++) {
+            for (int j = 0; j < driveTrain.motors[i].length; j++) {
                 avgPos = avgPos + driveTrain.motors[i][j].getCurrentPosition();
             }
         }

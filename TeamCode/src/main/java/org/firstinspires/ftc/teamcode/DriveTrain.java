@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class DriveTrain {
     froshHardwareMap hwMap;
-    public DcMotor[][] motors=new DcMotor[2][2];
+    public DcMotor[][] motors = new DcMotor[2][2];
     public void init(froshHardwareMap hwMap){
         this.hwMap = hwMap;
         motors[0][0]  = hwMap.leftMotorA;
@@ -38,9 +38,10 @@ public class DriveTrain {
         motors[1][1]  = hwMap.rightMotorB;
         for(int i = 0; i < motors.length; i++){
             for(int j = 0; j <motors[0].length; j++) {
-                motors[i][j].setPower(0);
                 motors[i][j].setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 motors[i][j].setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                motors[i][j].setTargetPosition(motors[i][j].getCurrentPosition());
+                motors[i][j].setPower(.5);
             }
         }
     }
@@ -49,8 +50,8 @@ public class DriveTrain {
         //TODO: Should these positions be set to absolute position or relative to current position. Or possibly have a reset?
         motors[0][0].setTargetPosition(position);
         motors[0][1].setTargetPosition(position);
-        motors[1][0].setTargetPosition(position);
-        motors[1][1].setTargetPosition(position);
+        motors[1][0].setTargetPosition(0-position);
+        motors[1][1].setTargetPosition(0-position);
     }
 
     public void setLeftTurnPosition(int position){
@@ -72,7 +73,7 @@ public class DriveTrain {
     public int[][] getMotorPos(){
         int[][] motorPos = new int[2][2];
         for(int i = 0; i < motors.length; i++){
-            for(int j = 0; i < motors[i].length; j++){
+            for(int j = 0; j < motors[i].length; j++){
                 motorPos[i][j] = motors[i][j].getCurrentPosition();
             }
         }
