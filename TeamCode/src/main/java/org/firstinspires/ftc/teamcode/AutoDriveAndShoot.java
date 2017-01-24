@@ -25,16 +25,14 @@ public class AutoDriveAndShoot extends AutoMode {
                 nextState(intake.isCloseTo(intake.intakeHalfPos));
                 break;
 
-            case 1: // Shooting ball and Intake Down Position
+            case 1: // Shooting ball
                 shooter.shooterUp();
-                intake.intakeDown();
-                nextState(shooter.isCloseTo(shooter.shooterUpPos) && intake.isCloseTo(intake.intakeDownPos));
+                nextState(shooter.isCloseTo(shooter.shooterUpPos));
                 break;
 
             case 2: // Shooter Reset and Half Position For Intake and Moving to Center Vortex
                 shooter.shooterDown();
-                intake.intakeHalf();
-                driveTrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
+                nextState(drive(3 * Single_Block_Distance * DEGREES_PER_INCH));
                 break;
 
         }
