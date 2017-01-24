@@ -43,13 +43,12 @@ public class AutoMode extends OpMode {
     public static int totalPos = 0;
     public static int currentPos = 0;
     public static int targetPos = 0;
-    public static final int DEGREES_PER_INCH = 10000 / 85; //RAFI & JACK MEASUREMENT (WE HAVE TO  DO IT AGAIN)
-    public static final int Corner_Vortex_Distance_From_Far_Start = DEGREES_PER_INCH * 144;
-    public static final int SINGLE_BLOCK_DISTANCE = 24;
-    public static final int PART_BLOCK_DISTANCE = 15;
-    public static final double INCH_PER_DEGREE_CIRCUMFERENCE = 0.16;
-    public static final double INCH_FOR_90_DEGREE_TURN = 14.13;
-    public static final int TURN_DEGREE_90 = (int)(INCH_PER_DEGREE_CIRCUMFERENCE * INCH_FOR_90_DEGREE_TURN);
+    public static final int DEGREES_PER_INCH = 10000 / 85; //10000 Degs over how many inches that is
+    public static final int SINGLE_BLOCK_DISTANCE = 24; // Full Tile distance
+    public static final int PART_BLOCK_DISTANCE = 15; // From back of wall to have center of robot at 24 in
+    public static final double INCH_PER_DEGREE_CIRCUMFERENCE = 0.16; //inch per deg on 18 diameter circle
+    public static final double INCH_FOR_90_DEGREE_TURN = 14.13; // inch per deg on a 18 diameter circle
+    public static final int TURN_DEGREE_90 = (int)(INCH_PER_DEGREE_CIRCUMFERENCE * INCH_FOR_90_DEGREE_TURN); //MOtor drive distance for 18 Diameter circle
     public boolean driving = false;
     public boolean shooting;
 
