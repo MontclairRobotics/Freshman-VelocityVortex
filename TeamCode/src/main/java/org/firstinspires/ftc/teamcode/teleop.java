@@ -18,6 +18,7 @@ public class teleop extends OpMode{
     Controller controller;
     BeaconPusher pusher;
     Shooter shooter;
+    boolean intaking;
     @Override
     public void init() {
         hardware = new froshHardwareMap();
@@ -33,6 +34,7 @@ public class teleop extends OpMode{
         intake.intakeHalf();
         shooter = new Shooter();
         shooter.init(hardware);
+        intaking = false;
         telemetry.addData("INFO","Initialized");
 
     }
@@ -49,27 +51,34 @@ public class teleop extends OpMode{
         }else {
             multiplier = 0.5f;
         }
-        driveTrain.setDriveTank(controller.getRightPower(), controller.getLeftPower());
+        driveTrain.setDriveTank(controller.getRightPower() * multiplier, controller.getLeftPower() * multiplier);
 
 
 
         //Beacon Pusher Controls
         if (controller.getButtonPressed("B")){
+            telemetry.addData("INFO","Beacon Out");
+            telemetry.addData("INFO", pusher.getPos());
             pusher.pusherOut();
         }else{
+            telemetry.addData("INFO", "Beacon Int");
             pusher.pusherIn();
         }
 
 
 
         //intake Controls
-        boolean intaking = false;
+
         if (controller.getButtonPressed("Y")){
+            telemetry.addData("Projeted", intake.intakeDownPos);
+            telemetry.addData("Actual", intake.getVals());
             intake.intakeDown();
             intaking = true;
         }else if(intaking){
+            telemetry.addData("Projeted", intake.intakeUpPos);
+            telemetry.addData("Actual", intake.getVals());
             intake.intakeUp();
-            if (intake.getVals() == intake.intakeUpPos){
+            if (intake.isCloseTo(intake.intakeUpPos)){
                 intaking = false;
             }
         }else{

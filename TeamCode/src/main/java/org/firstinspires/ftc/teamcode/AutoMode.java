@@ -49,6 +49,7 @@ public class AutoMode extends OpMode {
     public static final double INCH_PER_DEGREE_CIRCUMFERENCE = 0.16; //inch per deg on 18 diameter circle
     public static final double INCH_FOR_90_DEGREE_TURN = 14.13; // inch per deg on a 18 diameter circle
     public static final int TURN_DEGREE_90 = (int)(INCH_PER_DEGREE_CIRCUMFERENCE * INCH_FOR_90_DEGREE_TURN); //MOtor drive distance for 18 Diameter circle
+    public static final int CORNER_VORTEX_DISTANCE_FROM_FAR_START = 12 * 3;
     public boolean driving = false;
     public boolean shooting;
 
@@ -76,12 +77,12 @@ public class AutoMode extends OpMode {
     public boolean drive(int distance){
         if(!(driving)) {
             for (int i = 0; i < driveTrain.motors[0].length; i++) {
-                startingPos = driveTrain.motors[1][i].getCurrentPosition();
+                startingPos = driveTrain.motors[0][i].getCurrentPosition();
                 driveTrain.motors[1][i].setTargetPosition(startingPos + distance);
             }
-            for (int i = 0; i < driveTrain.motors[0].length; i++) {
+            for (int i = 0; i < driveTrain.motors[1].length; i++) {
                 startingPos = driveTrain.motors[1][i].getCurrentPosition();
-                driveTrain.motors[1][i].setTargetPosition(startingPos + distance);
+                driveTrain.motors[1][i].setTargetPosition(0-(startingPos + distance));
             }
 
             driving = true;
@@ -89,7 +90,7 @@ public class AutoMode extends OpMode {
         int avgPos = 0;
         for (int i = 0; i < driveTrain.motors.length; i++) {
             for (int j = 0; j < driveTrain.motors[i].length; j++) {
-                avgPos = avgPos + driveTrain.motors[i][j].getCurrentPosition();
+                avgPos = avgPos + Math.abs(driveTrain.motors[i][j].getCurrentPosition());
             }
         }
         avgPos = avgPos/4;

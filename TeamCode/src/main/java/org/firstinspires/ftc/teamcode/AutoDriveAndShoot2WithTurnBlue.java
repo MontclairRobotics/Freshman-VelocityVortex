@@ -64,7 +64,7 @@ public class AutoDriveAndShoot2WithTurnBlue extends AutoMode {
 
             case 9: // Shooter Reset and Move to Center Vortex
                 shooter.shooterDown();
-                driveTrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
+                driveTrain.setDrivePosition(CORNER_VORTEX_DISTANCE_FROM_FAR_START * DEGREES_PER_INCH);
                 break;
         }
     }

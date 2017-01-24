@@ -54,7 +54,7 @@ public class AutoDriveAndShootWithTurnRed extends AutoMode {
             case 6: // Shooter Reset and intake Half Position
                 shooter.shooterDown();
                 intake.intakeHalf();
-                driveTrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
+                driveTrain.setDrivePosition(CORNER_VORTEX_DISTANCE_FROM_FAR_START * DEGREES_PER_INCH);
                 break;
 
         }

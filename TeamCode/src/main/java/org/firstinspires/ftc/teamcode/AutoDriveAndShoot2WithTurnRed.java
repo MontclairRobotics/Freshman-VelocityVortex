@@ -62,7 +62,7 @@ public class AutoDriveAndShoot2WithTurnRed extends AutoMode {
 
             case 8:// Shooter reset and Drive to Corner Vortex
                 shooter.shooterDown();
-                driveTrain.setDrivePosition(Corner_Vortex_Distance_From_Far_Start * DEGREES_PER_INCH);
+                driveTrain.setDrivePosition(CORNER_VORTEX_DISTANCE_FROM_FAR_START * DEGREES_PER_INCH);
                 break;
 
         }
