@@ -20,7 +20,7 @@ public class AutoDrive extends AutoMode {
     public void loop() {
         switch(state){
             case 0:
-                nextState(drive(24 * DEGREES_PER_INCH));
+                nextState(drive(3 * Single_Block_Distance * DEGREES_PER_INCH));
                 break;
             case 1:
                 telemetry.addData("INFO", "Second state Acheived");
