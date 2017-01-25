@@ -69,8 +69,7 @@ public class AutoMode extends OpMode {
             state++;
         }
     }
-
-
+    
     //Drive Controls
     int distanceTraveled = 0;
     int startingPos = 0;
@@ -82,7 +81,7 @@ public class AutoMode extends OpMode {
             }
             for (int i = 0; i < driveTrain.motors[1].length; i++) {
                 startingPos = driveTrain.motors[1][i].getCurrentPosition();
-                driveTrain.motors[1][i].setTargetPosition(0-(startingPos + distance));
+                driveTrain.motors[1][i].setTargetPosition((startingPos + distance));
             }
 
             driving = true;
