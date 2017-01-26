@@ -18,42 +18,57 @@ public class AutoDriveAndShoot2WithTurnRed extends AutoMode {
     @Override
     public void loop() {
         switch (state){
-
             case 0: //drive
-                nextState(drive(PART_BLOCK_DISTANCE * DEGREES_PER_INCH));
+                nextState(drive((PART_BLOCK_DISTANCE * DEGREES_PER_INCH)+ SINGLE_BLOCK_DISTANCE));
+                break;
 
-            case 1: //turn
+            case 1: //turn 45 deg left
+                driveTrain.setRightTurnPosition(TURN_DEGREE_45);
+                driveTrain.setLeftTurnPosition(-TURN_DEGREE_45);
+                nextState(driveTrain.isCloseToLeft(-TURN_DEGREE_45) && driveTrain.isCloseToRight(TURN_DEGREE_45));
+                break;
 
-            case 2: //intake down
+            case 2: //drive
+                nextState(drive(DISTANCE_BEFORE_SHOOTING * DEGREES_PER_INCH));
+                break;
+
+            case 3: //intake down
                 intake.intakeDown();
                 nextState(intake.isCloseTo(intake.intakeDownPos));
+                break;
 
-            case 3: //shoot
+            case 4: //shoot
                 shooter.shooterUp();
                 nextState(shooter.isCloseTo(shooter.shooterUpPos));
+                break;
 
-            case 4: //shooter reset and intake up
+            case 5: //shooter reset and intake up
                 shooter.shooterDown();
                 intake.intakeUp();
                 nextState(shooter.isCloseTo(shooter.shooterDownPos) && intake.isCloseTo(intake.intakeUpPos));
+                break;
 
-            case 5: // intake half
+            case 6: // intake half
                 intake.intakeHalf();
                 nextState(intake.isCloseTo(intake.intakeHalfPos));
+                break;
 
-            case 6: //shoot
+            case 7: //shoot
                 shooter.shooterUp();
                 nextState(shooter.isCloseTo(shooter.shooterUpPos));
+                break;
 
-            case 7: // shooter reset
+            case 8: // shooter reset
                 shooter.shooterDown();
                 nextState(shooter.isCloseTo(shooter.shooterDownPos));
-
-            case 8: // Park on center vorter
-
-            case 9: // telemetry
-                telemetry.addData("INFO", "Last State Achieved");
                 break;
-        }
+
+            case 9: // Park on center vorter
+                nextState(drive(DISTANCE_AFTER_SHOOTING));
+                break;
+
+            case 10: // telemetry
+                telemetry.addData("INFO", "Last State Achieved");
+                break;        }
     }
 }

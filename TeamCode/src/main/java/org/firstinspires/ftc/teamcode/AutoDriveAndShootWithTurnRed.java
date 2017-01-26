@@ -20,27 +20,38 @@ public class AutoDriveAndShootWithTurnRed extends AutoMode {
         switch (state){
             case 0: //drive
                 nextState(drive(PART_BLOCK_DISTANCE * DEGREES_PER_INCH));
+                break;
 
-            case 1: //turn
+            case 1: // turn 45 deg
+                driveTrain.setRightTurnPosition(-TURN_DEGREE_45);
+                driveTrain.setLeftTurnPosition(TURN_DEGREE_45);
+                nextState(driveTrain.isCloseToLeft(-TURN_DEGREE_45) && driveTrain.isCloseToRight(TURN_DEGREE_45));
+                break;
 
-            case 2: //intake half
+            case 2: //drive
+                nextState(drive(DISTANCE_BEFORE_SHOOTING));
+                break;
+
+            case 3: //intake half
                 intake.intakeHalf();
                 nextState(intake.isCloseTo(intake.intakeHalfPos));
                 break;
 
-            case 3: // shoot
+            case 4: // shoot
                 shooter.shooterUp();
                 nextState(shooter.isCloseTo(shooter.shooterUpPos));
                 break;
 
-            case 4: // shooter reset
+            case 5: // shooter reset
                 shooter.shooterDown();
                 nextState(shooter.isCloseTo(shooter.shooterDownPos));
                 break;
 
-            case 5: // drive
+            case 6: // drive
+                nextState(drive(DISTANCE_AFTER_SHOOTING));
+                break;
 
-            case 6: //telemetry
+            case 7: //telemetry
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
         }

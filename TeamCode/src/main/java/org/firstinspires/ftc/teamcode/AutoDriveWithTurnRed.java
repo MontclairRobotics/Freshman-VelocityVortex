@@ -26,7 +26,7 @@ public class AutoDriveWithTurnRed extends AutoMode {
 
             case 1: // Turn Left 45 Deg in same place
                 driveTrain.setLeftTurnPosition(45);
-                nextState(driveTrain.isCloseToLeft(-TURN_DEGREE_90/2) && driveTrain.isCloseToRight(TURN_DEGREE_90/2));
+                nextState(driveTrain.isCloseToLeft(-TURN_DEGREE_45) && driveTrain.isCloseToRight(TURN_DEGREE_45));
                 break;
 
             case 2: // Drive and Park in Center Vortex
