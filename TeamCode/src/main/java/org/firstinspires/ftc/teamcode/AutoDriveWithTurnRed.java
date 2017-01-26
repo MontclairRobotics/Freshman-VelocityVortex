@@ -30,8 +30,7 @@ public class AutoDriveWithTurnRed extends AutoMode {
                 break;
 
             case 2: // Drive and Park in Center Vortex
-                driveTrain.setDrivePosition( AFTER_TURN_DISTANCE * DEGREES_PER_INCH);
-
+                nextState(drive(AFTER_TURN_DISTANCE*DEGREES_PER_INCH));
                 break;
 
         }
