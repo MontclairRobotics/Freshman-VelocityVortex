@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 @Autonomous(name="Auto Drive With TURN And Shoot RED", group="147")
 public class AutoDriveAndShootWithTurnRed extends AutoMode {
 
+    //TODO: We need to calculate distances
 
     @Override
     public void init() {

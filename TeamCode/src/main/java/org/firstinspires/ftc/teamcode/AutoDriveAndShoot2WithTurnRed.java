@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 @Autonomous(name="Auto Drive With TURN And Shoot 2 Red", group="147")
 public class AutoDriveAndShoot2WithTurnRed extends AutoMode {
 
+    //TODO: We need to calculate distances
+
     @Override
     public void init() {
         setState(0);
@@ -17,7 +19,7 @@ public class AutoDriveAndShoot2WithTurnRed extends AutoMode {
     public void loop() {
         switch (state){
 
-            case 0: //drive foward
+            case 0: //drive
                 nextState(drive(PART_BLOCK_DISTANCE * DEGREES_PER_INCH));
 
             case 1: //turn
