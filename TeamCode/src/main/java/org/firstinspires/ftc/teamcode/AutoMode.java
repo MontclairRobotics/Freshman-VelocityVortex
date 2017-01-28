@@ -136,7 +136,9 @@ public class AutoMode extends OpMode {
 
 
     //AUTO TURNING
-    public boolean turn(int distance) {
+    public boolean turn(int degrees) {
+        //calculate how much each motor has to move
+        int distance = (int)((degrees/360)*18*Math.PI);
         //Get and set original positions
         if (!turning) {
             for (int i = 0; i < driveTrain.motors.length; i++) {
