@@ -78,7 +78,7 @@ public class AutoMode extends OpMode {
         if(!(driving)) {
             for (int i = 0; i < driveTrain.motors[0].length; i++) {
                 startingPos = driveTrain.motors[0][i].getCurrentPosition();
-                driveTrain.motors[1][i].setTargetPosition(startingPos + distance);
+                driveTrain.motors[0][i].setTargetPosition(startingPos + distance);
             }
             for (int i = 0; i < driveTrain.motors[1].length; i++) {
                 startingPos = driveTrain.motors[1][i].getCurrentPosition();

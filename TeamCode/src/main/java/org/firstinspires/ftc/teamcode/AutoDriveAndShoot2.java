@@ -40,7 +40,7 @@ public class AutoDriveAndShoot2 extends AutoMode {
 
             case 3: // Shooter Reset and Move to Center Vortex
                 shooter.shooterDown();
-                driveTrain.setDrivePosition(CORNER_VORTEX_DISTANCE_FROM_FAR_START * DEGREES_PER_INCH);
+                nextState(drive(3 * SINGLE_BLOCK_DISTANCE * DEGREES_PER_INCH));
                 break;
 
         }

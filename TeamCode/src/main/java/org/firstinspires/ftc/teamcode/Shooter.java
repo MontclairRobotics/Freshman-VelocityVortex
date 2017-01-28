@@ -10,8 +10,8 @@ public class Shooter {
     DcMotor shooter;
     froshHardwareMap hwMap;
 
-    int shooterUpPos = 200;
-    int shooterDownPos = -950;
+    int shooterUpPos = -750;
+    int shooterDownPos = 100;
 
     public void init(froshHardwareMap hwMap){
         this.hwMap = hwMap;
@@ -19,10 +19,12 @@ public class Shooter {
     }
 
     public void shooterUp(){
+        shooter.setPower(0.75);
         shooter.setTargetPosition(shooterUpPos);
     }
 
     public void shooterDown(){
+        shooter.setPower(1);
         shooter.setTargetPosition(shooterDownPos);
     }
 

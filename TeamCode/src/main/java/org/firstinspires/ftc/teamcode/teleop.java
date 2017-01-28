@@ -89,8 +89,10 @@ public class teleop extends OpMode{
 
         //Shooter Controls
         if (controller.getButtonPressed("A")){
+            telemetry.addData("Shooter Pos: ",shooter.getPos());
             shooter.shooterUp();
-        }else if(shooter.isCloseTo(shooter.shooterUpPos)){
+        }else{
+            telemetry.addData("Shooter Pos: ",shooter.getPos());
             shooter.shooterDown();
         }
 

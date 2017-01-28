@@ -53,7 +53,7 @@ public class Intake {
         intake.setTargetPosition(intake.getCurrentPosition() - incr);
     }
     public boolean isCloseTo(double val) {
-        return Math.abs(val - intake.getCurrentPosition()) < 30;
+        return Math.abs(val - intake.getCurrentPosition()) < intakeTolerance;
     }
     
 }

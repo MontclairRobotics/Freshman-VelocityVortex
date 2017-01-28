@@ -18,11 +18,11 @@ public class BeaconPusher {
         pusher = hardware.beaconMotor;
     }
     public void pusherIn(){
-        pusher.setPower(0.2);
+        pusher.setPower(0.4);
         pusher.setTargetPosition(pusherInPos);
     }
     public void pusherOut(){
-        pusher.setPower(0.2);
+        pusher.setPower(0.4);
         pusher.setTargetPosition(pusherOutPos);
     }
     public int getPos(){
