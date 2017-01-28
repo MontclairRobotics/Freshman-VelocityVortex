@@ -70,12 +70,12 @@ public class teleop extends OpMode{
         //intake Controls
 
         if (controller.getButtonPressed("Y")){
-            telemetry.addData("Projeted", intake.intakeDownPos);
+            telemetry.addData("Projected", intake.intakeDownPos);
             telemetry.addData("Actual", intake.getVals());
             intake.intakeDown();
             intaking = true;
         }else if(intaking){
-            telemetry.addData("Projeted", intake.intakeUpPos);
+            telemetry.addData("Projected", intake.intakeUpPos);
             telemetry.addData("Actual", intake.getVals());
             intake.intakeUp();
             if (intake.isCloseTo(intake.intakeUpPos)){

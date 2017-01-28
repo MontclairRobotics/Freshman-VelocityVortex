@@ -19,7 +19,7 @@ public class AutoDriveWithTurnRed extends AutoMode {
     @Override
     public void loop() {
         switch (state){
-            case 0: // Drive Foward a single Block Distance
+            case 0: // Drive Forward a single Block Distance
                 driveTrain.setDrivePosition(SINGLE_BLOCK_DISTANCE);
                 nextState(driveTrain.isCloseToLeft(SINGLE_BLOCK_DISTANCE) && driveTrain.isCloseToRight(SINGLE_BLOCK_DISTANCE));
                 break;
