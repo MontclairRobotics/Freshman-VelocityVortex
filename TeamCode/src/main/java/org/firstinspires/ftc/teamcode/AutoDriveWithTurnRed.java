@@ -25,14 +25,19 @@ public class AutoDriveWithTurnRed extends AutoMode {
                 break;
 
             case 1: // Turn Left 45 Deg in same place
+                telemetry.addData("INFO","Completed 0 State");
                 driveTrain.setLeftTurnPosition(45);
                 nextState(driveTrain.isCloseToLeft(-TURN_DEGREE_45) && driveTrain.isCloseToRight(TURN_DEGREE_45));
                 break;
 
             case 2: // Drive and Park in Center Vortex
+                telemetry.addData("INFO","Completed 1 State");
                 nextState(drive(AFTER_TURN_DISTANCE*DEGREES_PER_INCH));
                 break;
 
+            case 3: //telemetry
+                telemetry.addData("INFO", "Last State Achieved");
+                break;
         }
     }
 }
