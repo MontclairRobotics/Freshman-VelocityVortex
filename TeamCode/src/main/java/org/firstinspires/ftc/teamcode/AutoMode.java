@@ -66,6 +66,7 @@ public class AutoMode extends OpMode {
     public boolean shooting = false;
     public boolean turning = false;
     public boolean intaking = false;
+    public boolean doneIntaking = false;
 
     //State Machine
     public int state = 0;
@@ -82,6 +83,7 @@ public class AutoMode extends OpMode {
         if (nextState) {
             state++;
         }
+        telemetry.addData("INFO", "State " + state + " acheived");
     }
 
     //AUTO DRIVING
@@ -176,11 +178,15 @@ public class AutoMode extends OpMode {
     public boolean intake(){
         if (!intaking){
             intake.intakeDown();
+            doneIntaking = false;
             intaking = true;
         }else if(intake.isCloseTo(intake.intakeDownPos)){
             intake.intakeUp();
+        }else{
+            intake.intakeHalf();
+            doneIntaking = true;
         }
-        return true;
+        return doneIntaking;
     }
 
 

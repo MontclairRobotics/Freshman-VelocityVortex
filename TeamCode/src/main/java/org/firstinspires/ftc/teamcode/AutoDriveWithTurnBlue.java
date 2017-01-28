@@ -26,13 +26,11 @@ public class AutoDriveWithTurnBlue extends AutoMode {
                 break;
 
             case 1: // Turn Right 45 Degree in place
-                telemetry.addData("INFO","Completed 0 State");
                 driveTrain.setRightTurnPosition(45);
                 nextState(driveTrain.isCloseToLeft(TURN_DEGREE_45) && driveTrain.isCloseToRight(-TURN_DEGREE_45));
                 break;
 
             case 2: // Drive and Park on Corner Vortex
-                telemetry.addData("INFO","Completed 1 State");
                 nextState(drive(AFTER_TURN_DISTANCE * DEGREES_PER_INCH));
                 break;
 
