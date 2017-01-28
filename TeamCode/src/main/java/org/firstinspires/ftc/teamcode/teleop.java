@@ -45,7 +45,7 @@ public class teleop extends OpMode{
 
     public void loop() {
         //Drive Controls
-        float multiplier = 0.5f;
+        float multiplier;
         if(controller.getRightBumper()){
             multiplier = 1;
         }else if(controller.getLeftBumper()){
@@ -70,7 +70,6 @@ public class teleop extends OpMode{
 
 
         //intake Controls
-
         if (controller.getButtonPressed("Y")){
             telemetry.addData("Projeted", intake.intakeDownPos);
             telemetry.addData("Actual", intake.getVals());
@@ -97,9 +96,8 @@ public class teleop extends OpMode{
             telemetry.addData("Shooter Pos: ",shooter.getPos());
             shooter.shooterDown();
         }
-
-
         updateTelemetry(telemetry);
     }
+
 
 }
