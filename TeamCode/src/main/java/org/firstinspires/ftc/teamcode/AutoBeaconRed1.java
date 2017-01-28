@@ -57,7 +57,6 @@ public class AutoBeaconRed1 extends AutoMode {
                 driveTrain.setLeftTurnPosition(-3 * TURN_DEGREE_45);
                 nextState(driveTrain.isCloseToLeft(-3 * TURN_DEGREE_45) && driveTrain.isCloseToLeft(3 * TURN_DEGREE_45));
                 break;
-                break;
 
             case 7: // drive forward 6 block distance
                 nextState(drive(6 * SINGLE_BLOCK_DISTANCE * DEGREES_PER_INCH));
@@ -74,7 +73,6 @@ public class AutoBeaconRed1 extends AutoMode {
                 driveTrain.setLeftTurnPosition(3 * TURN_DEGREE_45);
                 nextState(driveTrain.isCloseToLeft(3 * TURN_DEGREE_45) && driveTrain.isCloseToLeft(-3 * TURN_DEGREE_45));
                 break;
-                break;
 
             case 11: //drive to center vortex
                 break;
@@ -84,4 +82,4 @@ public class AutoBeaconRed1 extends AutoMode {
                 break;
         }
     }
-}       }
+}

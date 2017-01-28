@@ -73,7 +73,6 @@ public class AutoBeaconBlue1 extends AutoMode {
                 driveTrain.setLeftTurnPosition(-3 * TURN_DEGREE_45);
                 nextState(driveTrain.isCloseToLeft(-3 * TURN_DEGREE_45) && driveTrain.isCloseToLeft(3 * TURN_DEGREE_45));
                 break;
-                break;
 
             case 11: //drive to center vortex
                 break;
@@ -83,4 +82,4 @@ public class AutoBeaconBlue1 extends AutoMode {
                 break;
         }
     }
-}       }
+}       
