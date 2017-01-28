@@ -35,6 +35,9 @@ public class AutoDriveAndShoot extends AutoMode {
                 nextState(drive(3 * SINGLE_BLOCK_DISTANCE * DEGREES_PER_INCH));
                 break;
 
+            case 3: //telemetry
+                telemetry.addData("INFO", "Last State Achieved");
+                break;
         }
     }
 }

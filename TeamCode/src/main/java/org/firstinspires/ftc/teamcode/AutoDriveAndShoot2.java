@@ -20,29 +20,44 @@ public class AutoDriveAndShoot2 extends AutoMode {
     public void loop() {
         switch (state){
 
-            case 0: // Shooting Ball and Intake 2nd Ball
-                shooter.shooterUp();
+            case 0: // Lower intake
                 intake.intakeDown();
-                nextState(shooter.isCloseTo(shooter.shooterUpPos) && intake.isCloseTo(intake.intakeDownPos));
+                nextState(intake.isCloseTo(intake.intakeDownPos));
                 break;
 
-            case 1: // Reset Shooter and Intake Up Position
-                shooter.shooterDown();
-                intake.intakeUp();
-                nextState(shooter.isCloseTo(shooter.shooterDownPos) && intake.isCloseTo(intake.intakeUpPos));
-                break;
-
-            case 2: // Shooting Ball and Intake half Position
+            case 1: // Shoot Ball
                 shooter.shooterUp();
-                intake.intakeHalf();
-                nextState(shooter.isCloseTo(shooter.shooterUpPos) && intake.isCloseTo(intake.intakeHalfPos));
+                nextState(shooter.isCloseTo(shooter.shooterUpPos));
                 break;
 
-            case 3: // Shooter Reset and Move to Center Vortex
+            case 2: //Raise intake
+                intake.intakeUp();
+                nextState(intake.isCloseTo(intake.intakeUpPos));
+                break;
+
+            case 3: // Shooter Reset and intake reset
                 shooter.shooterDown();
+                intake.intakeHalf();
+                nextState(shooter.isCloseTo(shooter.shooterDownPos) && intake.isCloseTo(intake.intakeHalfPos));
+                break;
+
+            case 4: // Shoot ball
+                shooter.shooterUp();
+                nextState(shooter.isCloseTo(shooter.shooterUpPos));
+                break;
+
+            case 5: // reset shooter
+                shooter.shooterDown();
+                nextState(shooter.isCloseTo(shooter.shooterDownPos));
+                break;
+
+            case 6: //drive foward
                 nextState(drive(3 * SINGLE_BLOCK_DISTANCE * DEGREES_PER_INCH));
                 break;
 
+            case 7: // telemetry
+                telemetry.addData("INFO", "Last State Achieved");
+                break;
         }
     }
 }
