@@ -11,7 +11,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 public class TestAuto extends AutoMode {
     @Override
     public void init(){
-
+        autoInit();
+        setState(0);
     }
 
     @Override
@@ -24,9 +25,14 @@ public class TestAuto extends AutoMode {
                 nextState(shoot());
                 break;
             case 2:
+                turn(TURN_DEGREE_90);
+                break;
+            case 3:
+                state++;
+            case 4:
                 telemetry.addData("INFO", "Last State Acheived");
                 break;
-
         }
+        updateTelemetry(telemetry);
     }
 }

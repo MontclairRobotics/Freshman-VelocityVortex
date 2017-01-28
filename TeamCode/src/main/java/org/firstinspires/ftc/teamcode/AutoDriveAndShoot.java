@@ -26,13 +26,11 @@ public class AutoDriveAndShoot extends AutoMode {
                 break;
 
             case 1: // Shooting ball
-                telemetry.addData("INFO","Completed 0 state");
                 shooter.shooterUp();
                 nextState(shooter.isCloseTo(shooter.shooterUpPos));
                 break;
 
             case 2: // Shooter Reset and Half Position For Intake and Moving to Center Vortex
-                telemetry.addData("INFO","Completed 1 State");
                 shooter.shooterDown();
                 nextState(drive(3 * SINGLE_BLOCK_DISTANCE * DEGREES_PER_INCH));
                 break;

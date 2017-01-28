@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -36,12 +37,13 @@ public class teleop extends OpMode{
         shooter.init(hardware);
         intaking = false;
         telemetry.addData("INFO","Initialized");
+        intake.intake.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        intake.intake.setPower(1);
+        intake.intake.setTargetPosition(intake.intakeHalfPos);
 
     }
 
-    @Override
     public void loop() {
-
         //Drive Controls
         float multiplier = 0.5f;
         if(controller.getRightBumper()){
@@ -99,4 +101,5 @@ public class teleop extends OpMode{
 
         updateTelemetry(telemetry);
     }
+
 }
