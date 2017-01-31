@@ -13,6 +13,7 @@ public class AutoDriveWithTurnBlue extends AutoMode {
 
     @Override
     public void init() {
+        autoInit();
         setState(0);
     }
 
