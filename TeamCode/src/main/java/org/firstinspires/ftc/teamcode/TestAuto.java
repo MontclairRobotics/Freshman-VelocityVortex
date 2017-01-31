@@ -25,7 +25,7 @@ public class TestAuto extends AutoMode {
                 nextState(shoot());
                 break;
             case 2:
-                turn(TURN_DEGREE_90);
+                nextState(turn(TURN_DEGREE_90));
                 break;
             case 3:
                 state++;

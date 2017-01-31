@@ -50,8 +50,8 @@ public class DriveTrain {
         //TODO: Should these positions be set to absolute position or relative to current position. Or possibly have a reset?
         motors[0][0].setTargetPosition(position);
         motors[0][1].setTargetPosition(position);
-        motors[1][0].setTargetPosition(0-position);
-        motors[1][1].setTargetPosition(0-position);
+        motors[1][0].setTargetPosition(position);
+        motors[1][1].setTargetPosition(position);
     }
 
     public void setLeftTurnPosition(int position){
@@ -78,6 +78,13 @@ public class DriveTrain {
             }
         }
         return motorPos;
+    }
+
+    public void setTankPosition(int rightPosition, int leftPosition){
+        for(int i = 0; i < motors[0].length; i++){
+            motors[0][i].setTargetPosition(leftPosition);
+            motors[1][i].setTargetPosition(rightPosition);
+        }
     }
 
     public boolean isCloseTo(int pos) {

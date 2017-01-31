@@ -17,6 +17,8 @@ public class AutoMode extends OpMode {
     Shooter shooter;
     BeaconPusher beaconPusher;
     public int[][] motorPos;
+    Sensors sensors;
+
 
     public void autoInit() {
         hardware = new froshHardwareMap();
@@ -35,6 +37,8 @@ public class AutoMode extends OpMode {
         shooter.init(hardware);
         telemetry.addData("INFO", "Shooter Init");
         motorPos = driveTrain.getMotorPos();
+        sensors = new Sensors();
+        sensors.init(hardware);
     }
 
 
@@ -61,12 +65,19 @@ public class AutoMode extends OpMode {
     public static final int TURN_DEGREE_45 = (int) ((INCH_PER_DEGREE_CIRCUMFERENCE * INCH_FOR_90_DEGREE_TURN) / 2); // Motor Distances for 18 Diameter circle
     public static final int TURN_DEGREE = (int) ((INCH_PER_DEGREE_CIRCUMFERENCE * INCH_FOR_90_DEGREE_TURN) / 90);
 
+    public static final double circumference = 18*Math.sqrt(2) * Math.PI;
+    public static final double degree = circumference/360;
+
     //control variables
     public boolean driving = false;
     public boolean shooting = false;
     public boolean turning = false;
     public boolean intaking = false;
     public boolean doneIntaking = false;
+
+    //Other Variables
+    public String beaconLeftColor;
+    public String beaconRightColor;
 
     //State Machine
     public int state = 0;
@@ -82,8 +93,8 @@ public class AutoMode extends OpMode {
     public void nextState(boolean nextState) {
         if (nextState) {
             state++;
+            telemetry.addData("INFO", "State " + state + " acheived");
         }
-        telemetry.addData("INFO", "State " + state + " acheived");
     }
 
     //AUTO DRIVING
@@ -100,7 +111,6 @@ public class AutoMode extends OpMode {
                 startingPos = driveTrain.motors[1][i].getCurrentPosition();
                 driveTrain.motors[1][i].setTargetPosition(0-(startingPos + distance));
             }
-
             driving = true;
         }
         int avgPos = 0;
@@ -110,7 +120,6 @@ public class AutoMode extends OpMode {
             }
         }
         avgPos = avgPos / 4;
-
         distanceTraveled = avgPos - startingPos;
         if (Math.abs(distanceTraveled - distance) < 20) {
             driving = false;
@@ -140,9 +149,10 @@ public class AutoMode extends OpMode {
     //AUTO TURNING
     public boolean turn(int degrees) {
         //calculate how much each motor has to move
-        int distance = (int)((degrees/360)*18*Math.PI);
+        int distance = (int)(degrees * degree);
+        driveTrain.setTankPosition(distance, -distance);
         //Get and set original positions
-        if (!turning) {
+       /* if (!turning) {
             for (int i = 0; i < driveTrain.motors.length; i++) {
                 for (int j = 0; j < driveTrain.motors[i].length; j++) {
                     startingPos = driveTrain.motors[i][j].getCurrentPosition();
@@ -168,11 +178,9 @@ public class AutoMode extends OpMode {
             startingPos = 0;
         }
         return turning;
+        */
+        return true;
     }
-
-    //Mototor Down
-    //If MotorDown then Motor Up
-    //else Motor half
 
     //AUTO INTAKE
     public boolean intake(){
