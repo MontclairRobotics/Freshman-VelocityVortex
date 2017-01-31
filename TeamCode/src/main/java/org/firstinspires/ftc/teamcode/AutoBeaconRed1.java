@@ -76,4 +76,4 @@ public class AutoBeaconRed1 extends AutoMode {
                 break;
         }
     }
-}       }
+}

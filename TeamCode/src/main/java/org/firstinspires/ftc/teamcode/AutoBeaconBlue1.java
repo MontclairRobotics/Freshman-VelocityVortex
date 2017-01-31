@@ -76,4 +76,4 @@ public class AutoBeaconBlue1 extends AutoMode {
                 break;
         }
     }
-}       }
+}
