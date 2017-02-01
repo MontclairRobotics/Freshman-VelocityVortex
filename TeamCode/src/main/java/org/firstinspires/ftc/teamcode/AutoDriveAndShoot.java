@@ -20,18 +20,16 @@ public class AutoDriveAndShoot extends AutoMode {
     public void loop() {
         switch (state){
 
-            case 0: // Bring Intake to Half Position
+            case 0: // Intake Half
                 intake.intakeHalf();
                 nextState(intake.isCloseTo(intake.intakeHalfPos));
                 break;
 
-            case 1: // Shooting ball
-                shooter.shooterUp();
-                nextState(shooter.isCloseTo(shooter.shooterUpPos));
+            case 1: // Shoot Particle
+                nextState(shoot());
                 break;
 
-            case 2: // Shooter Reset and Half Position For Intake and Moving to Center Vortex
-                shooter.shooterDown();
+            case 2: // Drive to Center Vortex
                 nextState(drive(3 * SINGLE_BLOCK_DISTANCE));
                 break;
 

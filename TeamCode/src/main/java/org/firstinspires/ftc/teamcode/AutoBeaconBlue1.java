@@ -19,62 +19,39 @@ public class AutoBeaconBlue1 extends AutoMode {
     @Override
     public void loop() {
         switch(state){
-            case 0: //lower intake and push out beacon pusher
-                intake.intakeDown();
-                beaconPusher.pusherOut();
-                nextState(intake.isCloseTo(intake.intakeDownPos) && beaconPusher.isCloseTo(beaconPusher.pusherOutPos));
-                break;
-
-            case 1: //shoot and retract beacon pusher
-                shooter.shooterUp();
-                beaconPusher.pusherIn();
-                nextState(shooter.isCloseTo(shooter.shooterUpPos) && beaconPusher.isCloseTo(beaconPusher.pusherInPos));
-                break;
-
-            case 2: // reset shooter and raise intake
-                shooter.shooterDown();
-                intake.intakeUp();
-                nextState(intake.isCloseTo(intake.intakeUpPos) && shooter.isCloseTo(shooter.shooterDownPos));
-                break;
-
-            case 3: //shoot
-                shooter.shooterUp();
-                nextState(shooter.isCloseTo(shooter.shooterUpPos));
-                break;
-
-            case 4: //reset shooter and half intake
-                shooter.shooterDown();
+            case 0: //Intake Half
                 intake.intakeHalf();
-                nextState(intake.isCloseTo(intake.intakeHalfPos) && shooter.isCloseTo(shooter.shooterDownPos));
+                nextState(intake.isCloseTo(intake.intakeHalfPos));
+
+            case 1: //Shoot
+                nextState(shoot());
                 break;
 
-            case 5: //drive 1 block distance\
-                nextState(drive(SINGLE_BLOCK_DISTANCE * DEGREES_PER_INCH));
+            case 2: // Intake and Deploy Wheels
+                nextState(intake() && beacon());
                 break;
 
-            case 6: //Turn 135 degs right
-                driveTrain.setRightTurnPosition(-3 * TURN_DEGREE_45);
-                driveTrain.setLeftTurnPosition(3 * TURN_DEGREE_45);
-                nextState(driveTrain.isCloseToLeft(3 * TURN_DEGREE_45) && driveTrain.isCloseToLeft(-3 * TURN_DEGREE_45));
+            case 3: //Shoot
+                nextState(shoot());
                 break;
 
-            case 7: // drive forward 6 block distance
-                nextState(drive(6 * SINGLE_BLOCK_DISTANCE * DEGREES_PER_INCH));
+            case 4: //Drive Forward One Block
+                nextState(drive(SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 8: //drive backwards to beacon
+            case 6: //TODO: Add Turning 135 Degrees
                 break;
 
-            case 9: // run beacon choosing program
+            case 7: //TODO: ADD DRIVE TO BEACON USING WHEELS
                 break;
 
-            case 10: //turn 135 deg
-                driveTrain.setRightTurnPosition(3 * TURN_DEGREE_45);
-                driveTrain.setLeftTurnPosition(-3 * TURN_DEGREE_45);
-                nextState(driveTrain.isCloseToLeft(-3 * TURN_DEGREE_45) && driveTrain.isCloseToLeft(3 * TURN_DEGREE_45));
+            case 8: //TODO: ADD BEACON CHOOSING FUNCTION
                 break;
 
-            case 11: //drive to center vortex
+            case 10: //TODO: TURN TOWARDS CENTER VORTEX
+                break;
+
+            case 11: //TODO: DRIVE TOWARDS TO CENTER VORTEX
                 break;
 
             case 12: // telemetry
