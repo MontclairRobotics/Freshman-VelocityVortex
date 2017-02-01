@@ -18,7 +18,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Motor channel:  Back  Right drive motor:        "right_driveB"
  * Motor channel:  Intake drive motor:             "intake"
  * Motor channel:  Beacon pusher drive motor:      "beacon_pusher"
-
+ * Sensor channel: Front light sensor:             "light_sensorA"
+ * Sensor channel: Back light sensor:              "light_sensorB"
  */
 
 public class froshHardwareMap
