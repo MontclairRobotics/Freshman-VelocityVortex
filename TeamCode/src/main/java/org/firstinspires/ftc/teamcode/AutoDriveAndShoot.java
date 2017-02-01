@@ -32,7 +32,7 @@ public class AutoDriveAndShoot extends AutoMode {
 
             case 2: // Shooter Reset and Half Position For Intake and Moving to Center Vortex
                 shooter.shooterDown();
-                nextState(drive(3 * SINGLE_BLOCK_DISTANCE * DEGREES_PER_INCH));
+                nextState(drive(3 * SINGLE_BLOCK_DISTANCE));
                 break;
 
             case 3: //telemetry
