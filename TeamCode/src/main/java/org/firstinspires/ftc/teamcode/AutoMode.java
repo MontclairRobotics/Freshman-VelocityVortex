@@ -65,7 +65,7 @@ public class AutoMode extends OpMode {
     public static final int TURN_DEGREE_45 = (int) ((INCH_PER_DEGREE_CIRCUMFERENCE * INCH_FOR_90_DEGREE_TURN) / 2); // Motor Distances for 18 Diameter circle
     public static final int TURN_DEGREE = (int) ((INCH_PER_DEGREE_CIRCUMFERENCE * INCH_FOR_90_DEGREE_TURN) / 90);
 
-    public static final double circumference = 18*Math.sqrt(2) * Math.PI;
+    public static final double circumference = 14*Math.sqrt(2) * Math.PI;
     public static final double degree = circumference/360;
 
     //control variables
@@ -99,17 +99,17 @@ public class AutoMode extends OpMode {
 
     //AUTO DRIVING
     int distanceTraveled = 0;
-    int startingPos = 0;
+    int driveStartingPos = 0;
 
     public boolean drive(int distance) {
         if (!(driving)) {
             for (int i = 0; i < driveTrain.motors[0].length; i++) {
-                startingPos = driveTrain.motors[0][i].getCurrentPosition();
-                driveTrain.motors[0][i].setTargetPosition(startingPos + distance);
+                driveStartingPos = driveTrain.motors[0][i].getCurrentPosition();
+                driveTrain.motors[0][i].setTargetPosition(driveStartingPos + distance);
             }
             for (int i = 0; i < driveTrain.motors[1].length; i++) {
-                startingPos = driveTrain.motors[1][i].getCurrentPosition();
-                driveTrain.motors[1][i].setTargetPosition(0-(startingPos + distance));
+                driveStartingPos = driveTrain.motors[1][i].getCurrentPosition();
+                driveTrain.motors[1][i].setTargetPosition(0-(driveStartingPos + distance));
             }
             driving = true;
         }
@@ -120,11 +120,11 @@ public class AutoMode extends OpMode {
             }
         }
         avgPos = avgPos / 4;
-        distanceTraveled = avgPos - startingPos;
+        distanceTraveled = avgPos - driveStartingPos;
         if (Math.abs(distanceTraveled - distance) < 20) {
             driving = false;
             distanceTraveled = 0;
-            startingPos = 0;
+            driveStartingPos = 0;
         }
         return !(driving);
     }
@@ -147,19 +147,21 @@ public class AutoMode extends OpMode {
 
 
     //AUTO TURNING
+    int turnStartingPos = 0;
     public boolean turn(int degrees) {
         //calculate how much each motor has to move
-        int distance = (int)(degrees * degree);
-        driveTrain.setTankPosition(distance, -distance);
+        int distance = (int)(degrees * degree * DEGREES_PER_INCH);
         //Get and set original positions
-       /* if (!turning) {
+       if (!turning) {
             for (int i = 0; i < driveTrain.motors.length; i++) {
                 for (int j = 0; j < driveTrain.motors[i].length; j++) {
-                    startingPos = driveTrain.motors[i][j].getCurrentPosition();
-                    driveTrain.motors[i][j].setTargetPosition(startingPos + distance);
+                    turnStartingPos = driveTrain.motors[i][j].getCurrentPosition();
+                    driveTrain.motors[i][j].setTargetPosition(turnStartingPos + distance);
                 }
             }
+           turning = true;
         }
+        telemetry.addData("Target Position", distance);
 
         //calculate the average all of the motor positions
         int avgPos = 0;
@@ -169,17 +171,18 @@ public class AutoMode extends OpMode {
             }
         }
         avgPos = avgPos / 4;
+        telemetry.addData("AvgPos", avgPos);
 
         //Test if the motors have gotten to the right position
-        distanceTraveled = avgPos - startingPos;
-        if (Math.abs(distanceTraveled - distance) < 20) {
+        distanceTraveled = avgPos + turnStartingPos;
+        telemetry.addData("Distance Traveled", distanceTraveled);
+        telemetry.addData("Diff", Math.abs(distanceTraveled - distance));
+        if (Math.abs(distanceTraveled - distance) < 300) {
             turning = false;
             distanceTraveled = 0;
-            startingPos = 0;
+            turnStartingPos = 0;
         }
         return turning;
-        */
-        return true;
     }
 
     //AUTO INTAKE

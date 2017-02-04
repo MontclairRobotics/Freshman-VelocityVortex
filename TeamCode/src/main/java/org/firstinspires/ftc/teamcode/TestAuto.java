@@ -19,19 +19,9 @@ public class TestAuto extends AutoMode {
     public void loop(){
         switch (state){
             case 0:
-                nextState(drive(2000));
+                nextState(turn(360));
                 break;
-            case 1:
-                nextState(shoot());
-                break;
-            case 2:
-                nextState(turn(TURN_DEGREE_90));
-                break;
-            case 3:
-                state++;
-            case 4:
-                telemetry.addData("INFO", "Last State Acheived");
-                break;
+
         }
         updateTelemetry(telemetry);
     }

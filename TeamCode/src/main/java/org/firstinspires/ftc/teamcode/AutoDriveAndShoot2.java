@@ -13,7 +13,7 @@ public class AutoDriveAndShoot2 extends AutoMode {
     @Override
     public void init() {
         setState(0);
-
+        autoInit();
     }
 
     @Override
@@ -52,7 +52,7 @@ public class AutoDriveAndShoot2 extends AutoMode {
                 break;
 
             case 6: //drive forward
-                nextState(drive(3 * SINGLE_BLOCK_DISTANCE * DEGREES_PER_INCH));
+                nextState(drive(3 * SINGLE_BLOCK_DISTANCE));
                 break;
 
             case 7: // telemetry

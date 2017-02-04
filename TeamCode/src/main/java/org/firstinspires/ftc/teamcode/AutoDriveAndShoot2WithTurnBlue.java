@@ -16,7 +16,7 @@ public class AutoDriveAndShoot2WithTurnBlue extends AutoMode {
     public void loop() {
         switch (state){
             case 0: //drive
-                nextState(drive((PART_BLOCK_DISTANCE * DEGREES_PER_INCH)+ SINGLE_BLOCK_DISTANCE));
+                nextState(drive(PART_BLOCK_DISTANCE + SINGLE_BLOCK_DISTANCE));
                 break;
 
             case 1: //turn 45 deg right
