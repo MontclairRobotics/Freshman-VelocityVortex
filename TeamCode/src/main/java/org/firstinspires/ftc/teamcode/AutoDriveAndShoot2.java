@@ -20,35 +20,21 @@ public class AutoDriveAndShoot2 extends AutoMode {
     public void loop() {
         switch (state){
 
-            case 0: // Lower intake
-                intake.intakeDown();
-                nextState(intake.isCloseTo(intake.intakeDownPos));
-                break;
-
-            case 1: // Shoot Ball
-                shooter.shooterUp();
-                nextState(shooter.isCloseTo(shooter.shooterUpPos));
-                break;
-
-            case 2: //Raise intake
-                intake.intakeUp();
-                nextState(intake.isCloseTo(intake.intakeUpPos));
-                break;
-
-            case 3: // Shooter Reset and intake reset
-                shooter.shooterDown();
+            case 0: // Intake Half
                 intake.intakeHalf();
-                nextState(shooter.isCloseTo(shooter.shooterDownPos) && intake.isCloseTo(intake.intakeHalfPos));
+                nextState(intake.isCloseTo(intake.intakeHalfPos));
                 break;
 
-            case 4: // Shoot ball
-                shooter.shooterUp();
-                nextState(shooter.isCloseTo(shooter.shooterUpPos));
+            case 1: // Shoot Particle
+                nextState(shoot());
                 break;
 
-            case 5: // reset shooter
-                shooter.shooterDown();
-                nextState(shooter.isCloseTo(shooter.shooterDownPos));
+            case 2: // Intake Particle
+                nextState(intake());
+                break;
+
+            case 3: // Shoot Particle
+                nextState(shoot());
                 break;
 
             case 6: //drive forward

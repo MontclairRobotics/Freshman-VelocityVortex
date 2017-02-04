@@ -15,18 +15,16 @@ public class AutoDriveAndShoot2WithTurnBlue extends AutoMode {
     @Override
     public void loop() {
         switch (state){
-            case 0: //drive
-                nextState(drive(PART_BLOCK_DISTANCE + SINGLE_BLOCK_DISTANCE));
+            case 0: //drive //// TODO: get more exact measurments
+                nextState(drive(SINGLE_BLOCK_DISTANCE + SINGLE_BLOCK_DISTANCE));
                 break;
 
             case 1: //turn 45 deg right
-                driveTrain.setRightTurnPosition(-TURN_DEGREE_45);
-                driveTrain.setLeftTurnPosition(TURN_DEGREE_45);
-                nextState(driveTrain.isCloseToLeft(TURN_DEGREE_45) && driveTrain.isCloseToRight(-TURN_DEGREE_45));
+                nextState(turn(45));
                 break;
 
-            case 2: //drive
-                nextState(drive(DISTANCE_BEFORE_SHOOTING * DEGREES_PER_INCH));
+            case 2: //drive //// TODO: 2/4/2017 get more exact measurements
+                nextState(drive(SINGLE_BLOCK_DISTANCE * DEGREES_PER_INCH));
                 break;
 
             case 3: //intake down
@@ -61,7 +59,7 @@ public class AutoDriveAndShoot2WithTurnBlue extends AutoMode {
                 break;
 
             case 9: // Park on center vorter
-                nextState(drive(DISTANCE_AFTER_SHOOTING));
+                nextState(drive(SINGLE_BLOCK_DISTANCE));
                 break;
 
             case 10: // telemetry
