@@ -40,12 +40,14 @@ public class AutoBeaconRed1 extends AutoMode {
                 break;
 
             case 6: //TODO: Add Turning 135 Degrees
+                nextState(turn(135));
                 break;
 
             case 7: //TODO: ADD DRIVE TO BEACON USING WHEELS
                 break;
 
             case 8: //TODO: ADD BEACON CHOOSING FUNCTION
+                nextState(getColors());
                 break;
 
             case 10: //TODO: TURN TOWARDS CENTER VORTEX

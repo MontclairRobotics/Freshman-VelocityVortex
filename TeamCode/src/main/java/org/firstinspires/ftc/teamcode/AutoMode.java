@@ -43,7 +43,6 @@ public class AutoMode extends OpMode {
 
 
     //AutoMode Variables
-    //TODO: Review whether distances / conversions are okay as ints instead of doubles
 
     //Positions
     public static int totalPos = 0;
@@ -201,6 +200,17 @@ public class AutoMode extends OpMode {
             doneIntaking = true;
         }
         return doneIntaking;
+    }
+
+    public boolean getColors(){
+        if(sensors.lightSensorA.getRawLightDetected()>sensors.lightSensorB.getRawLightDetected()){
+            beaconRightColor = "RED";
+            beaconLeftColor = "BLUE";
+        }else{
+            beaconRightColor = "BLUE";
+            beaconLeftColor = "RED";
+        }
+        return true;
     }
 
 

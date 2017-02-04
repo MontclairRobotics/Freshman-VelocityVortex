@@ -39,19 +39,22 @@ public class AutoBeaconBlue1 extends AutoMode {
                 nextState(drive(SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 6: //TODO: Add Turning 135 Degrees
+            case 6:
+                nextState(turn(135));
                 break;
 
             case 7: //TODO: ADD DRIVE TO BEACON USING WHEELS
                 break;
 
-            case 8: //TODO: ADD BEACON CHOOSING FUNCTION
+            case 8:
+                nextState(getColors());
                 break;
 
             case 10: //TODO: TURN TOWARDS CENTER VORTEX
                 break;
 
             case 11: //TODO: DRIVE TOWARDS TO CENTER VORTEX
+
                 break;
 
             case 12: // telemetry

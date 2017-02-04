@@ -15,13 +15,30 @@ public class TestAuto extends AutoMode {
         setState(0);
     }
 
+
+
+    private int driveDistance1 = 12 * DEGREES_PER_INCH;
+    private int driveDistance2 = -12 * DEGREES_PER_INCH;
+    private int turnDistance1 = 360;
+
+
     @Override
     public void loop(){
         switch (state){
             case 0:
-                nextState(turn(360));
+                nextState(drive(driveDistance1));
                 break;
-
+            case 1:
+                nextState(shoot());
+                break;
+            case 2:
+                nextState(intake());
+                break;
+            case 3:
+                nextState(turn(turnDistance1));
+                break;
+            case 4:
+                nextState(drive(driveDistance2));
         }
         updateTelemetry(telemetry);
     }
