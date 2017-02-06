@@ -21,8 +21,7 @@ public class AutoDriveAndShoot extends AutoMode {
         switch (state){
 
             case 0: // Intake Half
-                intake.intakeHalf();
-                nextState(intake.isCloseTo(intake.intakeHalfPos));
+                nextState(intake());
                 break;
 
             case 1: // Shoot Particle

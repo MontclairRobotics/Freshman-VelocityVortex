@@ -20,8 +20,7 @@ public class AutoBeaconBlue1 extends AutoMode {
     public void loop() {
         switch(state){
             case 0: //Intake Half
-                intake.intakeHalf();
-                nextState(intake.isCloseTo(intake.intakeHalfPos));
+                nextState(intake());
 
             case 1: //Shoot
                 nextState(shoot());

@@ -186,6 +186,8 @@ public class AutoMode extends OpMode {
         return true;
     }
 
+
+
     //AUTO INTAKE
     public boolean intake(){
         if (!intaking){
