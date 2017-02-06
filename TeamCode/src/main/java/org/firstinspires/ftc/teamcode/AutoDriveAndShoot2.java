@@ -13,7 +13,7 @@ public class AutoDriveAndShoot2 extends AutoMode {
     @Override
     public void init() {
         setState(0);
-
+        autoInit();
     }
 
     @Override
@@ -36,7 +36,7 @@ public class AutoDriveAndShoot2 extends AutoMode {
                 nextState(shoot());
                 break;
 
-            case 6: //Drive to Center Vortex
+            case 6: //drive forward
                 nextState(drive(3 * SINGLE_BLOCK_DISTANCE));
                 break;
 
