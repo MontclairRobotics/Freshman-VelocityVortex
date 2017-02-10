@@ -43,17 +43,22 @@ public class AutoBeaconRed1 extends AutoMode {
                 nextState(turn(135));
                 break;
 
-            case 7: //TODO: ADD DRIVE TO BEACON USING WHEELS
+            case 7: //Drive Foward robot is parallelto wall and wheels guide the path
+                nextState(drive(4 *SINGLE_BLOCK_DISTANCE)
+            
+            case 8: //TODO: ADD DRIVE TO BEACON USING WHEELS
                 break;
 
-            case 8: //TODO: ADD BEACON CHOOSING FUNCTION
+            case 9: //TODO: ADD BEACON CHOOSING FUNCTION
                 nextState(getColors());
                 break;
 
             case 10: //TODO: TURN TOWARDS CENTER VORTEX
+                nextState(turn(-135));
                 break;
 
             case 11: //TODO: DRIVE TOWARDS TO CENTER VORTEX
+                nextState(drive(DISTANCE_AFTER_TURN))
                 break;
 
             case 12: // telemetry
