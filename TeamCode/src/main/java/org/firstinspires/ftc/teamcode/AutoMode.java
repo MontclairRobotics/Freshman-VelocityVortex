@@ -39,6 +39,7 @@ public class AutoMode extends OpMode {
         motorPos = driveTrain.getMotorPos();
         sensors = new Sensors();
         sensors.init(hardware);
+        intake.intakeHalf();
     }
 
 
@@ -52,7 +53,7 @@ public class AutoMode extends OpMode {
     // Distances
     public static final int DEGREES_PER_INCH = 10000 / 85; //10000 Degrees over how many inches
     public static final int SINGLE_BLOCK_DISTANCE = 24 * DEGREES_PER_INCH; //length of block converted int degrees
-    public static final int DISTANCE_AFTER_TURN = (int) 36 * MATH.sqrt(2);
+    public static final int DISTANCE_AFTER_TURN = (int)(36 * Math.sqrt(2));
 
 
 

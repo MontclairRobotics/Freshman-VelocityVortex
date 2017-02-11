@@ -78,8 +78,8 @@ public class froshHardwareMap
         rightMotorA.setPower(0);
         rightMotorB.setPower(0);
         intakeMotor.setPower(.5);
-        shooterMotor.setPower(0);
-        beaconMotor.setPower(0);
+        shooterMotor.setPower(.5);
+        beaconMotor.setPower(.5);
 
     }
 

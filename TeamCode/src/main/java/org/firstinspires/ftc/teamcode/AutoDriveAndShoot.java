@@ -21,18 +21,22 @@ public class AutoDriveAndShoot extends AutoMode {
         switch (state){
 
             case 0: // Intake Half
-                nextState(intake());
+                intake.setPos(intake.intakeDownPos);
+                nextState(intake.isCloseTo(intake.intakeDownPos));
                 break;
 
             case 1: // Shoot Particle
                 nextState(shoot());
                 break;
-
-            case 2: // Drive to Center Vortex
+            case 2: // bring the intake to the half position
+                intake.setPos(intake.intakeHalfPos);
+                nextState(intake.isCloseTo(intake.intakeHalfPos));
+                break;
+            case 3: // Drive to Center Vortex
                 nextState(drive(3 * SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 3: //telemetry
+            case 4: //telemetry
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
         }

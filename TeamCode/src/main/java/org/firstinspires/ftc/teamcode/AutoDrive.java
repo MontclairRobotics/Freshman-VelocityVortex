@@ -22,9 +22,13 @@ public class AutoDrive extends AutoMode {
         switch(state){
 
             case 0: //Drive to Vortex and Half Intake
-                nextState(drive(3 * SINGLE_BLOCK_DISTANCE) && intake());
+                intake.setPos(intake.intakeHalfPos);
+                nextState(intake.isCloseTo(intake.intakeHalfPos));
                 break;
-            case 1: // Telemetry
+            case 1:
+                nextState(drive(3 * SINGLE_BLOCK_DISTANCE));
+                break;
+            case 2: // Telemetry
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
 
