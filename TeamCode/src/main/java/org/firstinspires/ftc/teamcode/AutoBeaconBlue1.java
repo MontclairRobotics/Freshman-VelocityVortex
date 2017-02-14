@@ -17,7 +17,7 @@ public class AutoBeaconBlue1 extends AutoMode {
     }
 
     @Override
-    public void loop() {
+    public void loop()  {
         switch(state){
             case 0: //Intake Half
                 nextState(intake());

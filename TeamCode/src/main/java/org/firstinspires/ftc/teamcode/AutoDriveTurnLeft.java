@@ -23,8 +23,8 @@ public class AutoDriveTurnLeft extends AutoMode {
             case 0: //Drive Forward 1 Block Distance and Intake Half
                 nextState(drive(SINGLE_BLOCK_DISTANCE) && intake());
                 break;
-            case 1: //Turn Right 45 Deg
-                nextState(turn(45));
+            case 1: //Turn Left 45 Deg
+                nextState(turn(-45));
                 break;
             case 2: // Drive to Center Vortex
                 nextState(drive(DISTANCE_AFTER_TURN));

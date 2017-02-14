@@ -29,7 +29,7 @@ public class AutoDriveTurnRight extends AutoMode {
                 break;
 
             case 2: // Drive to Center Vortex
-                nextState(drive(DISTANCE_AFTER_TURN);
+                nextState(drive(DISTANCE_AFTER_TURN));
                 break;
 
 
