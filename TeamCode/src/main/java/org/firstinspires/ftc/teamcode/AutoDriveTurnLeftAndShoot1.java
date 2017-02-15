@@ -3,13 +3,12 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 /**
- * Created by Will Chu on 01/19/17.
+ * Created by Will Chu on 02/01/17.
  */
 
-
-//TODO: CHECK IF IT WORKS.
+//TODO: fix name for auto
 @Autonomous(name="Auto Drive NO TURN RED/Blue", group="147")
-public class AutoDrive extends AutoMode {
+public class AutoDriveTurnLeftAndShoot1 extends AutoMode {
 
     @Override
     public void init() {
@@ -21,14 +20,18 @@ public class AutoDrive extends AutoMode {
     public void loop() {
         switch(state){
 
-            case 0: //Drive to Vortex and Half Intake
-                intake.setPos(intake.intakeHalfPos);
-                nextState(intake.isCloseTo(intake.intakeHalfPos));
+            case 0: //Drive Forward 1 Block Distance and Intake Half
+                nextState(drive(SINGLE_BLOCK_DISTANCE) && intake());
                 break;
-            case 1:
-                nextState(drive(3 * SINGLE_BLOCK_DISTANCE));
+
+            case 1: //Turn Right 45 Deg
                 break;
-            case 2: // Telemetry
+
+            case 2: // Drive to Center Vortex
+                break;
+
+
+            case 3: // Telemetry
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
 
