@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  * Created by Will on 1/20/17.
  */
 
+//TODO: test
 @Autonomous(name="Auto Drive NO TURN And Shoot 2 RED/Blue", group="147")
 public class AutoDriveAndShoot2 extends AutoMode {
 
@@ -20,8 +21,8 @@ public class AutoDriveAndShoot2 extends AutoMode {
     public void loop() {
         switch (state){
 
-            case 0: // Intake Down
-                intake.setPos(intake.intakeDownPos);
+            case 0: // Intake Half
+                intake.setPos(intake.intakeHalfPos);
                 nextState(intake.isCloseTo(intake.intakeDownPos));
                 break;
 
@@ -30,13 +31,10 @@ public class AutoDriveAndShoot2 extends AutoMode {
                 break;
 
             case 2: // Intake Particle
-                intake.setPos(intake.intakeUpPos);
-                nextState(intake.isCloseTo(intake.intakeUpPos));
+                nextState(intake());
                 break;
 
-            case 3:
-                intake.setPos(intake.intakeHalfPos);
-                nextState(intake.isCloseTo(intake.intakeHalfPos));
+
             case 4: // Shoot Particle
                 nextState(shoot());
                 break;

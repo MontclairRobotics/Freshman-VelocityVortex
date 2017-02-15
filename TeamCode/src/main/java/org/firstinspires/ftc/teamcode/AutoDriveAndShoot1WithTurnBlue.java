@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  * Created by thegb on 2/11/2017.
  */
 
+//TODO: test
 @Autonomous(name = "Auto Drive With TURN And Shoot 1 Red")
 public class AutoDriveAndShoot1WithTurnBlue  extends AutoMode{
     @Override
@@ -18,19 +19,19 @@ public class AutoDriveAndShoot1WithTurnBlue  extends AutoMode{
     public void loop(){
         switch (state){
             case 0:
-                nextState(drive(SINGLE_BLOCK_DISTANCE * DEGREES_PER_INCH));
+                nextState(drive(SINGLE_BLOCK_DISTANCE));
                 break;
             case 1:
-                nextState(turn(45));
+                nextState(turn(Right45));
                 break;
             case 2:
                 nextState(shoot());
                 break;
             case 4:
-                nextState(drive(SINGLE_BLOCK_DISTANCE));
+                nextState(drive(DISTANCE_AFTER_TURN));
                 break;
             case 5:
-                telemetry.addData("INFO", "Last State Acheived");
+                telemetry.addData("INFO", "Last State Achieved");
                 break;
         }
     }

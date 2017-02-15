@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  * Extended by Will Chu on 1/20/2017
  */
 
+//TODO: test
 @Autonomous(name="Auto Drive NO TURN And Shoot RED/Blue", group="147")
 public class AutoDriveAndShoot extends AutoMode {
 
@@ -28,15 +29,12 @@ public class AutoDriveAndShoot extends AutoMode {
             case 1: // Shoot Particle
                 nextState(shoot());
                 break;
-            case 2: // bring the intake to the half position
-                intake.setPos(intake.intakeHalfPos);
-                nextState(intake.isCloseTo(intake.intakeHalfPos));
-                break;
-            case 3: // Drive to Center Vortex
+
+            case 2: // Drive to Center Vortex
                 nextState(drive(3 * SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 4: //telemetry
+            case 3: //telemetry
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
         }

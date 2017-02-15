@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  * Created by willc on 1/28/2017.
  */
 
-
-@Autonomous(name="Auto Beacon 1 Blue", group="147")
-public class AutoBeaconBlue1 extends AutoMode {
+//TODO: test
+@Autonomous(name="Auto Beacon 2 Red", group="147")
+public class AutoBeaconRed2 extends AutoMode {
 
     @Override
     public void init() {
@@ -20,7 +20,8 @@ public class AutoBeaconBlue1 extends AutoMode {
     public void loop() {
         switch(state){
             case 0: //Intake Half
-                nextState(intake());
+                intake.intakeHalf();
+                nextState(intake.isCloseTo(intake.intakeHalfPos));
 
             case 1: //Shoot
                 nextState(shoot());
@@ -38,25 +39,30 @@ public class AutoBeaconBlue1 extends AutoMode {
                 nextState(drive(SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 6:
-                nextState(turn(135));
+            case 6: //Turn 45 deg right
+                nextState(turn(Left45));
                 break;
 
-            case 7: //TODO: ADD DRIVE TO BEACON USING WHEELS
+            case 7: //drive to beacon
+                nextState(drive(DistanceToFarBeacon));
                 break;
 
             case 8:
                 nextState(getColors());
                 break;
 
-            case 10: //TODO: TURN TOWARDS CENTER VORTEX
+            case 10: //drive to 2nd beacon
+                nextState(drive(-BeaconDistance));
                 break;
 
-            case 11: //TODO: DRIVE TOWARDS TO CENTER VORTEX
-
+            case 11: //turn 90 deg left
+                nextState(turn(2 * Right45));
                 break;
 
-            case 12: // telemetry
+            case 12: //drive to Center Vortex
+                nextState(drive(3 * SINGLE_BLOCK_DISTANCE));
+
+            case 13: // telemetry
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
         }

@@ -50,10 +50,16 @@ public class AutoMode extends OpMode {
     public static int currentPos = 0;
     public static int targetPos = 0;
 
-    // Distances
+    // Distances and turn values
     public static final int DEGREES_PER_INCH = 10000 / 85; //10000 Degrees over how many inches
     public static final int SINGLE_BLOCK_DISTANCE = 24 * DEGREES_PER_INCH; //length of block converted int degrees
     public static final int DISTANCE_AFTER_TURN = (int)(36 * Math.sqrt(2));
+
+    // TODO: test these values
+    public static final int Left45 = -45;
+    public static final int Right45 = 45;
+    public static final int BeaconDistance = 2 * SINGLE_BLOCK_DISTANCE;
+    public static final int DistanceToFarBeacon = 5 * SINGLE_BLOCK_DISTANCE;
 
 
 
