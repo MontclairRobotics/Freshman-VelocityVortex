@@ -55,6 +55,9 @@ public class AutoMode extends OpMode {
     public static final int SINGLE_BLOCK_DISTANCE = 24 * DEGREES_PER_INCH; //length of block converted int degrees
     public static final int DISTANCE_AFTER_TURN = (int)(36 * Math.sqrt(2));
 
+    public static final int Left45 = -45;
+    public static final int Right45 = 45;
+
 
 
     public static final double circumference = 14*Math.sqrt(2) * Math.PI;
