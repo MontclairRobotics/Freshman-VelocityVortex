@@ -138,7 +138,7 @@ public class AutoMode extends OpMode {
         if (Math.abs(shooter.shooterUpPos - shooter.getPos()) < 20) {
             shooter.shooterDown();
         }
-        if (shooting && shooter.shooterDownPos - shooter.getPos() < 20) {
+        if (shooting && Math.abs(shooter.shooterDownPos - shooter.getPos()) < 20) {
             shooting = false;
         }
         return !(shooting);
@@ -196,20 +196,36 @@ public class AutoMode extends OpMode {
     }
 
 
-
+    private int intakeState = 0;
     //AUTO INTAKE
     public boolean intake(){
-        if (!intaking){
+        /*if (!intaking){
             intake.intakeDown();
             doneIntaking = false;
             intaking = true;
         }else if(intake.isCloseTo(intake.intakeDownPos)){
             intake.intakeUp();
-        }else{
+        }else {
             intake.intakeHalf();
             doneIntaking = true;
+        }*/
+        switch(intakeState) {
+            case 0:
+                intake.intakeDown();
+                if(intake.isCloseTo(intake.intakeDownPos)) intakeState = 1;
+                break;
+            case 1:
+                intake.intakeUp();
+                if(intake.isCloseTo(intake.intakeUpPos)) intakeState = 2;
+                break;
+            case 2:
+                intake.intakeHalf();
+                if(intake.isCloseTo(intake.intakeHalfPos)) {
+                    intakeState = 0;
+                    return true;
+                }
         }
-        return doneIntaking;
+        return false;
     }
 
     public boolean getColors(){

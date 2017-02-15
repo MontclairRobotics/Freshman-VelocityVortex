@@ -39,7 +39,7 @@ public class AutoDriveAndShoot2 extends AutoMode {
                 break;
 
             case 4: //drive forward
-                nextState(drive(3 * SINGLE_BLOCK_DISTANCE));
+                nextState(drive(2 * SINGLE_BLOCK_DISTANCE + Half_Block_Distance));
                 break;
 
             case 6: // telemetry

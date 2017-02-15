@@ -15,7 +15,6 @@ public class AutoTest extends AutoMode {
         setState(0);
     }
 
-
     @Override
     public void loop(){
         switch (state){
