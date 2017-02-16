@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 /**
  * Created by Garrett on 1/16/2017.
@@ -112,14 +113,8 @@ public class AutoMode extends OpMode {
             }
             driving = true;
         }
-        int avgPos = 0;
-        for (int i = 0; i < driveTrain.motors.length; i++) {
-            for (int j = 0; j < driveTrain.motors[i].length; j++) {
-                avgPos = avgPos + Math.abs(driveTrain.motors[i][j].getCurrentPosition());
-            }
-        }
-        avgPos = avgPos / 4;
-        distanceTraveled = avgPos - driveStartingPos;
+
+        distanceTraveled = driveTrain.motors[0][0].getCurrentPosition() - driveStartingPos;
         if (Math.abs(distanceTraveled - distance) < 20) {
             driving = false;
             distanceTraveled = 0;
@@ -158,7 +153,7 @@ public class AutoMode extends OpMode {
 
     //AUTO TURNING
     int turnStartingPos = 0;
-    public boolean turn(int degrees) {
+    public boolean turn2(int degrees){
         //calculate how much each motor has to move
         int distance = (int)(degrees * degree * DEGREES_PER_INCH);
         //Get and set original positions
@@ -177,7 +172,7 @@ public class AutoMode extends OpMode {
         int avgPos = 0;
         for (int i = 0; i < driveTrain.motors.length; i++) {
             for (int j = 0; j < driveTrain.motors[i].length; j++) {
-                avgPos = avgPos + Math.abs(driveTrain.motors[i][j].getCurrentPosition());
+                avgPos = avgPos + driveTrain.motors[i][j].getCurrentPosition();
             }
         }
         avgPos = avgPos / 4;
@@ -195,6 +190,25 @@ public class AutoMode extends OpMode {
         return turning;
     }
 
+    private int motor1end = 0;
+    public boolean turn(int degrees) {
+        if(!turning) {
+            int distance = (int)(degrees * degree * DEGREES_PER_INCH);
+            motor1end = driveTrain.motors[0][0].getCurrentPosition() + distance;
+            for(DcMotor[] row : driveTrain.motors) {
+                for(DcMotor m : row) {
+                    m.setTargetPosition(m.getCurrentPosition() + distance);
+                }
+            }
+            turning = true;
+        }
+
+        if(Math.abs(driveTrain.motors[0][0].getCurrentPosition() - motor1end) < 20) {
+            turning = false;
+            return true;
+        }
+        return false;
+    }
 
     private int intakeState = 0;
     //AUTO INTAKE

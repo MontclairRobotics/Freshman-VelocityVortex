@@ -43,7 +43,7 @@ public class AutoTest extends AutoMode {
                 nextState(drive(-SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 6:
+            case 6: //beacon
                 nextState(beacon());
                 break;
 
