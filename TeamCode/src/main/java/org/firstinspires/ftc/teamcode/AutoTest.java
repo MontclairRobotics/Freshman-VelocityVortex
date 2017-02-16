@@ -32,11 +32,11 @@ public class AutoTest extends AutoMode {
                 break;
 
             case 3://turn right 45 Deg
-                nextState(turn(Right45));
+                nextState(turn(2 * Right45));
                 break;
 
             case 4: // turn left 45 deg
-                nextState(drive(Left45));
+                nextState(drive(2 * Left45));
                 break;
 
             case 5: //drive backwards

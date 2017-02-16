@@ -54,14 +54,21 @@ public class AutoMode extends OpMode {
     // Distances
     public static final int DEGREES_PER_INCH = 10000 / 85; //10000 Degrees over how many inches
     public static final int SINGLE_BLOCK_DISTANCE = 24 * DEGREES_PER_INCH; //length of block converted int degrees
-    public static final int Half_Block_Distance = 12 * DEGREES_PER_INCH;
-    public static final int DISTANCE_AFTER_TURN = (int)(36 * Math.sqrt(2));
-    public static final int DistanceBeforeBeacon = (int)(48 * Math.sqrt(2));
+    public static final int Half_Block_Distance = 12 * DEGREES_PER_INCH; // distance for half a block
+    public static final int DISTANCE_AFTER_TURN = (int)(36 * Math.sqrt(2) * DEGREES_PER_INCH); //distance after turning on turning autos without shooting
+    public static final int DISTANCE_AFTER_TURN2 = (int)(4 / Math.sqrt(2) * DEGREES_PER_INCH); // distance after turning on most turning autos with shooting
+    public static final int DistanceBeforeBeacon = (int)(48 * Math.sqrt(2) * DEGREES_PER_INCH); // distance to get to the furthest beacon
+    public static final int DISTANCE_AFTER_TURN3 = (int) (52 * DEGREES_PER_INCH); // distance after turning on far beacon autos
 
-
-    public static final int Left45 = -45;
-    public static final int Right45 = 45;
-
+    //Turning
+    public static final int Left45 = -45; // used for 45 deg turns left
+    public static final int Right45 = 45; // used for 45 deg turns right
+    public static final int Left90 = 2 * Left45; // used for 90 deg turns left
+    public static final int Right90 = 2 * Right45; // used for 90 turns right
+    public static final int BBTA1 = (int)(Math.acos(5/13)); // used for weird turn in blue beacon auto
+    public static final int BBTA2 = (int)(180 - (Math.acos(5/13) + 90)); // used for 2nd weird turn in blue beacon auto
+    public static final int RBTA1 = (int)(-1 * Math.acos(5/13)); // used for weird turn in red beacon auto
+    public static final int RBTA2 = (int)(-1 * (180 - (Math.acos(5/13) + 90))); // used for 2nd weird turn in red beacon auto
 
 
     public static final double circumference = 14*Math.sqrt(2) * Math.PI;
@@ -72,8 +79,11 @@ public class AutoMode extends OpMode {
     public boolean shooting = false;
     public boolean pushing = false;
     public boolean turning = false;
-    public boolean intaking = false;
-    public boolean doneIntaking = false;
+
+    // For Garrets failed intake method
+    /*
+        public boolean intaking = false;
+        public boolean doneIntaking = false; */
 
     //Other Variables
     public String beaconLeftColor;

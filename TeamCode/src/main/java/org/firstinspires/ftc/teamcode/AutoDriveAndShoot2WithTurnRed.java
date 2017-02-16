@@ -46,8 +46,8 @@ public class AutoDriveAndShoot2WithTurnRed extends AutoMode{
                 nextState(shoot());
                 break;
 
-            case 6: // Park on center vorter
-                nextState(drive(DISTANCE_AFTER_TURN));
+            case 6: // Park on center vortex
+                nextState(drive(DISTANCE_AFTER_TURN2));
                 break;
 
             case 7: // telemetry

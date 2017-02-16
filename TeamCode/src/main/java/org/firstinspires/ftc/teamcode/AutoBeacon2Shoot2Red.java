@@ -2,13 +2,15 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import java.security.SignedObject;
+
 /**
  * Created by willc on 1/28/2017.
  */
 
-//TODO: Test
-@Autonomous(name="Auto Beacon 1 Blue", group="147")
-public class AutoBeaconBlue1 extends AutoMode {
+// TODO: Test
+@Autonomous(name="Auto 2 Beacon Shoot 2 Red", group="147")
+public class AutoBeacon2Shoot2Red extends AutoMode {
 
     @Override
     public void init() {
@@ -19,6 +21,7 @@ public class AutoBeaconBlue1 extends AutoMode {
     @Override
     public void loop() {
         switch(state){
+
             case 0: //Intake Half
                 intake.intakeHalf();
                 nextState(intake.isCloseTo(intake.intakeHalfPos));
@@ -39,16 +42,16 @@ public class AutoBeaconBlue1 extends AutoMode {
                 nextState(drive(SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 6: //Turn Right 45 deg
-                nextState(turn(Right45));
+            case 6: //Turn left 45 deg
+                nextState(turn(Left45));
                 break;
 
             case 7: //Drive Foward robot is parallelto wall and wheels guide the path
                 nextState(drive(DistanceBeforeBeacon));
                 break;
-
-            case 8: //Turn 45 deg left
-                nextState(turn(Left45));
+            
+            case 8: //Turn 45 deg right
+                nextState(turn(Right45));
                 break;
 
             case 9: //Drive Forward to Beacon
@@ -67,8 +70,8 @@ public class AutoBeaconBlue1 extends AutoMode {
                 nextState(getColors());
                 break;
 
-            case 13: // turn Left 90 Deg
-                nextState(turn(2 * Left45));
+            case 13: // turn right 90 Deg
+                nextState(turn(2 * Right45));
                 break;
 
             case 14: // Drive to Center vortex

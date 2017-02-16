@@ -25,7 +25,7 @@ public class AutoDriveAndShoot1WithTurnBlue  extends AutoMode{
                 break;
 
             case 1: // Drive Forward
-                nextState(drive(SINGLE_BLOCK_DISTANCE));
+                nextState(drive(Half_Block_Distance));
                 break;
 
             case 2: // Turn Right 45 Deg
@@ -37,11 +37,11 @@ public class AutoDriveAndShoot1WithTurnBlue  extends AutoMode{
                 break;
 
             case 4: // Drive to Center Vortex
-                nextState(drive(DISTANCE_AFTER_TURN));
+                nextState(drive(DISTANCE_AFTER_TURN2));
                 break;
 
             case 5: //telemetry
-                telemetry.addData("INFO", "Last State Acheived");
+                telemetry.addData("INFO", "Last State Achieved");
                 break;
         }
     }

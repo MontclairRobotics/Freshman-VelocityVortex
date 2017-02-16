@@ -36,11 +36,11 @@ public class AutoDriveAndShoot1WithTurnRed extends AutoMode{
                 break;
 
             case 4: // Drive to Center Vortex
-                nextState(drive(DISTANCE_AFTER_TURN));
+                nextState(drive(DISTANCE_AFTER_TURN2));
                 break;
 
             case 5: //telemetry
-                telemetry.addData("INFO", "Last State Acheived");
+                telemetry.addData("INFO", "Last State Achieved");
                 break;
         }
     }
