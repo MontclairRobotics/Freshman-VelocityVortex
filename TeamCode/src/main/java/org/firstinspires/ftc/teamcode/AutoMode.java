@@ -53,12 +53,11 @@ public class AutoMode extends OpMode {
     // Distances
     public static final int DEGREES_PER_INCH = 10000 / 85; //10000 Degrees over how many inches
     public static final int SINGLE_BLOCK_DISTANCE = 24 * DEGREES_PER_INCH; //length of block converted int degrees
-    public static final int DISTANCE_AFTER_TURN = (int)(36 * Math.sqrt(2));
+    public static final int DISTANCE_AFTER_TURN = (int) (36 * Math.sqrt(2));
 
 
-
-    public static final double circumference = 14*Math.sqrt(2) * Math.PI;
-    public static final double degree = circumference/360;
+    public static final double circumference = 14 * Math.sqrt(2) * Math.PI;
+    public static final double degree = circumference / 360;
 
     //control variables
     public boolean driving = false;
@@ -102,18 +101,12 @@ public class AutoMode extends OpMode {
             }
             for (int i = 0; i < driveTrain.motors[1].length; i++) {
                 driveStartingPos = driveTrain.motors[1][i].getCurrentPosition();
-                driveTrain.motors[1][i].setTargetPosition(0-(driveStartingPos + distance));
+                driveTrain.motors[1][i].setTargetPosition(0 - (driveStartingPos + distance));
             }
             driving = true;
         }
-        int avgPos = 0;
-        for (int i = 0; i < driveTrain.motors.length; i++) {
-            for (int j = 0; j < driveTrain.motors[i].length; j++) {
-                avgPos = avgPos + Math.abs(driveTrain.motors[i][j].getCurrentPosition());
-            }
-        }
-        avgPos = avgPos / 4;
-        distanceTraveled = avgPos - driveStartingPos;
+
+        distanceTraveled = driveTrain.motors[0][0].getCurrentPosition() + driveStartingPos;
         if (Math.abs(distanceTraveled - distance) < 20) {
             driving = false;
             distanceTraveled = 0;
@@ -143,8 +136,7 @@ public class AutoMode extends OpMode {
         if (!pushing) {
             beaconPusher.pusherOut();
             pushing = true;
-        }
-        else {
+        } else {
             beaconPusher.pusherIn();
         }
         return !(pushing);
@@ -152,33 +144,24 @@ public class AutoMode extends OpMode {
 
     //AUTO TURNING
     int turnStartingPos = 0;
+
     public boolean turn(int degrees) {
         //calculate how much each motor has to move
-        int distance = (int)(degrees * degree * DEGREES_PER_INCH);
+        int distance = (int) (degrees * degree * DEGREES_PER_INCH);
         //Get and set original positions
-       if (!turning) {
+        if (!turning) {
             for (int i = 0; i < driveTrain.motors.length; i++) {
                 for (int j = 0; j < driveTrain.motors[i].length; j++) {
                     turnStartingPos = driveTrain.motors[i][j].getCurrentPosition();
                     driveTrain.motors[i][j].setTargetPosition(turnStartingPos + distance);
                 }
             }
-           turning = true;
+            turning = true;
         }
         telemetry.addData("Target Position", distance);
 
-        //calculate the average all of the motor positions
-        int avgPos = 0;
-        for (int i = 0; i < driveTrain.motors.length; i++) {
-            for (int j = 0; j < driveTrain.motors[i].length; j++) {
-                avgPos = avgPos + Math.abs(driveTrain.motors[i][j].getCurrentPosition());
-            }
-        }
-        avgPos = avgPos / 4;
-        telemetry.addData("AvgPos", avgPos);
-
         //Test if the motors have gotten to the right position
-        distanceTraveled = avgPos + turnStartingPos;
+        distanceTraveled = driveTrain.motors[0][0].getCurrentPosition() + turnStartingPos;
         telemetry.addData("Distance Traveled", distanceTraveled);
         telemetry.addData("Diff", Math.abs(distanceTraveled - distance));
         if (Math.abs(distanceTraveled - distance) < 300) {
@@ -190,34 +173,31 @@ public class AutoMode extends OpMode {
     }
 
 
-
     //AUTO INTAKE
-    public boolean intake(){
-        if (!intaking){
+    public boolean intake() {
+        if (!intaking) {
             intake.intakeDown();
             doneIntaking = false;
             intaking = true;
-        }else if(intake.isCloseTo(intake.intakeDownPos)){
+        } else if (intake.isCloseTo(intake.intakeDownPos)) {
             intake.intakeUp();
-        }else{
+        } else {
             intake.intakeHalf();
             doneIntaking = true;
         }
         return doneIntaking;
     }
 
-    public boolean getColors(){
-        if(sensors.lightSensorA.getRawLightDetected()>sensors.lightSensorB.getRawLightDetected()){
+    public boolean getColors() {
+        if (sensors.lightSensorA.getRawLightDetected() > sensors.lightSensorB.getRawLightDetected()) {
             beaconRightColor = "RED";
             beaconLeftColor = "BLUE";
-        }else{
+        } else {
             beaconRightColor = "BLUE";
             beaconLeftColor = "RED";
         }
         return true;
     }
-
-
 
 
     @Override

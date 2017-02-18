@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 /**
  * Created by Will Chu on 1/20/2017.
  */
-@Autonomous(name="Auto Drive With TURN And Shoot 2 Blue", group="147")
+@Autonomous(name="Auto Drive and shoot 2 with turn Blue", group="147")
 public class AutoDriveAndShoot2WithTurnBlue extends AutoMode {
 
     @Override

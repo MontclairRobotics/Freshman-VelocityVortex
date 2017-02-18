@@ -7,7 +7,7 @@ import com.vuforia.Type;
  * Created by thegb on 2/11/2017.
  */
 
-@Autonomous(name = "Auto Drive With TURN And Shoot 2 RED")
+@Autonomous(name = "Auto Drive and shoot 2 with turn Red")
 public class AutoDriveAndShoot2WithTurnRed extends AutoMode{
 
     @Override
