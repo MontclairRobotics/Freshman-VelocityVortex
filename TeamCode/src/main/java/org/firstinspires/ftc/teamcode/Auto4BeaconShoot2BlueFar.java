@@ -71,7 +71,14 @@ public class Auto4BeaconShoot2BlueFar extends AutoMode {
                 break;
 
             case 12: //push Beacon
-                nextState(getColors());
+                getColors();
+                if (beaconRightColor.equals("BLUE")){
+                    state = 22;
+                    previousState = 10;
+                }else{
+                    state = 26;
+                    previousState = 10;
+                }
                 break;
 
             case 13: // Drive forward 1 block + 6 in

@@ -17,7 +17,7 @@ public class AutoBeacon2Shoot2Red extends AutoMode {
         autoInit();
         setState(0);
     }
-
+    int previousState = 0;
     @Override
     public void loop() {
         switch(state){
@@ -59,7 +59,14 @@ public class AutoBeacon2Shoot2Red extends AutoMode {
                 break;
 
             case 10: //Push Beacon
-                nextState(getColors());
+                getColors();
+                if (beaconRightColor.equals("RED")){
+                    state = 22;
+                    previousState = 10;
+                }else{
+                    state = 26;
+                    previousState = 10;
+                }
                 break;
 
             case 11: //Drive Backwards to beacon
@@ -67,7 +74,14 @@ public class AutoBeacon2Shoot2Red extends AutoMode {
                 break;
 
             case 12: //push Beacon
-                nextState(getColors());
+                getColors();
+                if (beaconRightColor.equals("RED")){
+                    state = 22;
+                    previousState = 10;
+                }else{
+                    state = 26;
+                    previousState = 10;
+                }
                 break;
 
             case 13: // turn right 90 Deg
@@ -79,6 +93,33 @@ public class AutoBeacon2Shoot2Red extends AutoMode {
 
             case 15: // telemetry
                 telemetry.addData("INFO", "Last State Achieved");
+                break;
+
+            //beacon pusher cases
+            case 22:
+                nextState(drive(rightBeaconDistance));
+                break;
+            case 23:
+                nextState(beacon());
+                break;
+            case 24:
+                nextState(drive(-rightBeaconDistance));
+                break;
+            case 25:
+                state = previousState + 1;
+                break;
+
+            case 26:
+                nextState(drive(leftBeaconDistance));
+                break;
+            case 27:
+                nextState(beacon());
+                break;
+            case 28:
+                nextState(drive(-leftBeaconDistance));
+                break;
+            case 29:
+                state = previousState + 1;
                 break;
         }
     }

@@ -15,7 +15,7 @@ public class Auto4BeaconShoot2RedFar extends AutoMode {
         autoInit();
         setState(0);
     }
-
+    int previousState = 0;
     @Override
     public void loop() {
         switch(state){
@@ -56,7 +56,14 @@ public class Auto4BeaconShoot2RedFar extends AutoMode {
                 break;
 
             case 10: //Push Beacon
-                nextState(getColors());
+                getColors();
+                if (beaconRightColor.equals("RED")){
+                    state = 22;
+                    previousState = 10;
+                }else{
+                    state = 26;
+                    previousState = 10;
+                }
                 break;
 
             case 11: //Drive Forwards to beacon
@@ -64,7 +71,14 @@ public class Auto4BeaconShoot2RedFar extends AutoMode {
                 break;
 
             case 12: //push Beacon
-                nextState(getColors());
+                getColors();
+                if (beaconRightColor.equals("RED")){
+                    state = 22;
+                    previousState = 10;
+                }else{
+                    state = 26;
+                    previousState = 10;
+                }
                 break;
 
             case 13: // Drive forward 1 block + 6 in
@@ -80,7 +94,14 @@ public class Auto4BeaconShoot2RedFar extends AutoMode {
                 break;
 
             case 16: //beacon
-                nextState(getColors());
+                getColors();
+                if (beaconRightColor.equals("RED")){
+                    state = 22;
+                    previousState = 10;
+                }else{
+                    state = 26;
+                    previousState = 10;
+                }
                 break;
 
             case 17: //drive
@@ -88,7 +109,14 @@ public class Auto4BeaconShoot2RedFar extends AutoMode {
                 break;
 
             case 18: //get color
-                nextState(getColors());
+                getColors();
+                if (beaconRightColor.equals("RED")){
+                    state = 22;
+                    previousState = 10;
+                }else{
+                    state = 26;
+                    previousState = 10;
+                }
                 break;
 
             case 19: //turn
@@ -101,6 +129,33 @@ public class Auto4BeaconShoot2RedFar extends AutoMode {
 
             case 21: // telemetry
                 telemetry.addData("INFO", "Last State Achieved");
+                break;
+
+            //Beacon Pusher Cases
+            case 22:
+                nextState(drive(rightBeaconDistance));
+                break;
+            case 23:
+                nextState(beacon());
+                break;
+            case 24:
+                nextState(drive(-rightBeaconDistance));
+                break;
+            case 25:
+                state = previousState + 1;
+                break;
+
+            case 26:
+                nextState(drive(leftBeaconDistance));
+                break;
+            case 27:
+                nextState(beacon());
+                break;
+            case 28:
+                nextState(drive(-leftBeaconDistance));
+                break;
+            case 29:
+                state = previousState + 1;
                 break;
         }
     }
