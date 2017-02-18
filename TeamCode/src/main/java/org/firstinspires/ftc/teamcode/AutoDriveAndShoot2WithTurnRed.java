@@ -55,5 +55,6 @@ public class AutoDriveAndShoot2WithTurnRed extends AutoMode{
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
         }
+        updateTelemetry(telemetry);
     }
 }

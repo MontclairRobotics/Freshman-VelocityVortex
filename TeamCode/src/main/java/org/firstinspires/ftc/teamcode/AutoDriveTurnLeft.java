@@ -43,5 +43,6 @@ public class AutoDriveTurnLeft extends AutoMode {
                 break;
 
         }
+        updateTelemetry(telemetry);
     }
 }

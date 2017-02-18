@@ -46,5 +46,6 @@ public class AutoDriveAndShoot2 extends AutoMode {
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
         }
+        updateTelemetry(telemetry);
     }
 }

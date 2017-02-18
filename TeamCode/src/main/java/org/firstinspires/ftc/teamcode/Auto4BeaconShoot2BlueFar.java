@@ -74,10 +74,10 @@ public class Auto4BeaconShoot2BlueFar extends AutoMode {
                 getColors();
                 if (beaconRightColor.equals("BLUE")){
                     state = 22;
-                    previousState = 10;
+                    previousState = 12;
                 }else{
                     state = 26;
-                    previousState = 10;
+                    previousState = 12;
                 }
                 break;
 
@@ -97,10 +97,10 @@ public class Auto4BeaconShoot2BlueFar extends AutoMode {
                 getColors();
                 if (beaconRightColor.equals("BLUE")){
                     state = 22;
-                    previousState = 10;
+                    previousState = 16;
                 }else{
                     state = 26;
-                    previousState = 10;
+                    previousState = 16;
                 }
                 break;
 
@@ -112,10 +112,10 @@ public class Auto4BeaconShoot2BlueFar extends AutoMode {
                 getColors();
                 if (beaconRightColor.equals("BLUE")){
                     state = 22;
-                    previousState = 10;
+                    previousState = 18;
                 }else{
                     state = 26;
-                    previousState = 10;
+                    previousState = 18;
                 }
                 break;
 

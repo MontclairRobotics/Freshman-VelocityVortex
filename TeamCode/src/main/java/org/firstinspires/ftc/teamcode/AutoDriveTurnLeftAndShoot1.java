@@ -36,5 +36,6 @@ public class AutoDriveTurnLeftAndShoot1 extends AutoMode {
                 break;
 
         }
+        updateTelemetry(telemetry);
     }
 }

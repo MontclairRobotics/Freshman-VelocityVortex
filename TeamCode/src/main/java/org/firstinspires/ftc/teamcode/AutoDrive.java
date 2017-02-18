@@ -34,5 +34,6 @@ public class AutoDrive extends AutoMode {
                 break;
 
         }
+        updateTelemetry(telemetry);
     }
 }

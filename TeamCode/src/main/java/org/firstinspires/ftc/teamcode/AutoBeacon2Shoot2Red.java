@@ -77,10 +77,10 @@ public class AutoBeacon2Shoot2Red extends AutoMode {
                 getColors();
                 if (beaconRightColor.equals("RED")){
                     state = 22;
-                    previousState = 10;
+                    previousState = 12;
                 }else{
                     state = 26;
-                    previousState = 10;
+                    previousState = 12;
                 }
                 break;
 
@@ -122,5 +122,6 @@ public class AutoBeacon2Shoot2Red extends AutoMode {
                 state = previousState + 1;
                 break;
         }
+        updateTelemetry(telemetry);
     }
 }
