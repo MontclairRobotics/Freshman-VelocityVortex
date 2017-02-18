@@ -61,6 +61,9 @@ public class AutoMode extends OpMode {
     public static final int DistanceBeforeBeacon = (int)(48 * Math.sqrt(2) * DEGREES_PER_INCH); // distance to get to the furthest beacon
     public static final int DISTANCE_AFTER_TURN3 = (int) (52 * DEGREES_PER_INCH); // distance after turning on far beacon autos
 
+    public static final int rightBeaconDistance = (int)(5 * DEGREES_PER_INCH);
+    public static final int leftBeaconDistance = (int)(2 * DEGREES_PER_INCH);
+
     //Turning
     public static final int Left45 = -45; // used for 45 deg turns left
     public static final int Right45 = 45; // used for 45 deg turns right
@@ -80,10 +83,6 @@ public class AutoMode extends OpMode {
     public boolean pushing = false;
     public boolean turning = false;
 
-    // For Garrets failed intake method
-    /*
-        public boolean intaking = false;
-        public boolean doneIntaking = false; */
 
     //Other Variables
     public String beaconLeftColor;
