@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  */
 
 
-//TODO: CHECK IF IT WORKS.
+//TODO: Works
 @Autonomous(name="Auto Drive NO TURN RED/Blue", group="147")
 public class AutoDrive extends AutoMode {
 
@@ -21,12 +21,13 @@ public class AutoDrive extends AutoMode {
     public void loop() {
         switch(state){
 
-            case 0: //Drive to Vortex and Half Intake
+            case 0: // Half Intake
                 intake.setPos(intake.intakeHalfPos);
                 nextState(intake.isCloseTo(intake.intakeHalfPos));
                 break;
-            case 1:
-                nextState(drive(3 * SINGLE_BLOCK_DISTANCE));
+
+            case 1: // Drive to center Vortex
+                nextState(drive(2 * SINGLE_BLOCK_DISTANCE + Half_Block_Distance));
                 break;
             case 2: // Telemetry
                 telemetry.addData("INFO", "Last State Achieved");

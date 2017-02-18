@@ -4,7 +4,10 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 /**
  * Created by Will Chu on 1/20/2017.
  */
-@Autonomous(name="Auto Drive and shoot 2 with turn Blue", group="147")
+
+
+//TODO: Test
+@Autonomous(name="Auto Drive With TURN And Shoot 2 Blue", group="147")
 public class AutoDriveAndShoot2WithTurnBlue extends AutoMode {
 
     @Override
@@ -16,37 +19,37 @@ public class AutoDriveAndShoot2WithTurnBlue extends AutoMode {
     @Override
     public void loop() {
         switch (state){
-            case 0: //intake down
-                intake.intakeDown();
-                nextState(intake.isCloseTo(intake.intakeDownPos));
-                break;
-            case 1: // intake half
-                intake.intakeHalf();
+
+            case 0: //intake Half
+                intake.setPos(intake.intakeHalfPos);
                 nextState(intake.isCloseTo(intake.intakeHalfPos));
                 break;
-            case 2: //drive //// TODO: get more exact measurments
-                nextState(drive(SINGLE_BLOCK_DISTANCE + SINGLE_BLOCK_DISTANCE));
+
+            case 1: //drive
+                nextState(drive(SINGLE_BLOCK_DISTANCE));
                 break;
-            case 3: //turn 45 deg right
-                nextState(turn(45));
+
+            case 2: //turn 45 deg right
+                nextState(turn(Right45));
                 break;
-            case 4: //drive //// TODO: 2/4/2017 get more exact measurements
-                nextState(drive(SINGLE_BLOCK_DISTANCE * DEGREES_PER_INCH));
+
+            case 3: //shoot
+                nextState(shoot());
                 break;
+
+            case 4: //intake
+                nextState(intake());
+                break;
+
             case 5: //shoot
                 nextState(shoot());
                 break;
-            case 6: //intake up
-                intake.intakeUp();
-                nextState(intake.isCloseTo(intake.intakeUpPos));
+
+            case 6: // Park on center vortex
+                nextState(drive(DISTANCE_AFTER_TURN2));
                 break;
-            case 7: //shoot
-                nextState(shoot());
-                break;
-            case 8: // Park on center vorter
-                nextState(drive(SINGLE_BLOCK_DISTANCE));
-                break;
-            case 9: // telemetry
+
+            case 7: // telemetry
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
         }

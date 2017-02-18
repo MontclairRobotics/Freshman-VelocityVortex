@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 /**
  * Created by Garrett on 1/16/2017.
@@ -53,8 +54,22 @@ public class AutoMode extends OpMode {
     // Distances
     public static final int DEGREES_PER_INCH = 10000 / 85; //10000 Degrees over how many inches
     public static final int SINGLE_BLOCK_DISTANCE = 24 * DEGREES_PER_INCH; //length of block converted int degrees
-    public static final int DISTANCE_AFTER_TURN = (int) (36 * Math.sqrt(2));
+    public static final int Half_Block_Distance = 12 * DEGREES_PER_INCH; // distance for half a block
 
+    public static final int DISTANCE_AFTER_TURN = (int)(36 * Math.sqrt(2) * DEGREES_PER_INCH); //distance after turning on turning autos without shooting
+    public static final int DISTANCE_AFTER_TURN2 = (int)(4 / Math.sqrt(2) * DEGREES_PER_INCH); // distance after turning on most turning autos with shooting
+    public static final int DistanceBeforeBeacon = (int)(48 * Math.sqrt(2) * DEGREES_PER_INCH); // distance to get to the furthest beacon
+    public static final int DISTANCE_AFTER_TURN3 = (int) (52 * DEGREES_PER_INCH); // distance after turning on far beacon autos
+
+    //Turning
+    public static final int Left45 = -45; // used for 45 deg turns left
+    public static final int Right45 = 45; // used for 45 deg turns right
+    public static final int Left90 = 2 * Left45; // used for 90 deg turns left
+    public static final int Right90 = 2 * Right45; // used for 90 turns right
+    public static final int BBTA1 = (int)(Math.acos(5/13)); // used for weird turn in blue beacon auto
+    public static final int BBTA2 = (int)(180 - (Math.acos(5/13) + 90)); // used for 2nd weird turn in blue beacon auto
+    public static final int RBTA1 = (int)(-1 * Math.acos(5/13)); // used for weird turn in red beacon auto
+    public static final int RBTA2 = (int)(-1 * (180 - (Math.acos(5/13) + 90))); // used for 2nd weird turn in red beacon auto
 
     public static final double circumference = 14 * Math.sqrt(2) * Math.PI;
     public static final double degree = circumference / 360;
@@ -64,8 +79,11 @@ public class AutoMode extends OpMode {
     public boolean shooting = false;
     public boolean pushing = false;
     public boolean turning = false;
-    public boolean intaking = false;
-    public boolean doneIntaking = false;
+
+    // For Garrets failed intake method
+    /*
+        public boolean intaking = false;
+        public boolean doneIntaking = false; */
 
     //Other Variables
     public String beaconLeftColor;
@@ -107,6 +125,7 @@ public class AutoMode extends OpMode {
         }
 
         distanceTraveled = driveTrain.motors[0][0].getCurrentPosition() + driveStartingPos;
+
         if (Math.abs(distanceTraveled - distance) < 20) {
             driving = false;
             distanceTraveled = 0;
@@ -125,7 +144,7 @@ public class AutoMode extends OpMode {
         if (Math.abs(shooter.shooterUpPos - shooter.getPos()) < 20) {
             shooter.shooterDown();
         }
-        if (shooting && shooter.shooterDownPos - shooter.getPos() < 20) {
+        if (shooting && Math.abs(shooter.shooterDownPos - shooter.getPos()) < 20) {
             shooting = false;
         }
         return !(shooting);
@@ -144,8 +163,7 @@ public class AutoMode extends OpMode {
 
     //AUTO TURNING
     int turnStartingPos = 0;
-
-    public boolean turn(int degrees) {
+    public boolean turn2(int degrees){
         //calculate how much each motor has to move
         int distance = (int) (degrees * degree * DEGREES_PER_INCH);
         //Get and set original positions
@@ -160,6 +178,16 @@ public class AutoMode extends OpMode {
         }
         telemetry.addData("Target Position", distance);
 
+        //calculate the average all of the motor positions
+        int avgPos = 0;
+        for (int i = 0; i < driveTrain.motors.length; i++) {
+            for (int j = 0; j < driveTrain.motors[i].length; j++) {
+                avgPos = avgPos + driveTrain.motors[i][j].getCurrentPosition();
+            }
+        }
+        avgPos = avgPos / 4;
+        telemetry.addData("AvgPos", avgPos);
+
         //Test if the motors have gotten to the right position
         distanceTraveled = driveTrain.motors[0][0].getCurrentPosition() + turnStartingPos;
         telemetry.addData("Distance Traveled", distanceTraveled);
@@ -172,20 +200,45 @@ public class AutoMode extends OpMode {
         return turning;
     }
 
-
-    //AUTO INTAKE
-    public boolean intake() {
-        if (!intaking) {
-            intake.intakeDown();
-            doneIntaking = false;
-            intaking = true;
-        } else if (intake.isCloseTo(intake.intakeDownPos)) {
-            intake.intakeUp();
-        } else {
-            intake.intakeHalf();
-            doneIntaking = true;
+    private int motor1end = 0;
+    public boolean turn(int degrees) {
+        if(!turning) {
+            int distance = (int)(degrees * degree * DEGREES_PER_INCH);
+            motor1end = driveTrain.motors[0][0].getCurrentPosition() + distance;
+            for(DcMotor[] row : driveTrain.motors) {
+                for(DcMotor m : row) {
+                    m.setTargetPosition(m.getCurrentPosition() + distance);
+                }
+            }
+            turning = true;
         }
-        return doneIntaking;
+        if(Math.abs(driveTrain.motors[0][0].getCurrentPosition() - motor1end) < 20) {
+            turning = false;
+            return true;
+        }
+        return false;
+    }
+
+    private int intakeState = 0;
+    //AUTO INTAKE
+    public boolean intake(){
+        switch(intakeState) {
+            case 0:
+                intake.intakeDown();
+                if(intake.isCloseTo(intake.intakeDownPos)) intakeState = 1;
+                break;
+            case 1:
+                intake.intakeUp();
+                if(intake.isCloseTo(intake.intakeUpPos)) intakeState = 2;
+                break;
+            case 2:
+                intake.intakeHalf();
+                if(intake.isCloseTo(intake.intakeHalfPos)) {
+                    intakeState = 0;
+                    return true;
+                }
+        }
+        return false;
     }
 
     public boolean getColors() {

@@ -6,8 +6,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  * Created by Will Chu on 02/01/17.
  */
 
-//TODO: fix name for auto
-@Autonomous(name="Auto Drive turn Red", group="147")
+
+//TODO: Test
+@Autonomous(name="Auto Drive TURN RED", group="147")
 public class AutoDriveTurnLeft extends AutoMode {
 
     @Override
@@ -20,16 +21,24 @@ public class AutoDriveTurnLeft extends AutoMode {
     public void loop() {
         switch(state){
 
-            case 0: //Drive Forward 1 Block Distance and Intake Half
-                nextState(drive(SINGLE_BLOCK_DISTANCE) && intake());
+            case 0: // Half Intake
+                intake.setPos(intake.intakeHalfPos);
+                nextState(intake.isCloseTo(intake.intakeHalfPos));
                 break;
-            case 1: //Turn Left 45 Deg
-                nextState(turn(-45));
+
+            case 1: //drive
+                nextState(drive(SINGLE_BLOCK_DISTANCE));
                 break;
-            case 2: // Drive to Center Vortex
+
+            case 2: //Turn Left 45 Deg
+                nextState(turn(Left45));
+                break;
+
+            case 3: // Drive to Center Vortex
                 nextState(drive(DISTANCE_AFTER_TURN));
                 break;
-            case 3: // Telemetry
+
+            case 4: // Telemetry
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
 
