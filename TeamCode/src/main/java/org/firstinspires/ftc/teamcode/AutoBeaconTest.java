@@ -6,8 +6,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  * Created by thegb on 2/18/2017.
  */
 
+//TODO: Test
 @Autonomous(name = "Beacon Test", group = "147")
-public class BeaconTest extends AutoMode{
+public class AutoBeaconTest extends AutoMode{
     @Override
     public void init(){
         autoInit();
@@ -28,7 +29,7 @@ public class BeaconTest extends AutoMode{
                 }
                 break;
             case 2:
-                telemetry.addData("INFO", "Last State Acheived");
+                telemetry.addData("INFO", "Last State Achieved");
             //beacon pusher cases
             case 22:
                 nextState(drive(rightBeaconDistance));

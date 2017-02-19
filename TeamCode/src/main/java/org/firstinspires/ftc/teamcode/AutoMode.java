@@ -51,16 +51,18 @@ public class AutoMode extends OpMode {
     public static int currentPos = 0;
     public static int targetPos = 0;
 
-    // Distances
+    // Distances(Basic)
     public static final int DEGREES_PER_INCH = 10000 / 85; //10000 Degrees over how many inches
     public static final int SINGLE_BLOCK_DISTANCE = 24 * DEGREES_PER_INCH; //length of block converted int degrees
     public static final int Half_Block_Distance = 12 * DEGREES_PER_INCH; // distance for half a block
 
+    //Distances after turns or betweens things
     public static final int DISTANCE_AFTER_TURN = (int)(36 * Math.sqrt(2) * DEGREES_PER_INCH); //distance after turning on turning autos without shooting
     public static final int DISTANCE_AFTER_TURN2 = (int)(4 / Math.sqrt(2) * DEGREES_PER_INCH); // distance after turning on most turning autos with shooting
     public static final int DistanceBeforeBeacon = (int)(48 * Math.sqrt(2) * DEGREES_PER_INCH); // distance to get to the furthest beacon
     public static final int DISTANCE_AFTER_TURN3 = (int) (52 * DEGREES_PER_INCH); // distance after turning on far beacon autos
 
+    //beacon color distances
     public static final int rightBeaconDistance = (int)(5 * DEGREES_PER_INCH);
     public static final int leftBeaconDistance = (int)(2 * DEGREES_PER_INCH);
 
@@ -74,6 +76,7 @@ public class AutoMode extends OpMode {
     public static final int RBTA1 = (int)(-1 * Math.acos(5/13)); // used for weird turn in red beacon auto
     public static final int RBTA2 = (int)(-1 * (180 - (Math.acos(5/13) + 90))); // used for 2nd weird turn in red beacon auto
 
+    //Math for Turning
     public static final double circumference = 14 * Math.sqrt(2) * Math.PI;
     public static final double degree = circumference / 360;
 
@@ -160,7 +163,7 @@ public class AutoMode extends OpMode {
         return !(pushing);
     }
 
-    //AUTO TURNING
+    //Auto turning (Garrett)
     int turnStartingPos = 0;
     public boolean turn2(int degrees){
         //calculate how much each motor has to move
@@ -199,6 +202,7 @@ public class AutoMode extends OpMode {
         return turning;
     }
 
+    //Auto Turning (Rafi)
     private int motor1end = 0;
     public boolean turn(int degrees) {
         if(!turning) {
@@ -218,8 +222,8 @@ public class AutoMode extends OpMode {
         return false;
     }
 
+    //Auto Intake
     private int intakeState = 0;
-    //AUTO INTAKE
     public boolean intake(){
         switch(intakeState) {
             case 0:
@@ -240,6 +244,7 @@ public class AutoMode extends OpMode {
         return false;
     }
 
+    //Beacon colors method
     public boolean getColors() {
         if (sensors.lightSensorA.getRawLightDetected() > sensors.lightSensorB.getRawLightDetected()) {
             beaconRightColor = "RED";

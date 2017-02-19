@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 //TODO: Test
 @Autonomous(name="Auto Drive Turn Blue", group="147")
-public class AutoDriveTurnRight extends AutoMode {
+public class AutoDriveTurnBlue extends AutoMode {
 
     @Override
     public void init() {

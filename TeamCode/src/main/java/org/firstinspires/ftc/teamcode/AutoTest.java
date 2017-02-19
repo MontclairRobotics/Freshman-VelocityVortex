@@ -43,11 +43,7 @@ public class AutoTest extends AutoMode {
                 nextState(drive(-SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 6: //beacon
-                nextState(beacon());
-                break;
-
-            case 7: //telemetry
+            case 6: //telemetry
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
 

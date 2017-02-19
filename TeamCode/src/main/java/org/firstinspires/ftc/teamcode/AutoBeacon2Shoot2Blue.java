@@ -43,7 +43,7 @@ public class AutoBeacon2Shoot2Blue extends AutoMode {
                 nextState(turn(Right45));
                 break;
 
-            case 7: //Drive Foward robot is parallel to wall and wheels guide the path
+            case 7: //Drive Forward robot is parallel to wall and wheels guide the path
                 nextState(drive(DistanceBeforeBeacon));
                 break;
 
