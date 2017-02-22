@@ -29,14 +29,15 @@ public class AutoTest extends AutoMode {
 
             case 2: //intake
                 nextState(intake());
+                telemetry.addData("Intake State", intakeState);
                 break;
 
             case 3://turn right 45 Deg
-                nextState(turn(2 * Right45));
+                nextState(turn(Right90));
                 break;
 
             case 4: // turn left 45 deg
-                nextState(drive(2 * Left45));
+                nextState(turn(Left90));
                 break;
 
             case 5: //drive backwards

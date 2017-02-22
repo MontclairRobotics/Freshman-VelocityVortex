@@ -17,9 +17,9 @@ public class Intake {
     public DcMotor intake;
     froshHardwareMap hwMap;
 
-    public int intakeTolerance = 50;
+    public int intakeTolerance = 100;
     int intakeUpPos = 200;
-    int intakeDownPos = 1300;
+    int intakeDownPos = 1100;
     int intakeHalfPos = 400;
 
     public void init(froshHardwareMap hwMap){

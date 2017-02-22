@@ -63,8 +63,8 @@ public class AutoMode extends OpMode {
     public static final int DISTANCE_AFTER_TURN3 = (int) (52 * DEGREES_PER_INCH); // distance after turning on far beacon autos
 
     //beacon color distances
-    public static final int rightBeaconDistance = (int)(5 * DEGREES_PER_INCH);
-    public static final int leftBeaconDistance = (int)(2 * DEGREES_PER_INCH);
+    public static final int rightBeaconDistance = (int)(24 * DEGREES_PER_INCH);
+    public static final int leftBeaconDistance = (int)(12 * DEGREES_PER_INCH);
 
     //Turning
     public static final int Left45 = -45; // used for 45 deg turns left
@@ -121,7 +121,7 @@ public class AutoMode extends OpMode {
             }
             for (int i = 0; i < driveTrain.motors[1].length; i++) {
                 driveStartingPos = driveTrain.motors[1][i].getCurrentPosition();
-                driveTrain.motors[1][i].setTargetPosition(0 - (driveStartingPos + distance));
+                driveTrain.motors[1][i].setTargetPosition((driveStartingPos - distance));
             }
             driving = true;
         }
@@ -156,9 +156,12 @@ public class AutoMode extends OpMode {
     public boolean beacon() {
         if (!pushing) {
             beaconPusher.pusherOut();
-            pushing = true;
+            if(beaconPusher.isCloseTo(beaconPusher.pusherOutPos)) {
+                pushing = true;
+            }
         } else {
             beaconPusher.pusherIn();
+            pushing = false;
         }
         return !(pushing);
     }
@@ -223,7 +226,7 @@ public class AutoMode extends OpMode {
     }
 
     //Auto Intake
-    private int intakeState = 0;
+    public int intakeState = 0;
     public boolean intake(){
         switch(intakeState) {
             case 0:
@@ -240,6 +243,7 @@ public class AutoMode extends OpMode {
                     intakeState = 0;
                     return true;
                 }
+
         }
         return false;
     }

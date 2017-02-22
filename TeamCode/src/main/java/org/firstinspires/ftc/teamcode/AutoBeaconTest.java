@@ -18,7 +18,8 @@ public class AutoBeaconTest extends AutoMode{
     @Override
     public void loop(){
         switch (state){
-            case 1: //beacon
+            case 0: //beacon
+                telemetry.addData("Beacon Color", "true");
                 getColors();
                 if (beaconRightColor.equals("BLUE")){
                     state = 22;
@@ -27,8 +28,9 @@ public class AutoBeaconTest extends AutoMode{
                     state = 26;
                     previousState = 1;
                 }
+                telemetry.addData("Beacon Color", beaconRightColor);
                 break;
-            case 2:
+            case 1:
                 telemetry.addData("INFO", "Last State Achieved");
             //beacon pusher cases
             case 22:
