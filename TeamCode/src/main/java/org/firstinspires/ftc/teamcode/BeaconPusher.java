@@ -29,6 +29,6 @@ public class BeaconPusher {
         return pusher.getCurrentPosition();
     }
     public boolean isCloseTo(int pos){
-        return Math.abs(pusher.getCurrentPosition() - pos) > 20;
+        return Math.abs(pusher.getCurrentPosition() - pos) < 20;
     }
 }
