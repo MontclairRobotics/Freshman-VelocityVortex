@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  */
 
 
-//TODO: Test
+//Fixed
 @Autonomous(name="Auto Drive TURN RED", group="147")
 public class AutoDriveTurnRed extends AutoMode {
 

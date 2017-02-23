@@ -58,13 +58,13 @@ public class AutoMode extends OpMode {
 
     //Distances after turns or betweens things
     public static final int DISTANCE_AFTER_TURN = (int)(36 * DEGREES_PER_INCH); //distance after turning on turning autos without shooting
-    public static final int DISTANCE_AFTER_TURN2 = (int)(4 / Math.sqrt(2) * DEGREES_PER_INCH); // distance after turning on most turning autos with shooting
     public static final int DistanceBeforeBeacon = (int)(48 * Math.sqrt(2) * DEGREES_PER_INCH); // distance to get to the furthest beacon
     public static final int DISTANCE_AFTER_TURN3 = (int) (52 * DEGREES_PER_INCH); // distance after turning on far beacon autos
+    /* public static final int DISTANCE_AFTER_TURN2 = (int)(4 / Math.sqrt(2) * DEGREES_PER_INCH); // distance after turning on most turning autos with shooting */
 
     //beacon color distances
-    public static final int rightBeaconDistance = (int)(24 * DEGREES_PER_INCH);
-    public static final int leftBeaconDistance = (int)(12 * DEGREES_PER_INCH);
+    public static final int rightBeaconDistance = (int)(4 * DEGREES_PER_INCH);
+    public static final int leftBeaconDistance = (int)(9 * DEGREES_PER_INCH);
 
     //Turning
     public static final int Left45 = -45; // used for 45 deg turns left

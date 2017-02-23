@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  */
 
 
-//TODO: Test
+//Fixed
 @Autonomous(name="Auto Drive With TURN And Shoot 2 Blue", group="147")
 public class AutoDriveAndShoot2WithTurnBlue extends AutoMode {
 
