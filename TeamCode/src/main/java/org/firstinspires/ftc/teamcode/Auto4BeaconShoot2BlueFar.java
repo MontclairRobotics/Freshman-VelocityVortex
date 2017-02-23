@@ -44,7 +44,7 @@ public class Auto4BeaconShoot2BlueFar extends AutoMode {
                 break;
 
             case 7: //Drive Forward robot is parallel to wall and wheels guide the path
-                nextState(drive(DistanceBeforeBeacon));
+                nextState(beaconDrive(DistanceBeforeBeacon));
                 break;
 
             case 8: //Turn 45 deg left

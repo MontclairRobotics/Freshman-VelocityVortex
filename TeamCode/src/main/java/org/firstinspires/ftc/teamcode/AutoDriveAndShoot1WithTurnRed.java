@@ -13,6 +13,7 @@ public class AutoDriveAndShoot1WithTurnRed extends AutoMode{
     public void init(){
         autoInit();
         setState(0);
+        intake.intakeHalf();
     }
     @Override
     public void loop(){

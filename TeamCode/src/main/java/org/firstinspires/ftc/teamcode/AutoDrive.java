@@ -15,6 +15,7 @@ public class AutoDrive extends AutoMode {
     public void init() {
         autoInit();
         setState(0);
+        intake.intakeHalf();
     }
 
     @Override
