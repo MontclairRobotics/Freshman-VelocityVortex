@@ -40,7 +40,7 @@ public class AutoMode extends OpMode {
         motorPos = driveTrain.getMotorPos();
         sensors = new Sensors();
         sensors.init(hardware);
-        intake.intakeHalf();
+
     }
 
 
@@ -85,6 +85,7 @@ public class AutoMode extends OpMode {
     public boolean shooting = false;
     public boolean pushing = false;
     public boolean turning = false;
+    public boolean beaconDriving;
 
 
     //Other Variables
@@ -136,6 +137,32 @@ public class AutoMode extends OpMode {
         return !(driving);
     }
 
+    //BEACON DRIVING (DRIVING USING THE WALL WHEELS)
+    int beaconStart = 0;
+    int beaconDistanceTraveled = 0;
+    public boolean beaconDrive(int distance){
+        if(!(beaconDriving)){
+            beaconStart = driveTrain.motors[0][0].getCurrentPosition();
+            beaconDriving = true;
+        }
+        driveTrain.motors[0][0].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        driveTrain.motors[0][1].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        driveTrain.motors[1][0].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        driveTrain.motors[1][1].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        driveTrain.motors[0][0].setPower(0.6);
+        driveTrain.motors[0][1].setPower(0.6);
+        driveTrain.motors[1][0].setPower(0.5);
+        driveTrain.motors[1][1].setPower(0.5);
+        beaconDistanceTraveled = driveTrain.motors[0][0].getCurrentPosition() - beaconStart;
+        if(Math.abs(driveTrain.motors[0][0].getCurrentPosition() - distance) < 20){
+            driveTrain.motors[0][0].setPower(0);
+            driveTrain.motors[0][1].setPower(0);
+            driveTrain.motors[1][0].setPower(0);
+            driveTrain.motors[1][1].setPower(0);
+            beaconDriving = false;
+        }
+        return beaconDriving;
+    }
 
     //AUTO SHOOTING
     public boolean shoot() {

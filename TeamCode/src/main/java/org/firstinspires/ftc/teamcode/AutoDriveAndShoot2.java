@@ -15,6 +15,7 @@ public class AutoDriveAndShoot2 extends AutoMode {
     public void init() {
         setState(0);
         autoInit();
+        intake.intakeHalf();
     }
 
     @Override
