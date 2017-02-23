@@ -22,7 +22,7 @@ public class AutoDriveTurnBlue extends AutoMode {
         switch(state){
 
             case 0: // Half Intake
-                intake.setPos(intake.intakeHalfPos);
+                intake.intakeHalf();
                 nextState(intake.isCloseTo(intake.intakeHalfPos));
                 break;
 

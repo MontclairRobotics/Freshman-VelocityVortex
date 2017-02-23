@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  * Created by WillC on 2/11/2017.
  */
 
-
+//Fixed
 @Autonomous(name = "Auto Drive With TURN And Shoot 1 Blue")
 public class AutoDriveAndShoot1WithTurnBlue  extends AutoMode{
     @Override
@@ -20,12 +20,12 @@ public class AutoDriveAndShoot1WithTurnBlue  extends AutoMode{
         switch (state){
 
             case 0: //intake Half
-                intake.setPos(intake.intakeHalfPos);
+                intake.intakeHalf();
                 nextState(intake.isCloseTo(intake.intakeHalfPos));
                 break;
 
             case 1: // Drive Forward
-                nextState(drive(Half_Block_Distance));
+                nextState(drive(SINGLE_BLOCK_DISTANCE));
                 break;
 
             case 2: // Turn Right 45 Deg
@@ -37,7 +37,7 @@ public class AutoDriveAndShoot1WithTurnBlue  extends AutoMode{
                 break;
 
             case 4: // Drive to Center Vortex
-                nextState(drive(DISTANCE_AFTER_TURN2));
+                nextState(drive(DISTANCE_AFTER_TURN));
                 break;
 
             case 5: //telemetry

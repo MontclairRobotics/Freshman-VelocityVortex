@@ -57,7 +57,7 @@ public class AutoMode extends OpMode {
     public static final int Half_Block_Distance = 12 * DEGREES_PER_INCH; // distance for half a block
 
     //Distances after turns or betweens things
-    public static final int DISTANCE_AFTER_TURN = (int)(36 * Math.sqrt(2) * DEGREES_PER_INCH); //distance after turning on turning autos without shooting
+    public static final int DISTANCE_AFTER_TURN = (int)(36 * DEGREES_PER_INCH); //distance after turning on turning autos without shooting
     public static final int DISTANCE_AFTER_TURN2 = (int)(4 / Math.sqrt(2) * DEGREES_PER_INCH); // distance after turning on most turning autos with shooting
     public static final int DistanceBeforeBeacon = (int)(48 * Math.sqrt(2) * DEGREES_PER_INCH); // distance to get to the furthest beacon
     public static final int DISTANCE_AFTER_TURN3 = (int) (52 * DEGREES_PER_INCH); // distance after turning on far beacon autos

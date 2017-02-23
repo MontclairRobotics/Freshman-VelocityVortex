@@ -22,7 +22,7 @@ public class AutoDriveAndShoot extends AutoMode {
         switch (state){
 
             case 0: // Intake Half
-                intake.setPos(intake.intakeHalfPos);
+                intake.intakeHalf();
                 nextState(intake.isCloseTo(intake.intakeHalfPos));
                 break;
 

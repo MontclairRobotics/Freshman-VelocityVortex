@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  * Created by thegb on 2/11/2017.
  */
 
-// TODO: Test
+//Fixed
 @Autonomous(name = "Auto Drive With TURN And Shoot 1 Red")
 public class AutoDriveAndShoot1WithTurnRed extends AutoMode{
     @Override
@@ -36,7 +36,7 @@ public class AutoDriveAndShoot1WithTurnRed extends AutoMode{
                 break;
 
             case 4: // Drive to Center Vortex
-                nextState(drive(DISTANCE_AFTER_TURN2));
+                nextState(drive(DISTANCE_AFTER_TURN));
                 break;
 
             case 5: //telemetry

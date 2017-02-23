@@ -1,16 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.vuforia.Type;
-
 /**
- * Created by thegb on 2/11/2017.
+ * Created by Will Chu on 1/20/2017.
  */
 
 
 //TODO: Test
-@Autonomous(name = "Auto Drive With TURN And Shoot 2 RED")
-public class AutoDriveAndShoot2WithTurnRed extends AutoMode{
+@Autonomous(name="Auto Drive With TURN And Shoot 2 Red", group="147")
+public class AutoDriveAndShoot2WithTurnRed extends AutoMode {
 
     @Override
     public void init() {
@@ -22,36 +20,41 @@ public class AutoDriveAndShoot2WithTurnRed extends AutoMode{
     public void loop() {
         switch (state){
 
-            case 0: //intake Half
-                intake.setPos(intake.intakeHalfPos);
-                nextState(intake.isCloseTo(intake.intakeHalfPos));
-                break;
-
-            case 1: //drive
+            case 0: //drive
                 nextState(drive(SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 2: //turn 45 deg left
+            case 1: //turn 45 deg left
                 nextState(turn(Left45));
+                break;
+
+            case 2: //intake Down
+                intake.intakeDown();
+                nextState(intake.isCloseTo(intake.intakeDownPos));
                 break;
 
             case 3: //shoot
                 nextState(shoot());
                 break;
 
-            case 4: //intake
-                nextState(intake());
+            case 4: //intake Up
+                intake.intakeUp();
+                nextState(intake.isCloseTo(intake.intakeUpPos));
                 break;
 
-            case 5: //shoot
+            case 5: //intake half
+                intake.intakeHalf();
+                nextState(intake.isCloseTo(intake.intakeHalfPos));
+
+            case 6: //shoot
                 nextState(shoot());
                 break;
 
-            case 6: // Park on center vortex
-                nextState(drive(DISTANCE_AFTER_TURN2));
+            case 7: // Park on center vortex
+                nextState(drive(DISTANCE_AFTER_TURN));
                 break;
 
-            case 7: // telemetry
+            case 8: // telemetry
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
         }

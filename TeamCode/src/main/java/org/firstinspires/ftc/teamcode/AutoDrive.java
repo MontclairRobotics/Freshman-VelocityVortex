@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 
 //TODO: Works
-@Autonomous(name="Auto Drive NO TURN RED/Blue", group="147")
+@Autonomous(name="Auto Drive No Turn Red/Blue", group="147")
 public class AutoDrive extends AutoMode {
 
     @Override
