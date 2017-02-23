@@ -96,6 +96,7 @@ public class teleop extends OpMode{
             telemetry.addData("Shooter Pos: ",shooter.getPos());
             shooter.shooterDown();
         }
+        telemetry.addData("INFO", pusher.getPos());
         updateTelemetry(telemetry);
     }
 
