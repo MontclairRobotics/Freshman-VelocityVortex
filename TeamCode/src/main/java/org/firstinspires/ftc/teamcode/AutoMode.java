@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
  * Created by Garrett on 1/16/2017.
@@ -19,6 +20,7 @@ public class AutoMode extends OpMode {
     BeaconPusher beaconPusher;
     public int[][] motorPos;
     Sensors sensors;
+    ElapsedTime timer;
 
 
     public void autoInit() {
@@ -40,7 +42,8 @@ public class AutoMode extends OpMode {
         motorPos = driveTrain.getMotorPos();
         sensors = new Sensors();
         sensors.init(hardware);
-
+        timer = new ElapsedTime();
+        timer.milliseconds();
     }
 
 
@@ -107,6 +110,7 @@ public class AutoMode extends OpMode {
         if (nextState) {
             state++;
             telemetry.addData("INFO", "State " + state + " acheived");
+            timer.reset();
         }
     }
 
@@ -275,7 +279,7 @@ public class AutoMode extends OpMode {
         return false;
     }
 
-    //Beacon colors method
+    //BEACON COLORS METHOD
     public boolean getColors() {
         if (sensors.lightSensorA.getRawLightDetected() > sensors.lightSensorB.getRawLightDetected()) {
             beaconRightColor = "RED";
@@ -285,6 +289,14 @@ public class AutoMode extends OpMode {
             beaconLeftColor = "RED";
         }
         return true;
+    }
+
+    //WAIT METHOD
+    public boolean pause(long seconds){
+        if(timer.milliseconds() * 1000 > seconds){
+            return true;
+        }
+        return false;
     }
 
 
