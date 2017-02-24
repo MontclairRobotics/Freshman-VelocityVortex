@@ -3,12 +3,12 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 /**
- * Created by thegb on 2/18/2017.
+ * Created by willc on 2/23/2017.
  */
 
-//TODO: Test
-@Autonomous(name = "Beacon Test", group = "147")
-public class AutoTestBeacon extends AutoMode{
+//works red only
+@Autonomous(name = "Blue Beacon Test", group = "147")
+public class AutoTestBeaconBlue extends AutoMode{
     @Override
     public void init(){
         autoInit();
@@ -22,17 +22,17 @@ public class AutoTestBeacon extends AutoMode{
                 telemetry.addData("Beacon Color", "true");
                 getColors();
                 if (beaconRightColor.equals("BLUE")){
-                    state = 22;
+                    state = 26;
                     previousState = 1;
                 }else{
-                    state = 26;
+                    state = 22;
                     previousState = 1;
                 }
                 telemetry.addData("Beacon Color", beaconRightColor);
                 break;
             case 1:
                 telemetry.addData("INFO", "Last State Achieved");
-            //beacon pusher cases
+                //beacon pusher cases
             case 22:
                 nextState(drive(rightBeaconDistance));
                 break;
