@@ -138,6 +138,32 @@ public class AutoMode extends OpMode {
         return !(driving);
     }
 
+
+    //LIGHT DRIVING
+    public boolean driveUntilLine(){
+        driveTrain.motors[0][0].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        driveTrain.motors[0][1].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        driveTrain.motors[1][0].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        driveTrain.motors[1][1].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        driveTrain.motors[0][0].setPower(0.5);
+        driveTrain.motors[0][1].setPower(0.5);
+        driveTrain.motors[1][0].setPower(0.5);
+        driveTrain.motors[1][1].setPower(0.5);
+        if(sensors.lightSensorC.getRawLightDetected() > .6){
+            driveTrain.motors[0][0].setPower(0);
+            driveTrain.motors[0][1].setPower(0);
+            driveTrain.motors[1][0].setPower(0);
+            driveTrain.motors[1][1].setPower(0);
+            driveTrain.motors[0][0].setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            driveTrain.motors[0][1].setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            driveTrain.motors[1][0].setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            driveTrain.motors[1][1].setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            return true;
+        }
+        return false;
+    }
+
+
     //BEACON DRIVING (DRIVING USING THE WALL WHEELS)
     int beaconStart = 0;
     int beaconDistanceTraveled = 0;
@@ -160,6 +186,10 @@ public class AutoMode extends OpMode {
             driveTrain.motors[0][1].setPower(0);
             driveTrain.motors[1][0].setPower(0);
             driveTrain.motors[1][1].setPower(0);
+            driveTrain.motors[0][0].setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            driveTrain.motors[0][1].setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            driveTrain.motors[1][0].setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            driveTrain.motors[1][1].setMode(DcMotor.RunMode.RUN_TO_POSITION);
             beaconDriving = false;
         }
         return beaconDriving;
@@ -181,17 +211,22 @@ public class AutoMode extends OpMode {
     }
 
     // AUTO BEACON PUSHER
+    private int beaconState = 0;
     public boolean beacon() {
-        if (!pushing) {
-            beaconPusher.pusherOut();
-            if(beaconPusher.isCloseTo(beaconPusher.pusherOutPos)) {
-                pushing = true;
-            }
-        } else {
-            beaconPusher.pusherIn();
-            pushing = false;
-        }
-        return !(pushing);
+       switch(beaconState) {
+           case 0:
+               beaconPusher.pusherOut();
+               if(beaconPusher.isCloseTo(beaconPusher.pusherOutPos)) beaconState = 1;
+               break;
+           case 1:
+               beaconPusher.pusherIn();
+               if(beaconPusher.isCloseTo(beaconPusher.pusherInPos)) {
+                   beaconState = 0;
+                   return true;
+               }
+               break;
+       }
+        return false;
     }
 
     //Auto turning (Garrett)

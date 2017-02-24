@@ -34,6 +34,7 @@ public class froshHardwareMap
     public DcMotor  beaconMotor  = null;
     public LightSensor sensorA   = null;
     public LightSensor sensorB   = null;
+    public LightSensor sensorC   = null;
 
 
     /* local OpMode members. */
@@ -49,7 +50,6 @@ public class froshHardwareMap
     public void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
         hwMap = ahwMap;
-
         // Define and Initialize Motors
         leftMotorA   = hwMap.dcMotor.get("left_driveA");
         leftMotorB   = hwMap.dcMotor.get("left_driveB");
@@ -62,6 +62,7 @@ public class froshHardwareMap
         //Define and Initialize Sensors
         sensorA = hwMap.lightSensor.get("light_sensorA");
         sensorB = hwMap.lightSensor.get("light_sensorB");
+        sensorC = hwMap.lightSensor.get("light_sensorC");
 
         // Set all motors to run with encoders.
         leftMotorA.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

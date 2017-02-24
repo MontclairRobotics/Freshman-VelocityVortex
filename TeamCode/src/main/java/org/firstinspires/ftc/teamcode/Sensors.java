@@ -9,8 +9,10 @@ import com.qualcomm.robotcore.hardware.LightSensor;
 public class Sensors {
     public LightSensor lightSensorA;
     public LightSensor lightSensorB;
+    public LightSensor lightSensorC;
     public void init(froshHardwareMap hwMap){
         lightSensorA = hwMap.sensorA;
         lightSensorB = hwMap.sensorB;
+        lightSensorC = hwMap.sensorC;
     }
 }
