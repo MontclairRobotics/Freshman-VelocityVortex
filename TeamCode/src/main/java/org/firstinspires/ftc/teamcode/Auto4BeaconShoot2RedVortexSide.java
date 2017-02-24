@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  */
 
 //TODO: Test
-@Autonomous(name="Auto All or Nothing Blue", group="147")
-public class Auto4BeaconShoot2BlueFar extends AutoMode {
+@Autonomous(name="Auto 4 Beacon S Red", group="147")
+public class Auto4BeaconShoot2RedVortexSide extends AutoMode {
 
     @Override
     public void init() {
@@ -39,16 +39,16 @@ public class Auto4BeaconShoot2BlueFar extends AutoMode {
                 nextState(drive(SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 6: //Turn Right 45 deg
-                nextState(turn(Right45));
+            case 6: //Turn Left 45 deg
+                nextState(turn(Left45));
                 break;
 
             case 7: //Drive Forward robot is parallel to wall and wheels guide the path
                 nextState(beaconDrive(DistanceBeforeBeacon));
                 break;
 
-            case 8: //Turn 45 deg left
-                nextState(turn(Left45));
+            case 8: //Turn 45 deg right
+                nextState(turn(Right45));
                 break;
 
             case 9: //Drive Backwards to Beacon
@@ -57,7 +57,7 @@ public class Auto4BeaconShoot2BlueFar extends AutoMode {
 
             case 10: //Push Beacon
                 getColors();
-                if (beaconRightColor.equals("BLUE")){
+                if (beaconRightColor.equals("RED")){
                     state = 22;
                     previousState = 10;
                 }else{
@@ -72,7 +72,7 @@ public class Auto4BeaconShoot2BlueFar extends AutoMode {
 
             case 12: //push Beacon
                 getColors();
-                if (beaconRightColor.equals("BLUE")){
+                if (beaconRightColor.equals("RED")){
                     state = 22;
                     previousState = 12;
                 }else{
@@ -85,8 +85,8 @@ public class Auto4BeaconShoot2BlueFar extends AutoMode {
                 nextState(drive(SINGLE_BLOCK_DISTANCE + (Half_Block_Distance)/2));
                 break;
 
-            case 14: // turn 90 deg left
-                nextState(turn(Left90));
+            case 14: // turn 90 deg right
+                nextState(turn(Right90));
                 break;
 
             case 15: //drive
@@ -95,7 +95,7 @@ public class Auto4BeaconShoot2BlueFar extends AutoMode {
 
             case 16: //beacon
                 getColors();
-                if (beaconRightColor.equals("BLUE")){
+                if (beaconRightColor.equals("RED")){
                     state = 22;
                     previousState = 16;
                 }else{
@@ -110,7 +110,7 @@ public class Auto4BeaconShoot2BlueFar extends AutoMode {
 
             case 18: //get color
                 getColors();
-                if (beaconRightColor.equals("BLUE")){
+                if (beaconRightColor.equals("RED")){
                     state = 22;
                     previousState = 18;
                 }else{
@@ -120,12 +120,13 @@ public class Auto4BeaconShoot2BlueFar extends AutoMode {
                 break;
 
             case 19: //turn
-                nextState(turn(Left90));
+                nextState(turn(Right90));
                 break;
 
             case 20: // drive
                 nextState(drive(2 * SINGLE_BLOCK_DISTANCE + Half_Block_Distance));
                 break;
+
             case 21: // telemetry
                 telemetry.addData("INFO", "Last State Achieved");
                 break;

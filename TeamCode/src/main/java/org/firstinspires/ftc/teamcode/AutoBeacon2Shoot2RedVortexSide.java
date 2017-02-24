@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  */
 
 //TODO: Test New
-@Autonomous(name="Auto 2 Beacon Shoot 2 Far Red Vortex Side", group="147")
+@Autonomous(name="Auto 2 Beacon Shoot 2 Red Vortex Side", group="147")
 public class AutoBeacon2Shoot2RedVortexSide extends AutoMode {
 
     @Override

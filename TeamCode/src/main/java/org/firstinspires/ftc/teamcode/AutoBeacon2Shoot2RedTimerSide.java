@@ -9,7 +9,7 @@ import java.security.SignedObject;
  */
 
 // TODO: Test
-@Autonomous(name="Auto 2 Beacon Shoot 2 Red", group="147")
+@Autonomous(name="Auto 2 Beacon Shoot 2 Red Timer Side", group="147")
 public class AutoBeacon2Shoot2RedTimerSide extends AutoMode {
 
     @Override
