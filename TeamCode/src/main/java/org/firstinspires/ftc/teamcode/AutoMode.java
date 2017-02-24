@@ -72,10 +72,6 @@ public class AutoMode extends OpMode {
     public static final int Left60 = -60; //used for 60 deg turns left
     public static final int Left90 = 2 * Left45; // used for 90 deg turns left
     public static final int Right90 = 2 * Right45; // used for 90 turns right
-    public static final int BBTA1 = (int)(Math.acos(5/13)); // used for weird turn in blue beacon auto
-    public static final int BBTA2 = (int)(180 - (Math.acos(5/13) + 90)); // used for 2nd weird turn in blue beacon auto
-    public static final int RBTA1 = (int)(-1 * Math.acos(5/13)); // used for weird turn in red beacon auto
-    public static final int RBTA2 = (int)(-1 * (180 - (Math.acos(5/13) + 90))); // used for 2nd weird turn in red beacon auto
 
     //Math for Turning
     public static final double circumference = 14 * Math.sqrt(2) * Math.PI;

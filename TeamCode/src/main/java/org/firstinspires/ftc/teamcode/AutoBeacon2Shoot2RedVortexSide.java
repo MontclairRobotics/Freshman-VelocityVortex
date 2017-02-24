@@ -67,7 +67,7 @@ public class AutoBeacon2Shoot2RedVortexSide extends AutoMode {
                 break;
 
             case 11:// beacon drive 1 root 2 blocks
-                nextState(beaconDrive(DISTANCE_AFTER_TURN2));
+                nextState(beaconDrive(DISTANCE_AFTER_TURN2) && driveUntilLine());
                 break;
 
             case 12: // get beacon
@@ -82,7 +82,7 @@ public class AutoBeacon2Shoot2RedVortexSide extends AutoMode {
                 break;
 
             case 13: //beacon drive backwards
-                nextState(beaconDrive(-SINGLE_BLOCK_DISTANCE));
+                nextState(beaconDrive(-SINGLE_BLOCK_DISTANCE) && driveUntilLine());
                 break;
 
             case 14: //get beacon
