@@ -13,12 +13,12 @@ public class AutoTest extends AutoMode {
     public void init(){
         autoInit();
         setState(0);
+        intake.intakeHalf();
     }
 
     @Override
     public void loop(){
         switch (state){
-
             case 0: // drive
                 nextState(drive(SINGLE_BLOCK_DISTANCE));
                 break;

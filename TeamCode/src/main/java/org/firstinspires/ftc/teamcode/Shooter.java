@@ -11,7 +11,7 @@ public class Shooter {
     froshHardwareMap hwMap;
 
     int shooterUpPos = -750;
-    int shooterDownPos = 100;
+    int shooterDownPos = 200;
 
     public void init(froshHardwareMap hwMap){
         this.hwMap = hwMap;
@@ -19,7 +19,7 @@ public class Shooter {
     }
 
     public void shooterUp(){
-        shooter.setPower(0.75);
+        shooter.setPower(.75);
         shooter.setTargetPosition(shooterUpPos);
     }
 

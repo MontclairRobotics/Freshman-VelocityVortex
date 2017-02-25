@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -20,6 +21,9 @@ public class teleop extends OpMode{
     BeaconPusher pusher;
     Shooter shooter;
     boolean intaking;
+    ElapsedTime timer;
+    double startTime;
+    boolean setup = false;
     @Override
     public void init() {
         hardware = new froshHardwareMap();
@@ -32,23 +36,28 @@ public class teleop extends OpMode{
         intake.init(hardware);
         pusher = new BeaconPusher();
         pusher.init(hardware);
-        intake.intakeHalf();
         shooter = new Shooter();
         shooter.init(hardware);
         intaking = false;
+        timer = new ElapsedTime();
+        startTime = timer.seconds();
         telemetry.addData("INFO","Initialized");
         intake.intake.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        intake.intake.setPower(1);
-        intake.intake.setTargetPosition(intake.intakeHalfPos);
 
+        startTime = timer.seconds();
     }
 
     public void loop() {
+
+        if(!setup){
+            intake.intakeHalf();
+            intake.intake.setPower(1);
+            setup= true;
+        }
         //Drive Controls
         float multiplier;
         if(controller.getRightBumper()){
             multiplier = 1;
-        }else if(controller.getLeftBumper()){
             multiplier = 0.25f;
         }else {
             multiplier = 0.5f;
@@ -70,7 +79,7 @@ public class teleop extends OpMode{
 
 
         //intake Controls
-        if (controller.getButtonPressed("Y")){
+        /*if (controller.getButtonPressed("Y")){
             telemetry.addData("Projected", intake.intakeDownPos);
             telemetry.addData("Actual", intake.getVals());
             intake.intakeDown();
@@ -84,6 +93,14 @@ public class teleop extends OpMode{
             }
         }else{
             intake.intakeHalf();
+            telemetry.addData("Projected", intake.intakeHalfPos);
+            telemetry.addData("Actual", intake.getVals());
+        }*/
+        if(controller.dpad("UP")){
+            intake.incrUp(50);
+        }
+        if(controller.dpad("DOWN")){
+            intake.incrDown(50);
         }
 
 

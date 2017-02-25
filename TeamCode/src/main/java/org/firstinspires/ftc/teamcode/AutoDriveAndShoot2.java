@@ -15,7 +15,6 @@ public class AutoDriveAndShoot2 extends AutoMode {
     public void init() {
         setState(0);
         autoInit();
-        intake.intakeHalf();
     }
 
     @Override
@@ -40,16 +39,21 @@ public class AutoDriveAndShoot2 extends AutoMode {
                 intake.intakeHalf();
                 nextState(intake.isCloseTo(intake.intakeHalfPos));
                 break;
-
-            case 4: // Shoot particle
+            case 4:
+                nextState(pause(2.0));
+                break;
+            case 5: // Shoot particle
                 nextState(shoot());
                 break;
-
-            case 5: //drive forward
-                nextState(drive(2 * SINGLE_BLOCK_DISTANCE + Half_Block_Distance));
+            case 6:
+                intake.intakeUp();
+                nextState(pause(2.0));
+                break;
+            case 7: //drive forward
+                nextState(drive(2 * SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 6: // telemetry
+            case 8: // telemetry
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
         }

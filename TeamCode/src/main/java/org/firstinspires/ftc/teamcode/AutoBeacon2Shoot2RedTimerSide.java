@@ -78,14 +78,14 @@ public class AutoBeacon2Shoot2RedTimerSide extends AutoMode {
 
             case 14: // get beacon
                 getColors();
-                if (beaconRightColor.equals("BLUE")){
-                    state = 22;
-                    previousState = 12;
-                }else{
-                    state = 26;
-                    previousState = 12;
-                }
-                break;
+            if (beaconRightColor.equals("BLUE")){
+                state = 22;
+                previousState = 12;
+            }else{
+                state = 26;
+                previousState = 12;
+            }
+            break;
 
             case 15: //beacon drive backwards
                 nextState(beaconDrive(-SINGLE_BLOCK_DISTANCE) && driveUntilLine());

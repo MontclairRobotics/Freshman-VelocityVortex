@@ -14,5 +14,6 @@ public class Sensors {
         lightSensorA = hwMap.sensorA;
         lightSensorB = hwMap.sensorB;
         lightSensorC = hwMap.sensorC;
+        lightSensorC.enableLed(true);
     }
 }

@@ -12,6 +12,7 @@ public class BeaconPusher {
 
     int pusherInPos = 0;
     int pusherOutPos  = 1100;
+    int pusherOutHalfPos = (int)(pusherOutPos * .65);
 
     public void init(froshHardwareMap hwMap){
         hardware = hwMap;
@@ -21,6 +22,11 @@ public class BeaconPusher {
         pusher.setPower(0.4);
         pusher.setTargetPosition(pusherInPos);
     }
+    public void pusherOutHalf(){
+        pusher.setPower(.4);
+        pusher.setTargetPosition(pusherOutHalfPos);
+    }
+
     public void pusherOut(){
         pusher.setPower(0.4);
         pusher.setTargetPosition(pusherOutPos);
