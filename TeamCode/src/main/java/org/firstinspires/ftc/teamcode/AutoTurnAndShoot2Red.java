@@ -45,7 +45,7 @@ public class AutoTurnAndShoot2Red extends AutoMode {
             case 7: // shoot
                 nextState(shoot());
                 break;
-            case 8: // done
+            case 8: // donee
                 telemetry.addData("INFO", "Last State Acheived");
                 break;
         }

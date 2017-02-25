@@ -28,17 +28,17 @@ public class Intake {
     }
 
     public void intakeUp(){
-        intake.setPower(.5);
+        intake.setPower(1);
         intake.setTargetPosition(intakeUpPos);
     }
 
     public void intakeDown(){
-        intake.setPower(.5);
+        intake.setPower(1);
         intake.setTargetPosition(intakeDownPos);
     }
 
     public void intakeHalf() {
-        intake.setPower(.3);
+        intake.setPower(1);
         intake.setTargetPosition(intakeHalfPos);
     }
 

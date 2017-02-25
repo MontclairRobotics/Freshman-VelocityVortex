@@ -97,10 +97,10 @@ public class teleop extends OpMode{
             telemetry.addData("Actual", intake.getVals());
         }*/
         if(controller.dpad("UP")){
-            intake.incrUp(50);
+            intake.incrUp(150);
         }
         if(controller.dpad("DOWN")){
-            intake.incrDown(50);
+            intake.incrDown(150);
         }
 
 
