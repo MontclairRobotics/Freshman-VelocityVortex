@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  * Created by willc on 2/16/2017.
  */
 
-//TODO: Test
+//Ready for testing
 @Autonomous(name="Auto 4 Beacon S Red", group="147")
 public class Auto4BeaconShoot2RedVortexSide extends AutoMode {
 
@@ -19,115 +19,114 @@ public class Auto4BeaconShoot2RedVortexSide extends AutoMode {
     @Override
     public void loop() {
         switch(state){
-            case 0: //Intake Half
-                intake.intakeHalf();
-                nextState(intake.isCloseTo(intake.intakeHalfPos));
+            case 0: //intake down
+                intake.intakeDown();
+                nextState(intake.isCloseTo(intake.intakeDownPos));
+                break;
 
             case 1: //Shoot
                 nextState(shoot());
                 break;
 
-            case 2: // Intake and Deploy Wheels
-                nextState(intake() && beacon());
+            case 2: // intake up
+                intake.intakeUp();
+                nextState(intake.isCloseTo(intake.intakeUpPos));
                 break;
 
-            case 3: //Shoot
-                nextState(shoot());
+            case 3: //intake half
+                intake.intakeHalf();
+                nextState(intake.isCloseTo(intake.intakeHalfPos));
                 break;
 
-            case 4: //Drive Forward One Block
-                nextState(drive(SINGLE_BLOCK_DISTANCE));
+            case 4: //Drive Forward 3 in
+                nextState(drive(3 * DEGREES_PER_INCH));
                 break;
 
             case 6: //Turn Left 45 deg
                 nextState(turn(Left45));
                 break;
 
-            case 7: //Drive Forward robot is parallel to wall and wheels guide the path
-                nextState(beaconDrive(DistanceBeforeBeacon));
+            case 7: //Drive to forward tape
+                nextState(driveUntilLine());
                 break;
 
             case 8: //Turn 45 deg right
-                nextState(turn(Right45));
+                nextState(drive(Right45));
                 break;
 
-            case 9: //Drive Backwards to Beacon
-                nextState(drive(-Half_Block_Distance));
-                break;
-
-            case 10: //Push Beacon
+            case 9: //get beacon
                 getColors();
-                if (beaconRightColor.equals("RED")){
+                if (beaconRightColor.equals("BLUE")){
                     state = 22;
-                    previousState = 10;
+                    previousState = 9;
                 }else{
                     state = 26;
-                    previousState = 10;
+                    previousState = 9;
                 }
                 break;
 
-            case 11: //Drive Forwards to beacon
-                nextState(drive(2 * SINGLE_BLOCK_DISTANCE));
+            case 10: //drive forward to tape
+                nextState(driveUntilLine());
                 break;
 
-            case 12: //push Beacon
+            case 11: //get beacon
                 getColors();
-                if (beaconRightColor.equals("RED")){
+                if (beaconRightColor.equals("BLUE")){
                     state = 22;
-                    previousState = 12;
+                    previousState = 11;
                 }else{
                     state = 26;
-                    previousState = 12;
+                    previousState = 11;
                 }
                 break;
 
-            case 13: // Drive forward 1 block + 6 in
-                nextState(drive(SINGLE_BLOCK_DISTANCE + (Half_Block_Distance)/2));
+            case 12: //drive forward Single Block distance + 9 in
+                nextState(drive(SINGLE_BLOCK_DISTANCE + 9 * SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 14: // turn 90 deg right
+            case 13: // turn 90 Right
                 nextState(turn(Right90));
                 break;
 
-            case 15: //drive
-                nextState(drive(SINGLE_BLOCK_DISTANCE));
+            case 14: // drive forward to tape
+                nextState(driveUntilLine());
                 break;
 
-            case 16: //beacon
+            case 15: //get beacon
                 getColors();
-                if (beaconRightColor.equals("RED")){
+                if (beaconRightColor.equals("BLUE")){
                     state = 22;
-                    previousState = 16;
+                    previousState = 15;
                 }else{
                     state = 26;
-                    previousState = 16;
+                    previousState = 15;
                 }
                 break;
 
-            case 17: //drive
+            case 16: // drive to Forward tape
+                nextState(driveUntilLine());
+                break;
+
+            case 17: //get beacon
+                getColors();
+                if (beaconRightColor.equals("BLUE")){
+                    state = 22;
+                    previousState = 17;
+                }else{
+                    state = 26;
+                    previousState = 17;
+                }
+                break;
+
+            case 18: //turn 23 deg left
+                nextState(turn(-23));
+                break;
+
+            case 19: //drive to corner vortex
                 nextState(drive(2 * SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 18: //get color
-                getColors();
-                if (beaconRightColor.equals("RED")){
-                    state = 22;
-                    previousState = 18;
-                }else{
-                    state = 26;
-                    previousState = 18;
-                }
-                break;
-
-            case 19: //turn
-                nextState(turn(Right90));
-                break;
-
-            case 20: // drive
-                nextState(drive(2 * SINGLE_BLOCK_DISTANCE + Half_Block_Distance));
-                break;
-
-            case 21: // telemetry
+            case 20: // telemetry
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
 
