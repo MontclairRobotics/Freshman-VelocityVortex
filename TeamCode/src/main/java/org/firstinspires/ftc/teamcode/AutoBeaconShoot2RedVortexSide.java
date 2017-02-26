@@ -3,12 +3,12 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 /**
- * Created by willc on 2/16/2017.
+ * Created by Will on 2/26/17.
  */
 
 //Ready for testing
-@Autonomous(name="Auto 4 Beacons Shoot 2 Blue Vortex Side", group="147")
-public class Auto4BeaconShoot2BlueVortexSide extends AutoMode {
+@Autonomous(name="Auto Beacon Shoot 2 Red Vortex Side", group="147")
+public class AutoBeaconShoot2RedVortexSide extends AutoMode {
 
     @Override
     public void init() {
@@ -42,91 +42,34 @@ public class Auto4BeaconShoot2BlueVortexSide extends AutoMode {
                 nextState(drive(3 * DEGREES_PER_INCH));
                 break;
 
-            case 6: //Turn Right 45 deg
-                nextState(turn(Right45));
+            case 6: //Turn left 45 deg
+                nextState(turn(Left45));
                 break;
 
             case 7: //Drive to forward tape
                 nextState(driveUntilLine());
                 break;
 
-            case 8: //Turn 45 deg left
-                nextState(turn(Left45));
+            case 8: //Turn 45 deg right
+                nextState(turn(Right45));
                 break;
 
             case 9: //get beacon
                 getColors();
                 if (beaconRightColor.equals("BLUE")){
-                    state = 26;
-                    previousState = 9;
-                }else{
                     state = 22;
                     previousState = 9;
-                }
-                break;
-
-            case 10: //drive forward to tape
-                nextState(driveUntilLine());
-                break;
-
-            case 11: //get beacon
-                getColors();
-                if (beaconRightColor.equals("BLUE")){
-                    state = 26;
-                    previousState = 11;
                 }else{
-                    state = 22;
-                    previousState = 11;
-                }
-                break;
-
-            case 12: //drive forward Single Block distance + 9 in
-                nextState(drive(SINGLE_BLOCK_DISTANCE + 9 * SINGLE_BLOCK_DISTANCE));
-                break;
-
-            case 13: // turn 90 left
-                nextState(turn(Left90));
-                break;
-
-            case 14: // drive forward to tape
-                nextState(driveUntilLine());
-                break;
-
-            case 15: //get beacon
-                getColors();
-                if (beaconRightColor.equals("BLUE")){
                     state = 26;
-                    previousState = 15;
-                }else{
-                    state = 22;
-                    previousState = 15;
+                    previousState = 9;
                 }
                 break;
 
-            case 16: // drive to Forward tape
-                nextState(driveUntilLine());
-                break;
-
-            case 17: //get beacon
-                getColors();
-                if (beaconRightColor.equals("BLUE")){
-                    state = 26;
-                    previousState = 17;
-                }else{
-                    state = 22;
-                    previousState = 17;
-                }
-                break;
-
-            case 18: //turn 23 deg left
-                nextState(turn(-23));
-                break;
-
-            case 19: //drive to corner vortex
+            case 10: //drive to corner vortex
                 nextState(drive(2 * SINGLE_BLOCK_DISTANCE));
                 break;
 
-            case 20: // telemetry
+            case 11: // telemetry
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
 
@@ -159,4 +102,5 @@ public class Auto4BeaconShoot2BlueVortexSide extends AutoMode {
         }
         updateTelemetry(telemetry);
     }
+
 }

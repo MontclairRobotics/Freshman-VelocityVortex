@@ -19,9 +19,9 @@ public class Auto4BeaconShoot2RedVortexSide extends AutoMode {
     @Override
     public void loop() {
         switch(state){
-            case 0: //intake down
+            case 0: //intake down and wheels deployed
                 intake.intakeDown();
-                nextState(intake.isCloseTo(intake.intakeDownPos));
+                nextState(intake.isCloseTo(intake.intakeDownPos) && beacon());
                 break;
 
             case 1: //Shoot
