@@ -143,6 +143,7 @@ public class AutoMode extends OpMode {
 
 
     //LIGHT DRIVING
+    //TODO: MAke sure light values work
     public boolean driveUntilLine(){
         driveTrain.motors[0][0].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         driveTrain.motors[0][1].setMode(DcMotor.RunMode.RUN_USING_ENCODER);

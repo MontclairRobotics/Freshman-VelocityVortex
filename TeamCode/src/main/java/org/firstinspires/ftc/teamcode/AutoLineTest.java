@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  * Created by thegb on 2/25/2017.
  */
 @Autonomous(name="Auto Drive Line Test", group="147")
-public class AutoDriveTest extends AutoMode{
+public class AutoLineTest extends AutoMode{
     @Override
     public void init() {
         autoInit();

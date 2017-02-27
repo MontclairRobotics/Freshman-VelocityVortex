@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  * Created by willc on 2/23/2017.
  */
 
-//works red only
+
 @Autonomous(name = "Blue Beacon Test", group = "147")
 public class AutoTestBeaconBlue extends AutoMode{
     @Override
@@ -23,10 +23,10 @@ public class AutoTestBeaconBlue extends AutoMode{
                 getColors();
                 if (beaconRightColor.equals("BLUE")){
                     state = 26;
-                    previousState = 1;
+                    previousState = 0;
                 }else{
                     state = 22;
-                    previousState = 1;
+                    previousState = 0;
                 }
                 telemetry.addData("Beacon Color", beaconRightColor);
                 break;
