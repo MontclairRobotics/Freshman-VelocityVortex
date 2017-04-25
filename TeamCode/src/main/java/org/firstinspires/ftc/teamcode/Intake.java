@@ -17,10 +17,10 @@ public class Intake {
     public DcMotor intake;
     froshHardwareMap hwMap;
 
-    public int intakeTolerance = 100;
-    final int intakeUpPos = 200;
+    public int intakeTolerance = 20;
+    final int intakeUpPos = 100;
     final int intakeDownPos = 1100;
-    final int intakeHalfPos = 400;
+    final int intakeHalfPos = 500;
 
     public void init(froshHardwareMap hwMap){
         this.hwMap = hwMap;
@@ -28,7 +28,7 @@ public class Intake {
     }
 
     public void intakeUp(){
-        intake.setPower(.5);
+        intake.setPower(1);
         intake.setTargetPosition(intakeUpPos);
     }
 
@@ -38,7 +38,7 @@ public class Intake {
     }
 
     public void intakeHalf() {
-        intake.setPower(.5);
+        intake.setPower(1);
         intake.setTargetPosition(intakeHalfPos);
     }
 

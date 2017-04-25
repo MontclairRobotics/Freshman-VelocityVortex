@@ -15,7 +15,6 @@ public class AutoDriveAndShoot extends AutoMode {
     public void init() {
         setState(0);
         autoInit();
-        intake.intakeHalf();
     }
 
     @Override
@@ -32,7 +31,7 @@ public class AutoDriveAndShoot extends AutoMode {
                 break;
 
             case 2: // Drive to Center Vortex
-                nextState(drive(2 * SINGLE_BLOCK_DISTANCE + Half_Block_Distance));
+                nextState(drive(2 * SINGLE_BLOCK_DISTANCE + Half_Block_Distance/2));
                 break;
 
             case 3: //telemetry

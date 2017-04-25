@@ -29,6 +29,7 @@ public class AutoMode extends OpMode {
         telemetry.addData("INFO", "Hardware Map Init");
         intake = new Intake();
         intake.init(hardware);
+        intake.setPos(0);
         telemetry.addData("INFO", "Intake Init");
         driveTrain = new DriveTrain();
         driveTrain.autoInit(hardware);
@@ -43,7 +44,7 @@ public class AutoMode extends OpMode {
         sensors = new Sensors();
         sensors.init(hardware);
         timer = new ElapsedTime();
-        timer.milliseconds();
+        startTime = timer.milliseconds();
     }
 
 
@@ -75,10 +76,6 @@ public class AutoMode extends OpMode {
     public static final int Left60 = -60; //used for 60 deg turns left
     public static final int Left90 = 2 * Left45; // used for 90 deg turns left
     public static final int Right90 = 2 * Right45; // used for 90 turns right
-    public static final int BBTA1 = (int)(Math.acos(5/13)); // used for weird turn in blue beacon auto
-    public static final int BBTA2 = (int)(180 - (Math.acos(5/13) + 90)); // used for 2nd weird turn in blue beacon auto
-    public static final int RBTA1 = (int)(-1 * Math.acos(5/13)); // used for weird turn in red beacon auto
-    public static final int RBTA2 = (int)(-1 * (180 - (Math.acos(5/13) + 90))); // used for 2nd weird turn in red beacon auto
 
     //Math for Turning
     public static final double circumference = 14 * Math.sqrt(2) * Math.PI;
@@ -90,6 +87,8 @@ public class AutoMode extends OpMode {
     public boolean pushing = false;
     public boolean turning = false;
     public boolean beaconDriving;
+
+    private double startTime;
 
 
     //Other Variables
@@ -111,7 +110,7 @@ public class AutoMode extends OpMode {
         if (nextState) {
             state++;
             telemetry.addData("INFO", "State " + state + " acheived");
-            timer.reset();
+            startTime = timer.milliseconds();
         }
     }
 
@@ -149,11 +148,33 @@ public class AutoMode extends OpMode {
         driveTrain.motors[0][1].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         driveTrain.motors[1][0].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         driveTrain.motors[1][1].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        driveTrain.motors[0][0].setPower(0.5);
-        driveTrain.motors[0][1].setPower(0.5);
+        driveTrain.motors[0][0].setPower(0.6);
+        driveTrain.motors[0][1].setPower(0.6);
+        driveTrain.motors[1][0].setPower(-0.5);
+        driveTrain.motors[1][1].setPower(-0.5);
+        if(sensors.lightSensorC.getRawLightDetected() > .57){
+            driveTrain.motors[0][0].setPower(0);
+            driveTrain.motors[0][1].setPower(0);
+            driveTrain.motors[1][0].setPower(0);
+            driveTrain.motors[1][1].setPower(0);
+            driveTrain.motors[0][0].setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            driveTrain.motors[0][1].setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            driveTrain.motors[1][0].setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            driveTrain.motors[1][1].setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            return true;
+        }
+        return false;
+    }
+    public boolean driveBackUntilLine(){
+        driveTrain.motors[0][0].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        driveTrain.motors[0][1].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        driveTrain.motors[1][0].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        driveTrain.motors[1][1].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        driveTrain.motors[0][0].setPower(-0.6);
+        driveTrain.motors[0][1].setPower(-0.6);
         driveTrain.motors[1][0].setPower(0.5);
         driveTrain.motors[1][1].setPower(0.5);
-        if(sensors.lightSensorC.getRawLightDetected() > .6){
+        if(sensors.lightSensorC.getRawLightDetected() > 1.4){
             driveTrain.motors[0][0].setPower(0);
             driveTrain.motors[0][1].setPower(0);
             driveTrain.motors[1][0].setPower(0);
@@ -182,8 +203,8 @@ public class AutoMode extends OpMode {
         driveTrain.motors[1][1].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         driveTrain.motors[0][0].setPower(0.6);
         driveTrain.motors[0][1].setPower(0.6);
-        driveTrain.motors[1][0].setPower(0.5);
-        driveTrain.motors[1][1].setPower(0.5);
+        driveTrain.motors[1][0].setPower(-0.5);
+        driveTrain.motors[1][1].setPower(-0.5);
         beaconDistanceTraveled = driveTrain.motors[0][0].getCurrentPosition() - beaconStart;
         if(Math.abs(driveTrain.motors[0][0].getCurrentPosition() - distance) < 20){
             driveTrain.motors[0][0].setPower(0);
@@ -200,18 +221,22 @@ public class AutoMode extends OpMode {
     }
 
     //AUTO SHOOTING
+    int shootingState = 0;
     public boolean shoot() {
-        if (!(shooting)) {
-            shooter.shooterUp();
-            shooting = true;
+        switch (shootingState){
+            case 0:
+                shooter.shooterUp();
+                if(shooter.isCloseTo(shooter.shooterUpPos)) shootingState = 1;
+                break;
+            case 1:
+                shooter.shooterDown();
+                if(shooter.isCloseTo(shooter.shooterDownPos)){
+                    shootingState = 0;
+                    return true;
+                }
+                break;
         }
-        if (Math.abs(shooter.shooterUpPos - shooter.getPos()) < 20) {
-            shooter.shooterDown();
-        }
-        if (shooting && Math.abs(shooter.shooterDownPos - shooter.getPos()) < 20) {
-            shooting = false;
-        }
-        return !(shooting);
+        return false;
     }
 
     // AUTO BEACON PUSHER
@@ -219,8 +244,8 @@ public class AutoMode extends OpMode {
     public boolean beacon() {
        switch(beaconState) {
            case 0:
-               beaconPusher.pusherOut();
-               if(beaconPusher.isCloseTo(beaconPusher.pusherOutPos)) beaconState = 1;
+               beaconPusher.pusherOutHalf();
+               if(beaconPusher.isCloseTo(beaconPusher.pusherOutHalfPos)) beaconState = 1;
                break;
            case 1:
                beaconPusher.pusherIn();
@@ -328,13 +353,22 @@ public class AutoMode extends OpMode {
     }
 
     //WAIT METHOD
-    public boolean pause(long seconds){
-        if(timer.milliseconds() * 1000 > seconds){
+    public boolean pause(double seconds){
+        telemetry.addData("Seconds", getSec());
+        telemetry.addData("Target Seconds",seconds);
+        if(getSec() > seconds){
             return true;
         }
         return false;
     }
 
+    public double getMillis() {
+        return timer.milliseconds() - startTime;
+    }
+
+    public double getSec() {
+        return getMillis() / 1000.0;
+    }
 
     @Override
     public void init() {

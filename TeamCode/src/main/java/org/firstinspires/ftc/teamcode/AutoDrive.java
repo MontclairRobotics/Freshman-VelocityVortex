@@ -22,9 +22,9 @@ public class AutoDrive extends AutoMode {
     public void loop() {
         switch(state){
 
-            case 0: // Half Intake
+            case 0: // Half Intake and wheels deployed
                 intake.setPos(intake.intakeHalfPos);
-                nextState(intake.isCloseTo(intake.intakeHalfPos));
+                nextState(intake.isCloseTo(intake.intakeHalfPos) && beacon());
                 break;
 
             case 1: // Drive to center Vortex

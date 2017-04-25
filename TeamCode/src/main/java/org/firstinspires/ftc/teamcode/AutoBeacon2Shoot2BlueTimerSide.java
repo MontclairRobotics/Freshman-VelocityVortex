@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  */
 
 //TODO: Test
-@Autonomous(name="Auto 2 Beacon Shoot 1 Blue", group="147")
+@Autonomous(name="Auto 2 Beacon Shoot 2 Blue Timer Side", group="147")
 public class AutoBeacon2Shoot2BlueTimerSide extends AutoMode {
 
     @Override
@@ -70,7 +70,7 @@ public class AutoBeacon2Shoot2BlueTimerSide extends AutoMode {
                 break;
 
             case 13:// beacon drive 1 root 2 blocks
-                nextState(beaconDrive(DISTANCE_AFTER_TURN2));
+                nextState(beaconDrive(DISTANCE_AFTER_TURN2) && driveUntilLine());
                 break;
 
             case 14: // get beacon
@@ -85,7 +85,7 @@ public class AutoBeacon2Shoot2BlueTimerSide extends AutoMode {
                 break;
 
             case 15: //beacon drive backwards
-                nextState(beaconDrive(-SINGLE_BLOCK_DISTANCE));
+                nextState(beaconDrive(-SINGLE_BLOCK_DISTANCE) && driveUntilLine());
                 break;
 
             case 16: //get beacon
