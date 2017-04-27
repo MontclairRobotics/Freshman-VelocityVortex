@@ -3,53 +3,50 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 /**
- * Created by Will Chu on 02/01/17.
+ * Created by Will on 4/27/2017.
  */
 
-
-//Fixed
-@Autonomous(name="Auto Drive Shoot 2 Blue", group="147")
-public class AutoDriveShoot2Blue extends AutoMode {
+//TODO: Testing Required
+@Autonomous(name="Auto Drive Shoot 2 (Red Timer Side)", group="147")
+public class AutoDriveShoot2TimerSideRed extends AutoMode {
 
     @Override
     public void init() {
-        autoInit();
         setState(0);
-        intake.intakeHalf();
+        autoInit();
     }
 
     @Override
     public void loop() {
-        switch(state){
+        switch (state){
 
-            case 0: // drive
-                nextState(drive(SINGLE_BLOCK_DISTANCE));
+            case 0: // Drive Forward 1.5 Tiles
+                nextState(drive(SINGLE_BLOCK_DISTANCE + Half_Block_Distance));
                 break;
 
-            case 1: //turn
-                nextState(turn(Right45));
+            case 1: //turn 135 left
+                nextState(turn(Left135));
                 break;
 
-            case 2: //intake
+            case 2: // Intake Down and wheels deployed
                 intake.intakeDown();
-                nextState(intake.isCloseTo(intake.intakeDownPos));
+                nextState(intake.isCloseTo(intake.intakeDownPos) &&  beacon());
                 break;
 
-            case 3: //shoot
+            case 3: // Shoot
                 nextState(shoot());
                 break;
 
-            case 4: // intake up
+            case 4: //Intake Up
                 intake.intakeUp();
                 nextState(intake.isCloseTo(intake.intakeUpPos));
                 break;
 
-            case 5: // intake half
-                intake.intakeHalf();
+            case 5: // Intake Half
                 nextState(intake.isCloseTo(intake.intakeHalfPos));
                 break;
 
-            case 6: //shoot
+            case 6:// Shoot
                 nextState(shoot());
                 break;
 
@@ -57,10 +54,9 @@ public class AutoDriveShoot2Blue extends AutoMode {
                 nextState(drive(DISTANCE_AFTER_TURN));
                 break;
 
-            case 8: // Telemetry
+            case 8: //telemetry
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
-
         }
         updateTelemetry(telemetry);
     }

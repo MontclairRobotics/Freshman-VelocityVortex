@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  */
 
 
-@Autonomous(name = "Red Beacon Test", group = "147")
+@Autonomous(name = "Test: Red Beacon", group = "147")
 public class AutoTestBeaconRed extends AutoMode{
     @Override
     public void init(){

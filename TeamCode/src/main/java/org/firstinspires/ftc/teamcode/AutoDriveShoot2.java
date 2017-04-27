@@ -21,9 +21,9 @@ public class AutoDriveShoot2 extends AutoMode {
     public void loop() {
         switch (state){
 
-            case 0: // Intake Down
+            case 0: // Intake Down and wheels deployed
                 intake.intakeDown();
-                nextState(intake.isCloseTo(intake.intakeDownPos));
+                nextState(intake.isCloseTo(intake.intakeDownPos) && beacon());
                 break;
 
             case 1: // Shoot Particle
@@ -45,7 +45,7 @@ public class AutoDriveShoot2 extends AutoMode {
                 break;
 
             case 5:// drive
-                nextState(drive(2 * DEGREES_PER_INCH +Half_Block_Distance));
+                nextState(drive(2 * DEGREES_PER_INCH + Half_Block_Distance));
                 break;
 
             case 6: //telemetry
