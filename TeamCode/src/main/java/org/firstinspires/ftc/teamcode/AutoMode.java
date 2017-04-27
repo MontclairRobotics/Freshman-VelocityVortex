@@ -256,7 +256,7 @@ public class AutoMode extends OpMode {
                }
                break;
        }
-        return false;
+       return false;
     }
 
     //Auto turning (Garrett)
