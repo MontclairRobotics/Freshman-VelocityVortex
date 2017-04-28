@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
  */
 
 //TODO: Testing Required
-@Autonomous(name="Auto Beacon 2 (Red)", group="147")
-public class AutoBeaconRed extends AutoMode {
+@Autonomous(name="Auto Beacon 2 (Blue)", group="147")
+public class AutoBeaconBlue extends AutoMode {
 
     @Override
     public void init() {
@@ -20,31 +20,31 @@ public class AutoBeaconRed extends AutoMode {
     public void loop() {
         switch (state){
 
-            case 0: // Drive Backwards 2 in
+            case 0: // Drive Forward 2 in
                 nextState(drive(2 * DEGREES_PER_INCH));
                 break;
 
-            case 1: //turn 45 left
-                nextState(turn(Left45));
+            case 1: //turn 45 right
+                nextState(turn(Right45));
                 break;
 
             case 2: //Drive until Line;
                 telemetry.addData("Light Value", sensors.lightSensorC.getRawLightDetected());
-                nextState(driveBackUntilLine());
+                nextState(driveUntilLine());
                 break;
 
-            case 3: //turn 45 right
-                nextState(turn(Right45));
+            case 3: //turn 45 left
+                nextState(turn(Left45));
                 break;
 
             case 4: //beacon
                 telemetry.addData("Beacon Color", "true");
                 getColors();
                 if (beaconRightColor.equals("BLUE")){
-                    state = 22;
+                    state = 26;
                     previousState = 0;
                 }else{
-                    state = 26;
+                    state = 22;
                     previousState = 0;
                 }
                 telemetry.addData("Beacon Color", beaconRightColor);
@@ -52,17 +52,17 @@ public class AutoBeaconRed extends AutoMode {
 
             case 5: //drive to second beacon
                 telemetry.addData("Light Value", sensors.lightSensorC.getRawLightDetected());
-                nextState(driveBackUntilLine());
+                nextState(driveUntilLine());
                 break;
 
             case 6: //beacon
                 telemetry.addData("Beacon Color", "true");
                 getColors();
                 if (beaconRightColor.equals("BLUE")){
-                    state = 22;
+                    state = 26;
                     previousState = 0;
                 }else{
-                    state = 26;
+                    state = 22;
                     previousState = 0;
                 }
                 telemetry.addData("Beacon Color", beaconRightColor);
