@@ -24,8 +24,8 @@ public class AutoDriveShoot2TimerSideBlue extends AutoMode {
                 nextState(drive(SINGLE_BLOCK_DISTANCE + Half_Block_Distance));
                 break;
 
-            case 1: //turn 135 Right
-                nextState(turn(Right135));
+            case 1: //turn 45 Right
+                nextState(turn(Right45));
                 break;
 
             case 2: // Intake Down and wheels deployed

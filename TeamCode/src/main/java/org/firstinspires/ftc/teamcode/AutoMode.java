@@ -75,8 +75,8 @@ public class AutoMode extends OpMode {
     public static final int Right45 = 45; // used for 45 deg turns right
     public static final int Left90 = 2 * Left45; // used for 90 deg turns left
     public static final int Right90 = 2 * Right45; // used for 90 turns right
-    public static final int Left135 = Left90 +Left45; //used for 135 turns left
-    public static final int Right135 = Right90 + Right45; //used for 135 turns right
+    //public static final int Left135 = Left90 +Left45; //used for 135 turns left
+    //public static final int Right135 = Right90 + Right45; //used for 135 turns right
 
     //Math for Turning
     public static final double circumference = 14 * Math.sqrt(2) * Math.PI;
