@@ -3,19 +3,17 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 /**
- * Created by Will Chu on 01/19/17.
+ * Created by Will Chu on 02/26/17.
  */
 
 
-//Fixed
-@Autonomous(name="Auto Drive No Turn Red/Blue", group="147")
+@Autonomous(name="Auto Drive", group="147")
 public class AutoDrive extends AutoMode {
 
     @Override
     public void init() {
         autoInit();
         setState(0);
-        intake.intakeHalf();
     }
 
     @Override

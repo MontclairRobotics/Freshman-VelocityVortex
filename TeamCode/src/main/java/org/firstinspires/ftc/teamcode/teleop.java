@@ -95,7 +95,13 @@ public class teleop extends OpMode{
             intake.intakeHalf();
             telemetry.addData("Projected", intake.intakeHalfPos);
             telemetry.addData("Actual", intake.getVals());
+<<<<<<< HEAD
         }/*
+=======
+        }
+
+        /*
+>>>>>>> 216d15fb6b2044b38cad78cd97e7506bab404b37
         if(controller.dpad("UP")){
             intake.incrUp(150);
         }
