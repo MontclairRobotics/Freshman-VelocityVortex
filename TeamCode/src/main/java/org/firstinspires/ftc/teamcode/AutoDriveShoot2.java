@@ -45,7 +45,7 @@ public class AutoDriveShoot2 extends AutoMode {
                 break;
 
             case 5:// drive
-                nextState(drive(2 * DEGREES_PER_INCH + Half_Block_Distance));
+                nextState(drive(2 * SINGLE_BLOCK_DISTANCE + Half_Block_Distance));
                 break;
 
             case 6: //telemetry

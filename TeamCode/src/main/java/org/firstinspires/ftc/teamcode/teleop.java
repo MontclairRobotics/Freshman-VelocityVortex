@@ -78,7 +78,7 @@ public class teleop extends OpMode{
 
 
 
-        //intake Controls
+        //intake Controls(automatic)
         if (controller.getButtonPressed("Y")){
             telemetry.addData("Projected", intake.intakeDownPos);
             telemetry.addData("Actual", intake.getVals());
@@ -95,19 +95,16 @@ public class teleop extends OpMode{
             intake.intakeHalf();
             telemetry.addData("Projected", intake.intakeHalfPos);
             telemetry.addData("Actual", intake.getVals());
-<<<<<<< HEAD
-        }/*
-=======
+
         }
 
-        /*
->>>>>>> 216d15fb6b2044b38cad78cd97e7506bab404b37
+        //intake Controls(manual)
         if(controller.dpad("UP")){
             intake.incrUp(150);
         }
         if(controller.dpad("DOWN")){
             intake.incrDown(150);
-        }*/
+        }
 
 
 

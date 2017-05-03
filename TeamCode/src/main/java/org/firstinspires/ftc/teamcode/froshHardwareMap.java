@@ -22,8 +22,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Sensor channel: Back light sensor:              "light_sensorB"
  */
 
-public class froshHardwareMap
-{
+public class froshHardwareMap {
+
     /* Public OpMode members. */
     public DcMotor  leftMotorA   = null;
     public DcMotor  leftMotorB   = null;
@@ -40,11 +40,6 @@ public class froshHardwareMap
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
     private ElapsedTime period  = new ElapsedTime();
-
-    /* Constructor */
-    public froshHardwareMap(){
-
-    }
 
     /* Initialize standard Hardware interfaces */
     public void init(HardwareMap ahwMap) {
@@ -73,7 +68,7 @@ public class froshHardwareMap
         shooterMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         beaconMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        // Set all motors to zero power
+        // Set all motors to power
         leftMotorA.setPower(0);
         leftMotorB.setPower(0);
         rightMotorA.setPower(0);
