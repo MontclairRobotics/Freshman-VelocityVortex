@@ -45,6 +45,7 @@ public class AutoMode extends OpMode {
         sensors.init(hardware);
         timer = new ElapsedTime();
         startTime = timer.milliseconds();
+        sensors.gyroSensorA.calibrate();
     }
 
 

@@ -5,6 +5,7 @@ package org.firstinspires.ftc.teamcode;
  */
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.LightSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -35,7 +36,7 @@ public class froshHardwareMap {
     public LightSensor sensorA   = null;
     public LightSensor sensorB   = null;
     public LightSensor sensorC   = null;
-
+    public GyroSensor sensorD = null;
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -58,6 +59,7 @@ public class froshHardwareMap {
         sensorA = hwMap.lightSensor.get("light_sensorA");
         sensorB = hwMap.lightSensor.get("light_sensorB");
         sensorC = hwMap.lightSensor.get("light_sensorC");
+        sensorD = hwMap.gyroSensor.get("gyro_sensor");
 
         // Set all motors to run with encoders.
         leftMotorA.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

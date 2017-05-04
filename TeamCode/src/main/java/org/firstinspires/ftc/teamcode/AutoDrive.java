@@ -27,6 +27,9 @@ public class AutoDrive extends AutoMode {
 
             case 1: // Drive to center Vortex
                 nextState(drive(2 * SINGLE_BLOCK_DISTANCE + Half_Block_Distance));
+                telemetry.addData("X", sensors.gyroSensorA.rawX());
+                telemetry.addData("Y", sensors.gyroSensorA.rawY());
+                telemetry.addData("Z", sensors.gyroSensorA.rawZ());
                 break;
 
             case 2: // Telemetry

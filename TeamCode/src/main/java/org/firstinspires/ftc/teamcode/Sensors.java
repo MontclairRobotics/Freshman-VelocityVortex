@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.GyroSensor;
 import com.qualcomm.robotcore.hardware.LightSensor;
 
 /**
@@ -10,10 +11,12 @@ public class Sensors {
     public LightSensor lightSensorA;
     public LightSensor lightSensorB;
     public LightSensor lightSensorC;
+    public GyroSensor gyroSensorA;
     public void init(froshHardwareMap hwMap){
         lightSensorA = hwMap.sensorA;
         lightSensorB = hwMap.sensorB;
         lightSensorC = hwMap.sensorC;
         lightSensorC.enableLed(true);
+        gyroSensorA = hwMap.sensorD;
     }
 }
