@@ -24,24 +24,29 @@ public class AutoDriveShoot2 extends AutoMode {
             case 0: // Intake Down and wheels deployed
                 intake.intakeDown();
                 nextState(intake.isCloseTo(intake.intakeDownPos) && beacon());
+                pause(pauseTime);
                 break;
 
             case 1: // Shoot Particle
                 nextState(shoot());
+                pause(pauseTime);
                 break;
 
             case 2: // intake Up
                 intake.intakeUp();
                 nextState(intake.isCloseTo(intake.intakeUpPos));
+                pause(pauseTime);
                 break;
 
             case 3: //intake half
                 intake.intakeHalf();
                 nextState(intake.isCloseTo(intake.intakeHalfPos));
+                pause(pauseTime);
                 break;
 
             case 4: // Shoot
                 nextState(shoot());
+                pause(pauseTime);
                 break;
 
             case 5:// drive

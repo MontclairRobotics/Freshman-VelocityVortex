@@ -90,7 +90,9 @@ public class AutoMode extends OpMode {
     public boolean turning = false;
     public boolean beaconDriving;
 
+    //Time and pauses
     private double startTime;
+    public double pauseTime = 0.5;
 
 
     //Other Variables
