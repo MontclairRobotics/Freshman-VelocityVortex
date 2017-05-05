@@ -1,8 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.kauailabs.navx.ftc.AHRS;
+import com.kauailabs.navx.ftc.navXPIDController;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -21,6 +24,8 @@ public class AutoMode extends OpMode {
     public int[][] motorPos;
     Sensors sensors;
     ElapsedTime timer;
+    DeviceInterfaceModule dim;
+
 
 
     public void autoInit() {
@@ -45,11 +50,16 @@ public class AutoMode extends OpMode {
         sensors.init(hardware);
         timer = new ElapsedTime();
         startTime = timer.milliseconds();
-        sensors.gyroSensorA.calibrate();
     }
 
 
     //AutoMode Variables
+
+    //Navx Variables
+    public static final int NAVX_DIM_I2C_PORT = 0;
+    public static AHRS navx_device;
+    public static navXPIDController yawPIDController;
+    public static final byte NAVX_DEVICE_UPDATE_RATE_HZ = 100;
 
     //Positions
     public static int totalPos = 0;

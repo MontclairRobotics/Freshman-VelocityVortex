@@ -18,7 +18,6 @@ public class AutoTestLedDIM extends AutoMode{
     //DIM setup
     private static final int    BLUE_LED    = 0;     // Blue LED channel on DIM
     private static final int    RED_LED     = 1;     // Red LED Channel on DIM
-    DeviceInterfaceModule dim;
 
     @Override
     public void loop() {
@@ -27,10 +26,6 @@ public class AutoTestLedDIM extends AutoMode{
                 dim.setLED(BLUE_LED,true);
                 dim.setLED(RED_LED,true);
                 telemetry.addData("INFO","Blue and Red LEDs true");
-                break;
-
-            case 2:
-
                 break;
         }
     }

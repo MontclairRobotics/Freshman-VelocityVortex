@@ -14,6 +14,7 @@ public class AutoBeaconBlue extends AutoMode {
     public void init() {
         setState(0);
         autoInit();
+        telemetry.addData("Info","Remember to Set up Backwards");
     }
     int previousState = 0;
     @Override

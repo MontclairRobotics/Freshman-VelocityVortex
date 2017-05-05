@@ -17,6 +17,5 @@ public class Sensors {
         lightSensorB = hwMap.sensorB;
         lightSensorC = hwMap.sensorC;
         lightSensorC.enableLed(true);
-        gyroSensorA = hwMap.sensorD;
     }
 }
