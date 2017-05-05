@@ -59,7 +59,14 @@ public class AutoMode extends OpMode {
     public static final int NAVX_DIM_I2C_PORT = 0;
     public static AHRS navx_device;
     public static navXPIDController yawPIDController;
-    public static final byte NAVX_DEVICE_UPDATE_RATE_HZ = 100;
+    public static final byte NAVX_DEVICE_UPDATE_RATE_HZ = 20;
+    private final double TARGET_ANGLE_DEGREES = 0.0;
+    private final double TOLERANCE_DEGREES = 2.0;
+    private final double MIN_MOTOR_OUTPUT_VALUE = -1.0;
+    private final double MAX_MOTOR_OUTPUT_VALUE = 1.0;
+    private final double YAW_PID_P = 0.005;
+    private final double YAW_PID_I = 0.0;
+    private final double YAW_PID_D = 0.0;
 
     //Positions
     public static int totalPos = 0;
