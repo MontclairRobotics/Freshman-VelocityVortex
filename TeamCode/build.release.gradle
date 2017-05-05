@@ -9,3 +9,8 @@ dependencies {
     compile (name:'navx_ftc-release', ext:'aar')
 }
 
+repositories {
+    flatDir {
+        dirs 'libs', 'C:\\Users\\Robotics\\navx-micro\\android\\libs'
+    }
+}
