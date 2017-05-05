@@ -14,6 +14,7 @@ public class AutoDrive extends AutoMode {
     public void init() {
         autoInit();
         setState(0);
+        navx_device.zeroYaw();
     }
 
     @Override
@@ -26,10 +27,12 @@ public class AutoDrive extends AutoMode {
                 break;
 
             case 1: // Drive to center Vortex
-                nextState(drive(2 * SINGLE_BLOCK_DISTANCE + Half_Block_Distance));
-                telemetry.addData("X", sensors.gyroSensorA.rawX());
-                telemetry.addData("Y", sensors.gyroSensorA.rawY());
-                telemetry.addData("Z", sensors.gyroSensorA.rawZ());
+                nextState(drive(2 * SINGLE_BLOCK_DISTANCE + HALF_BLOCK_DISTANCE));
+                telemetry.addData("X", navx_device.getRawGyroX());
+                telemetry.addData("Y", navx_device.getRawGyroY());
+                telemetry.addData("Z", navx_device.getRawGyroZ());
+                telemetry.addData("Moving",navx_device.isMoving());
+
                 break;
 
             case 2: // Telemetry

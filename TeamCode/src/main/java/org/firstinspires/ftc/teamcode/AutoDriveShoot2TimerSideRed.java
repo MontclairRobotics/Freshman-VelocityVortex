@@ -21,7 +21,7 @@ public class AutoDriveShoot2TimerSideRed extends AutoMode {
         switch (state){
 
             case 0: // Drive Forward 1.5 Tiles
-                nextState(drive(SINGLE_BLOCK_DISTANCE + Half_Block_Distance));
+                nextState(drive(ONE_AND_HALF_BLOCK_DISTANCE));
                 break;
 
             case 1: //turn 45 left

@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by Garrett on 1/16/2017.
  * Extended by Will on 1/20/2017
@@ -50,23 +52,28 @@ public class AutoMode extends OpMode {
         sensors.init(hardware);
         timer = new ElapsedTime();
         startTime = timer.milliseconds();
+
+        dim.setLED(BLUE_LED,true);
+        dim.setLED(RED_LED,true);
+
+        navx_device = AHRS.getInstance(hardwareMap.deviceInterfaceModule.get("dim"),
+                NAVX_DIM_I2C_PORT,
+                AHRS.DeviceDataType.kProcessedData,
+                NAVX_DEVICE_UPDATE_RATE_HZ);
     }
+
 
 
     //AutoMode Variables
 
+    //DIM setup
+    public static final int    BLUE_LED    = 0;     // Blue LED channel on DIM
+    public static final int    RED_LED     = 1;     // Red LED Channel on DIM
+
     //Navx Variables
-    public static final int NAVX_DIM_I2C_PORT = 0;
-    public static AHRS navx_device;
-    public static navXPIDController yawPIDController;
-    public static final byte NAVX_DEVICE_UPDATE_RATE_HZ = 20;
-    private final double TARGET_ANGLE_DEGREES = 0.0;
-    private final double TOLERANCE_DEGREES = 2.0;
-    private final double MIN_MOTOR_OUTPUT_VALUE = -1.0;
-    private final double MAX_MOTOR_OUTPUT_VALUE = 1.0;
-    private final double YAW_PID_P = 0.005;
-    private final double YAW_PID_I = 0.0;
-    private final double YAW_PID_D = 0.0;
+    public static final int NAVX_DIM_I2C_PORT = 0; //I2C port
+    public static AHRS navx_device; //NavX Deceleration
+    public static final byte NAVX_DEVICE_UPDATE_RATE_HZ = Byte.MAX_VALUE; // update rate
 
     //Positions
     public static int totalPos = 0;
@@ -76,13 +83,11 @@ public class AutoMode extends OpMode {
     // Distances(Basic)
     public static final int DEGREES_PER_INCH = 10000 / 85; //10000 Degrees over how many inches
     public static final int SINGLE_BLOCK_DISTANCE = 24 * DEGREES_PER_INCH; //length of block converted int degrees
-    public static final int Half_Block_Distance = 12 * DEGREES_PER_INCH; // distance for half a block
+    public static final int HALF_BLOCK_DISTANCE = 12 * DEGREES_PER_INCH; // distance for half a block
+    public static final int ONE_AND_HALF_BLOCK_DISTANCE = SINGLE_BLOCK_DISTANCE + HALF_BLOCK_DISTANCE;
 
-    //Distances after turns or betweens things
+    //Distances after turns or between things
     public static final int DISTANCE_AFTER_TURN = (int)(Math.sqrt(2) * 2 * SINGLE_BLOCK_DISTANCE); //distance to cover after turning in non-beacon timer side autos
-    //public static final int DistanceBeforeBeacon = (int)(48 * Math.sqrt(2) * DEGREES_PER_INCH); // distance to get to the furthest beacon
-   // public static final int DISTANCE_AFTER_TURN3 = (int) (2.5 * Math.sqrt(2) * SINGLE_BLOCK_DISTANCE); // distance after turning on far beacon autos
-    //public static final int DISTANCE_AFTER_TURN2 = (int)(1 * Math.sqrt(2) * SINGLE_BLOCK_DISTANCE); // distance after turning on most turning autos with shooting
 
     //beacon color distances
     public static final int rightBeaconDistance = (int)(4 * DEGREES_PER_INCH);
@@ -93,17 +98,13 @@ public class AutoMode extends OpMode {
     public static final int Right45 = 45; // used for 45 deg turns right
     public static final int Left90 = 2 * Left45; // used for 90 deg turns left
     public static final int Right90 = 2 * Right45; // used for 90 turns right
-    //public static final int Left135 = Left90 +Left45; //used for 135 turns left
-    //public static final int Right135 = Right90 + Right45; //used for 135 turns right
 
-    //Math for Turning
+    //Math for turning logic
     public static final double circumference = 14 * Math.sqrt(2) * Math.PI;
     public static final double degree = circumference / 360;
 
     //control variables
     public boolean driving = false;
-    public boolean shooting = false;
-    public boolean pushing = false;
     public boolean turning = false;
     public boolean beaconDriving;
 
@@ -130,7 +131,7 @@ public class AutoMode extends OpMode {
     public void nextState(boolean nextState) {
         if (nextState) {
             state++;
-            telemetry.addData("INFO", "State " + state + " acheived");
+            telemetry.addData("INFO", "State " + state + " achieved");
             startTime = timer.milliseconds();
         }
     }
@@ -319,7 +320,7 @@ public class AutoMode extends OpMode {
         return turning;
     }
 
-    //Auto Turning (Rafi)
+    //AUTO TURNING (RAFI)
     private int motor1end = 0;
     public boolean turn(int degrees) {
         if(!turning) {
@@ -339,7 +340,7 @@ public class AutoMode extends OpMode {
         return false;
     }
 
-    //Auto Intake
+    //AUTO INTAKE
     public int intakeState = 0;
     public boolean intake(){
         switch(intakeState) {
