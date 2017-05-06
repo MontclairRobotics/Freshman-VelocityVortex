@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
 import java.text.DecimalFormat;
 
@@ -417,6 +418,103 @@ public class AutoMode extends OpMode {
     //double for PID
     public double limit(double a) {
         return Math.min(Math.max(a, MIN_MOTOR_OUTPUT_VALUE), MAX_MOTOR_OUTPUT_VALUE);
+    }
+
+    //Gyro Drive
+    public void gyroDrive ( double speed, double distance, double angle) {
+
+        int     newLeftTargetA;
+        int     newRightTargetA;
+        int     newLeftTargetB;
+        int     newRightTargetB;
+        int     moveCounts;
+        double  max;
+        double  error;
+        double  steer;
+        double  leftSpeed;
+        double  rightSpeed;
+        final double  P_DRIVE_COEFF = 0.15;
+
+            // Determine new target position, and pass to motor controller
+            moveCounts = (int)(distance);
+            newLeftTargetA = hardware.leftMotorA.getCurrentPosition() + moveCounts;
+            newLeftTargetB = hardware.leftMotorA.getCurrentPosition() + moveCounts;
+            newRightTargetA = hardware.rightMotorB.getCurrentPosition() + moveCounts;
+            newRightTargetB = hardware.rightMotorB.getCurrentPosition() + moveCounts;
+
+            // Set Target and Turn On RUN_TO_POSITION
+            hardware.leftMotorA.setTargetPosition(newLeftTargetA);
+            hardware.leftMotorB.setTargetPosition(newLeftTargetB);
+            hardware.rightMotorA.setTargetPosition(newRightTargetA);
+            hardware.rightMotorB.setTargetPosition(newRightTargetB);
+
+            hardware.leftMotorA.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            hardware.leftMotorB.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            hardware.rightMotorA.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            hardware.rightMotorB.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            // start motion.
+            speed = Range.clip(Math.abs(speed), 0.0, 1.0);
+            hardware.leftMotorA.setPower(speed);
+            hardware.leftMotorB.setPower(speed);
+            hardware.rightMotorA.setPower(speed);
+            hardware.rightMotorB.setPower(speed);
+
+            // keep looping while we are still active, and BOTH motors are running.
+            while (hardware.leftMotorA.isBusy() && hardware.leftMotorB.isBusy()
+                    && hardware.rightMotorA.isBusy() && hardware.rightMotorB.isBusy()) {
+
+                // adjust relative speed based on heading error.
+                error = getError(angle);
+                steer = getSteer(error, P_DRIVE_COEFF);
+
+                // if driving in reverse, the motor correction also needs to be reversed
+                if (distance < 0)
+                    steer *= -1.0;
+
+                leftSpeed = speed - steer;
+                rightSpeed = speed + steer;
+
+                max = Math.max(Math.abs(leftSpeed), Math.abs(rightSpeed));
+                if (max > 1.0)
+                {
+                    leftSpeed /= max;
+                    rightSpeed /= max;
+                }
+
+                hardware.leftMotorA.setPower(leftSpeed);
+                hardware.leftMotorB.setPower(leftSpeed);
+                hardware.rightMotorA.setPower(rightSpeed);
+                hardware.rightMotorB.setPower(rightSpeed);
+            }
+
+            // Stop all motion;
+            hardware.leftMotorA.setPower(0);
+            hardware.leftMotorB.setPower(0);
+            hardware.rightMotorA.setPower(0);
+            hardware.rightMotorB.setPower(0);
+
+            // Turn off RUN_TO_POSITION
+            hardware.leftMotorA.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            hardware.leftMotorB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            hardware.rightMotorA.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            hardware.rightMotorB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+    }
+
+    public double getError(double targetAngle) {
+
+        double robotError;
+
+        // calculate error in -179 to +180 range  (
+        robotError = targetAngle - navx_device.getQuaternionZ();
+        while (robotError > 180)  robotError -= 360;
+        while (robotError <= -180) robotError += 360;
+        return robotError;
+    }
+
+    public double getSteer(double error, double PCoeff) {
+        return Range.clip(error * PCoeff, -1, 1);
     }
 
     @Override
