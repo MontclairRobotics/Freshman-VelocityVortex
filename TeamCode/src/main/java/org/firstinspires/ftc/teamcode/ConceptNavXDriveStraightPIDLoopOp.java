@@ -59,67 +59,11 @@ import java.text.DecimalFormat;
 
 @TeleOp(name = "Concept: navX Drive Straight PID - Loop", group = "Concept")
 // @Disabled Comment this in to remove this from the Driver Station OpMode List
-public class ConceptNavXDriveStraightPIDLoopOp extends OpMode {
-    DcMotor leftMotor;
-    DcMotor rightMotor;
-
-    /* This is the port on the Core Device Interface Module        */
-    /* in which the navX-Model Device is connected.  Modify this  */
-    /* depending upon which I2C port you are using.               */
-    private final int NAVX_DIM_I2C_PORT = 0;
-    private AHRS navx_device;
-    private navXPIDController yawPIDController;
-    private ElapsedTime runtime = new ElapsedTime();
-
-    private final byte NAVX_DEVICE_UPDATE_RATE_HZ = 50;
-
-    private final double TARGET_ANGLE_DEGREES = 0.0;
-    private final double TOLERANCE_DEGREES = 2.0;
-    private final double MIN_MOTOR_OUTPUT_VALUE = -1.0;
-    private final double MAX_MOTOR_OUTPUT_VALUE = 1.0;
-    private final double YAW_PID_P = 0.005;
-    private final double YAW_PID_I = 0.0;
-    private final double YAW_PID_D = 0.0;
-
-    private boolean calibration_complete = false;
-
-    navXPIDController.PIDResult yawPIDResult;
-    DecimalFormat df;
+public class ConceptNavXDriveStraightPIDLoopOp extends AutoMode {
 
     @Override
     public void init() {
-        leftMotor = hardwareMap.dcMotor.get("left motor");
-        rightMotor = hardwareMap.dcMotor.get("right motor");
-
-        navx_device = AHRS.getInstance(hardwareMap.deviceInterfaceModule.get("dim"),
-                NAVX_DIM_I2C_PORT,
-                AHRS.DeviceDataType.kProcessedData,
-                NAVX_DEVICE_UPDATE_RATE_HZ);
-
-        rightMotor.setDirection(DcMotor.Direction.REVERSE);
-
-        /* If possible, use encoders when driving, as it results in more */
-        /* predictable drive system response.                           */
-        //leftMotor.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-        //rightMotor.setChannelMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-
-        /* Create a PID Controller which uses the Yaw Angle as input. */
-        yawPIDController = new navXPIDController( navx_device,
-                navXPIDController.navXTimestampedDataSource.YAW);
-
-        /* Configure the PID controller */
-        yawPIDController.setSetpoint(TARGET_ANGLE_DEGREES);
-        yawPIDController.setContinuous(true);
-        yawPIDController.setOutputRange(MIN_MOTOR_OUTPUT_VALUE, MAX_MOTOR_OUTPUT_VALUE);
-        yawPIDController.setTolerance(navXPIDController.ToleranceType.ABSOLUTE, TOLERANCE_DEGREES);
-        yawPIDController.setPID(YAW_PID_P, YAW_PID_I, YAW_PID_D);
-        yawPIDController.enable(true);
-
-        df = new DecimalFormat("#.##");
-    }
-
-    public double limit(double a) {
-        return Math.min(Math.max(a, MIN_MOTOR_OUTPUT_VALUE), MAX_MOTOR_OUTPUT_VALUE);
+        autoInit();
     }
 
     @Override
@@ -154,14 +98,18 @@ public class ConceptNavXDriveStraightPIDLoopOp extends OpMode {
 
             if (yawPIDController.isNewUpdateAvailable(yawPIDResult)) {
                 if (yawPIDResult.isOnTarget()) {
-                    leftMotor.setPower(drive_speed);
-                    rightMotor.setPower(drive_speed);
+                    hardware.leftMotorA.setPower(drive_speed);
+                    hardware.leftMotorB.setPower(drive_speed);
+                    hardware.rightMotorA.setPower(drive_speed);
+                    hardware.rightMotorB.setPower(drive_speed);
                     telemetry.addData("Motor Output", df.format(drive_speed) + ", " +
                             df.format(drive_speed));
                 } else {
                     double output = yawPIDResult.getOutput();
-                    leftMotor.setPower(limit(drive_speed + output));
-                    rightMotor.setPower(limit(drive_speed - output));
+                    hardware.leftMotorA.setPower(limit(drive_speed + output));
+                    hardware.leftMotorA.setPower(limit(drive_speed + output));
+                    hardware.rightMotorA.setPower(limit(drive_speed + output));
+                    hardware.rightMotorB.setPower(limit(drive_speed + output));
                     telemetry.addData("Motor Output", df.format(limit(drive_speed + output)) + ", " +
                             df.format(limit(drive_speed - output)));
                 }

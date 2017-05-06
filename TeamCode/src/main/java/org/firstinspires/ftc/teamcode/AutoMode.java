@@ -60,6 +60,15 @@ public class AutoMode extends OpMode {
                 NAVX_DIM_I2C_PORT,
                 AHRS.DeviceDataType.kProcessedData,
                 NAVX_DEVICE_UPDATE_RATE_HZ);
+        yawPIDController = new navXPIDController( navx_device,
+                navXPIDController.navXTimestampedDataSource.YAW);
+        yawPIDController.setSetpoint(TARGET_ANGLE_DEGREES);
+        yawPIDController.setContinuous(true);
+        yawPIDController.setOutputRange(MIN_MOTOR_OUTPUT_VALUE, MAX_MOTOR_OUTPUT_VALUE);
+        yawPIDController.setTolerance(navXPIDController.ToleranceType.ABSOLUTE, TOLERANCE_DEGREES);
+        yawPIDController.setPID(YAW_PID_P, YAW_PID_I, YAW_PID_D);
+        yawPIDController.enable(true);
+        df = new DecimalFormat("#.##");
     }
 
 
@@ -71,9 +80,21 @@ public class AutoMode extends OpMode {
     public static final int    RED_LED     = 1;     // Red LED Channel on DIM
 
     //Navx Variables
-    public static final int NAVX_DIM_I2C_PORT = 0; //I2C port
-    public static AHRS navx_device; //NavX Deceleration
-    public static final byte NAVX_DEVICE_UPDATE_RATE_HZ = Byte.MAX_VALUE; // update rate
+    public final int NAVX_DIM_I2C_PORT = 0;
+    public AHRS navx_device;
+    public navXPIDController yawPIDController;
+    public ElapsedTime runtime = new ElapsedTime();
+    public final byte NAVX_DEVICE_UPDATE_RATE_HZ = 50;
+    public final double TARGET_ANGLE_DEGREES = 0.0;
+    public final double TOLERANCE_DEGREES = 2.0;
+    public final double MIN_MOTOR_OUTPUT_VALUE = -1.0;
+    public final double MAX_MOTOR_OUTPUT_VALUE = 1.0;
+    public final double YAW_PID_P = 0.005;
+    public final double YAW_PID_I = 0.0;
+    public final double YAW_PID_D = 0.0;
+    public boolean calibration_complete = false;
+    navXPIDController.PIDResult yawPIDResult;
+    DecimalFormat df;
 
     //Positions
     public static int totalPos = 0;
@@ -391,6 +412,11 @@ public class AutoMode extends OpMode {
 
     public double getSec() {
         return getMillis() / 1000.0;
+    }
+
+    //double for PID
+    public double limit(double a) {
+        return Math.min(Math.max(a, MIN_MOTOR_OUTPUT_VALUE), MAX_MOTOR_OUTPUT_VALUE);
     }
 
     @Override
