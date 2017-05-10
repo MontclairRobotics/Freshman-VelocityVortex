@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.kauailabs.navx.ftc.navXPIDController;
+
 /**
  * Created by Will on 5/5/2017.
  */
@@ -12,12 +14,14 @@ public class AutoDriveGyro extends AutoMode{
     }
 
     @Override
+    public void start(){
+            navx_device.zeroYaw();
+        yawPIDResult = new navXPIDController.PIDResult();
+    }
+    @Override
     public void loop() {
-        switch(state){
-            case 1:
-                gyroDrive(1,SINGLE_BLOCK_DISTANCE,0);
-                telemetry.addData("Moving",navx_device.isMoving());
-                break;
-        }
+        //Parameters (Speed, Distance, Angle)
+        gyroDrive(1,SINGLE_BLOCK_DISTANCE,0);
+        telemetry.addData("Moving",navx_device.isMoving());
     }
 }

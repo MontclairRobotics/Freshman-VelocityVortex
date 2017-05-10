@@ -18,15 +18,15 @@ public class AutoDrive extends AutoMode {
     }
 
     @Override
+    public void start(){
+        autoStart();
+    }
+
+    @Override
     public void loop() {
         switch(state){
 
-            case 0: // Half Intake and wheels deployed
-                intake.setPos(intake.intakeHalfPos);
-                nextState(intake.isCloseTo(intake.intakeHalfPos) && beacon());
-                break;
-
-            case 1: // Drive to center Vortex
+            case 0: // Drive to center Vortex
                 nextState(drive(2 * SINGLE_BLOCK_DISTANCE + HALF_BLOCK_DISTANCE));
                 telemetry.addData("X", navx_device.getRawGyroX());
                 telemetry.addData("Y", navx_device.getRawGyroY());
@@ -35,7 +35,7 @@ public class AutoDrive extends AutoMode {
 
                 break;
 
-            case 2: // Telemetry
+            case 1: // Telemetry
                 telemetry.addData("INFO", "Last State Achieved");
                 break;
 

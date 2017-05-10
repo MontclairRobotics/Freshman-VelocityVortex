@@ -18,13 +18,17 @@ public class AutoDriveShoot2 extends AutoMode {
     }
 
     @Override
+    public void start(){
+        autoStart();
+    }
+
+    @Override
     public void loop() {
         switch (state){
 
-            case 0: // Intake Down and wheels deployed
-                intake.intakeDown();
-                nextState(intake.isCloseTo(intake.intakeDownPos) && beacon());
-                pause(pauseTime);
+            case 0: //intake half
+                intake.intakeHalf();
+                nextState(intake.isCloseTo(intake.intakeHalfPos));
                 break;
 
             case 1: // Shoot Particle
