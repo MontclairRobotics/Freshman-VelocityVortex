@@ -78,6 +78,11 @@ public class AutoMode extends OpMode {
         yawPIDResult = new navXPIDController.PIDResult();
         intake.intakeHalf();
         beacon();
+        if(navx_device.isCalibrating()){
+            telemetry.addData("NavX","Calibrating");
+        }else{
+            telemetry.addData("NavX","Done Calibrating");
+        }
     }
 
     //AutoMode Variables
@@ -132,8 +137,11 @@ public class AutoMode extends OpMode {
     public static final double degree = circumference / 360;
 
     // Math for Gyro turning logic
-    public static float currentAngle;
-    public static int currentIntAngle;
+    public static float currentAngle; // for taking angle currently
+    public static int currentIntAngle; // int version of current angle
+    public static int gyroA; // X quaternion value for calculating distance
+    public static int gyroB; // Y quaternion value for calculating distance
+    public static int gyroC; // for drive distance without error and PIDs
 
     //control variables
     public boolean driving = false;
@@ -430,13 +438,39 @@ public class AutoMode extends OpMode {
         return Math.min(Math.max(a, MIN_MOTOR_OUTPUT_VALUE), MAX_MOTOR_OUTPUT_VALUE);
     }
 
+    //TODO: Test and review
     //Gyro Drive(Will)
-    public void gyroDrive (double speed, double distance, int angle){
-        currentAngle = navx_device.getQuaternionX();
-        currentIntAngle = (int)currentAngle;
-        if (angle>0){
+    public void gyroDrive (double speed, int distance, int targetAngle){
+        navx_device.zeroYaw();
+        currentAngle = navx_device.getYaw();
+        if (targetAngle < 0){
+            //turn left
+            while(navx_device.getYaw() < targetAngle){
+                driveTrain.motors[0][0].setPower(speed); //left motor A
+                driveTrain.motors[0][1].setPower(speed); //left motor B
+                driveTrain.motors[1][0].setPower(-speed); //right motor A
+                driveTrain.motors[1][1].setPower(-speed); //right motor B
+            }
+            driveTrain.motors[0][0].setPower(0); //left motor A
+            driveTrain.motors[0][1].setPower(0); //left motor B
+            driveTrain.motors[1][0].setPower(0); //right motor A
+            driveTrain.motors[1][1].setPower(0); //right motor B
 
+        }else{
+            //turn right
+            while(navx_device.getYaw() > targetAngle){
+                driveTrain.motors[0][0].setPower(-speed); //left motor A
+                driveTrain.motors[0][1].setPower(-speed); //left motor B
+                driveTrain.motors[1][0].setPower(speed); //right motor A
+                driveTrain.motors[1][1].setPower(speed); //right motor B
+            }
+            driveTrain.motors[0][0].setPower(0); //left motor A
+            driveTrain.motors[0][1].setPower(0); //left motor B
+            driveTrain.motors[1][0].setPower(0); //right motor A
+            driveTrain.motors[1][1].setPower(0); //right motor B
         }
+
+        driveTrain.setDrivePosition(distance);
     }
 
 
