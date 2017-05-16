@@ -440,12 +440,14 @@ public class AutoMode extends OpMode {
 
     //TODO: Test and review
     //Gyro Drive(Will)
+    /*
     public void gyroDrive (double speed, int distance, int targetAngle){
         navx_device.zeroYaw();
         currentAngle = navx_device.getYaw();
         if (targetAngle < 0){
-            //turn left
+
             while(navx_device.getYaw() < targetAngle){
+                //turn left
                 driveTrain.motors[0][0].setPower(speed); //left motor A
                 driveTrain.motors[0][1].setPower(speed); //left motor B
                 driveTrain.motors[1][0].setPower(-speed); //right motor A
@@ -471,6 +473,21 @@ public class AutoMode extends OpMode {
         }
 
         driveTrain.setDrivePosition(distance);
+    }*/
+    boolean zeroed = false;
+    public boolean gyroTurn(float angle){
+        final double p = 1;
+        if(!zeroed){
+            navx_device.zeroYaw();
+            zeroed = true;
+        }
+        driveTrain.setDriveTank(angle - navx_device.getYaw(), angle - navx_device.getYaw());
+        if(Math.abs(angle - navx_device.getYaw()) < 4){
+            zeroed = false;
+            return true;
+        }else{
+            return false;
+        }
     }
 
 

@@ -21,7 +21,8 @@ public class AutoDriveGyro extends AutoMode{
     @Override
     public void loop() {
         //Parameters (Speed, Distance, Angle)
-        gyroDrive(1,SINGLE_BLOCK_DISTANCE,0);
+        gyroTurn(Left45);
+        driveTrain.setDrivePosition(SINGLE_BLOCK_DISTANCE);
         telemetry.addData("Moving",navx_device.isMoving());
     }
 }
