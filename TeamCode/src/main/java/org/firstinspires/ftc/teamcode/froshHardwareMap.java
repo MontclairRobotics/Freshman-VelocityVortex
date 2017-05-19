@@ -18,9 +18,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Motor channel:  Front Right drive motor:        "right_driveA"
  * Motor channel:  Back  Right drive motor:        "right_driveB"
  * Motor channel:  Intake drive motor:             "intake"
- * Motor channel:  Beacon pusher drive motor:      "beacon_pusher"
- * Sensor channel: Front light sensor:             "light_sensorA"
- * Sensor channel: Back light sensor:              "light_sensorB"
  */
 
 public class froshHardwareMap {
@@ -33,9 +30,6 @@ public class froshHardwareMap {
     public DcMotor  intakeMotor  = null;
     public DcMotor  shooterMotor = null;
     public DcMotor  beaconMotor  = null;
-    public LightSensor sensorA   = null;
-    public LightSensor sensorB   = null;
-    public LightSensor sensorC   = null;
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -55,9 +49,6 @@ public class froshHardwareMap {
         beaconMotor  = hwMap.dcMotor.get("beacon_pusher");
 
         //Define and Initialize Sensors
-        sensorA = hwMap.lightSensor.get("light_sensorA");
-        sensorB = hwMap.lightSensor.get("light_sensorB");
-        sensorC = hwMap.lightSensor.get("light_sensorC");
 
         // Set all motors to run with encoders.
         leftMotorA.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
