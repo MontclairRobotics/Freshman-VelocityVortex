@@ -25,7 +25,6 @@ public class AutoMode extends OpMode {
     Shooter shooter;
     BeaconPusher beaconPusher;
     public int[][] motorPos;
-    Sensors sensors;
     ElapsedTime timer;
     DeviceInterfaceModule dim;
 
@@ -49,40 +48,10 @@ public class AutoMode extends OpMode {
         shooter.init(hardware);
         telemetry.addData("INFO", "Shooter Init");
         motorPos = driveTrain.getMotorPos();
-        sensors = new Sensors();
-        sensors.init(hardware);
         timer = new ElapsedTime();
         startTime = timer.milliseconds();
 
-        dim.setLED(BLUE_LED,true);
-        dim.setLED(RED_LED,true);
 
-        navx_device = AHRS.getInstance(hardwareMap.deviceInterfaceModule.get("dim"),
-                NAVX_DIM_I2C_PORT,
-                AHRS.DeviceDataType.kProcessedData,
-                NAVX_DEVICE_UPDATE_RATE_HZ);
-        yawPIDController = new navXPIDController( navx_device,
-                navXPIDController.navXTimestampedDataSource.YAW);
-        yawPIDController.setSetpoint(TARGET_ANGLE_DEGREES);
-        yawPIDController.setContinuous(true);
-        yawPIDController.setOutputRange(MIN_MOTOR_OUTPUT_VALUE, MAX_MOTOR_OUTPUT_VALUE);
-        yawPIDController.setTolerance(navXPIDController.ToleranceType.ABSOLUTE, TOLERANCE_DEGREES);
-        yawPIDController.setPID(YAW_PID_P, YAW_PID_I, YAW_PID_D);
-        yawPIDController.enable(true);
-        df = new DecimalFormat("#.##");
-    }
-
-    //Auto Start
-    public void autoStart(){
-        navx_device.zeroYaw();
-        yawPIDResult = new navXPIDController.PIDResult();
-        intake.intakeHalf();
-        beacon();
-        if(navx_device.isCalibrating()){
-            telemetry.addData("NavX","Calibrating");
-        }else{
-            telemetry.addData("NavX","Done Calibrating");
-        }
     }
 
     //AutoMode Variables
@@ -91,22 +60,7 @@ public class AutoMode extends OpMode {
     public static final int    BLUE_LED    = 0;     // Blue LED channel on DIM
     public static final int    RED_LED     = 1;     // Red LED Channel on DIM
 
-    //Navx Variables
-    public final int NAVX_DIM_I2C_PORT = 0;
-    public AHRS navx_device;
-    public navXPIDController yawPIDController;
-    public ElapsedTime runtime = new ElapsedTime();
-    public final byte NAVX_DEVICE_UPDATE_RATE_HZ = 50;
-    public final double TARGET_ANGLE_DEGREES = 0.0;
-    public final double TOLERANCE_DEGREES = 2.0;
-    public final double MIN_MOTOR_OUTPUT_VALUE = -1.0;
-    public final double MAX_MOTOR_OUTPUT_VALUE = 1.0;
-    public final double YAW_PID_P = 0.005;
-    public final double YAW_PID_I = 0.0;
-    public final double YAW_PID_D = 0.0;
-    public boolean calibration_complete = false;
-    navXPIDController.PIDResult yawPIDResult;
-    DecimalFormat df;
+
 
     //Positions
     public static int totalPos = 0;
@@ -204,52 +158,7 @@ public class AutoMode extends OpMode {
     }
 
 
-    //LIGHT DRIVING
-    //TODO: MAke sure light values work
-    public boolean driveUntilLine(){
-        driveTrain.motors[0][0].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        driveTrain.motors[0][1].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        driveTrain.motors[1][0].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        driveTrain.motors[1][1].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        driveTrain.motors[0][0].setPower(0.6);
-        driveTrain.motors[0][1].setPower(0.6);
-        driveTrain.motors[1][0].setPower(-0.5);
-        driveTrain.motors[1][1].setPower(-0.5);
-        if(sensors.lightSensorC.getRawLightDetected() > .57){
-            driveTrain.motors[0][0].setPower(0);
-            driveTrain.motors[0][1].setPower(0);
-            driveTrain.motors[1][0].setPower(0);
-            driveTrain.motors[1][1].setPower(0);
-            driveTrain.motors[0][0].setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            driveTrain.motors[0][1].setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            driveTrain.motors[1][0].setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            driveTrain.motors[1][1].setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            return true;
-        }
-        return false;
-    }
-    public boolean driveBackUntilLine(){
-        driveTrain.motors[0][0].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        driveTrain.motors[0][1].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        driveTrain.motors[1][0].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        driveTrain.motors[1][1].setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        driveTrain.motors[0][0].setPower(-0.6);
-        driveTrain.motors[0][1].setPower(-0.6);
-        driveTrain.motors[1][0].setPower(0.5);
-        driveTrain.motors[1][1].setPower(0.5);
-        if(sensors.lightSensorC.getRawLightDetected() > 1.4){
-            driveTrain.motors[0][0].setPower(0);
-            driveTrain.motors[0][1].setPower(0);
-            driveTrain.motors[1][0].setPower(0);
-            driveTrain.motors[1][1].setPower(0);
-            driveTrain.motors[0][0].setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            driveTrain.motors[0][1].setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            driveTrain.motors[1][0].setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            driveTrain.motors[1][1].setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            return true;
-        }
-        return false;
-    }
+
 
 
     //BEACON DRIVING (DRIVING USING THE WALL WHEELS)
@@ -403,18 +312,6 @@ public class AutoMode extends OpMode {
         return false;
     }
 
-    //BEACON COLORS METHOD
-    public boolean getColors() {
-        if (sensors.lightSensorA.getRawLightDetected() > sensors.lightSensorB.getRawLightDetected()) {
-            beaconRightColor = "RED";
-            beaconLeftColor = "BLUE";
-        } else {
-            beaconRightColor = "BLUE";
-            beaconLeftColor = "RED";
-        }
-        return true;
-    }
-
     //WAIT METHOD
     public boolean pause(double seconds){
         telemetry.addData("Seconds", getSec());
@@ -432,65 +329,6 @@ public class AutoMode extends OpMode {
     public double getSec() {
         return getMillis() / 1000.0;
     }
-
-    //double for PID
-    public double limit(double a) {
-        return Math.min(Math.max(a, MIN_MOTOR_OUTPUT_VALUE), MAX_MOTOR_OUTPUT_VALUE);
-    }
-
-    //TODO: Test and review
-    //Gyro Drive(Will)
-    /*
-    public void gyroDrive (double speed, int distance, int targetAngle){
-        navx_device.zeroYaw();
-        currentAngle = navx_device.getYaw();
-        if (targetAngle < 0){
-
-            while(navx_device.getYaw() < targetAngle){
-                //turn left
-                driveTrain.motors[0][0].setPower(speed); //left motor A
-                driveTrain.motors[0][1].setPower(speed); //left motor B
-                driveTrain.motors[1][0].setPower(-speed); //right motor A
-                driveTrain.motors[1][1].setPower(-speed); //right motor B
-            }
-            driveTrain.motors[0][0].setPower(0); //left motor A
-            driveTrain.motors[0][1].setPower(0); //left motor B
-            driveTrain.motors[1][0].setPower(0); //right motor A
-            driveTrain.motors[1][1].setPower(0); //right motor B
-
-        }else{
-            //turn right
-            while(navx_device.getYaw() > targetAngle){
-                driveTrain.motors[0][0].setPower(-speed); //left motor A
-                driveTrain.motors[0][1].setPower(-speed); //left motor B
-                driveTrain.motors[1][0].setPower(speed); //right motor A
-                driveTrain.motors[1][1].setPower(speed); //right motor B
-            }
-            driveTrain.motors[0][0].setPower(0); //left motor A
-            driveTrain.motors[0][1].setPower(0); //left motor B
-            driveTrain.motors[1][0].setPower(0); //right motor A
-            driveTrain.motors[1][1].setPower(0); //right motor B
-        }
-
-        driveTrain.setDrivePosition(distance);
-    }*/
-    boolean zeroed = false;
-    public boolean gyroTurn(float angle){
-        final double p = 1;
-        if(!zeroed){
-            navx_device.zeroYaw();
-            zeroed = true;
-        }
-        driveTrain.setDriveTank(angle - navx_device.getYaw(), angle - navx_device.getYaw());
-        if(Math.abs(angle - navx_device.getYaw()) < 4){
-            zeroed = false;
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-
 
     @Override
     public void init() {

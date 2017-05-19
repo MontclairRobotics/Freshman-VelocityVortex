@@ -16,11 +16,7 @@ public class AutoDriveShoot2 extends AutoMode {
         setState(0);
         autoInit();
     }
-
-    @Override
-    public void start(){
-        autoStart();
-    }
+    
 
     @Override
     public void loop() {
